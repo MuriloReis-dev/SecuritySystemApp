@@ -466,3 +466,4 @@ C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\D
 C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\qualifiers.txt
 C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\qualifiers.txt.intermediate
 C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\MultipleQualifiersPerDimensionFound.txt
+C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\SecuritySystemApp.sourcelink.json

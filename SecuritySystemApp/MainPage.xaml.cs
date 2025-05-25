@@ -2,22 +2,16 @@
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
+    public MainPage()
+    {
+        InitializeComponent();
+        CadrastroBtn.Clicked += OnCadrastroBtnClicked;
+    }
+    private async void OnCadrastroBtnClicked(object? sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(CadastroPage));
+    }
 
-	public MainPage()
-	{
-		InitializeComponent();
-	}
-
-	private void OnCounterClicked(object? sender, EventArgs e)
-	{
-		count++;
-
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
-
-		SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+    // Adicionar código da rota para tela de Login
+    
 }

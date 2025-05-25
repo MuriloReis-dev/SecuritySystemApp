@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SecuritySystemApp.CadastroPage"
+             Title="Cadastro"
+             BackgroundColor="White">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15" >
+            <Entry x:Name="NomeEntry" Placeholder="Nome" MaximumWidthRequest="300" />
+            <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" MaximumWidthRequest="300" />
+            <Label x:Name="EmailErrorLabel" Text="Email inválido" TextColor="Red" IsVisible="False" FontSize="12" HorizontalOptions="Center"/>
+
+            <Entry x:Name="SenhaEntry" Placeholder="Senha" IsPassword="True" MaximumWidthRequest="300" />
+            <Entry x:Name="ConfirmarSenhaEntry" Placeholder="Confirme a senha" IsPassword="True" MaximumWidthRequest="300" />
+            <Label x:Name="SenhaErrorLabel" Text="Senha incoreta" TextColor="Red" IsVisible="False" FontSize="12" HorizontalOptions="Center"/>
+            
+            <!-- Captcha simples -->
+            <Label Text="Quanto é 3 + 4?" FontSize="14" HorizontalOptions="Center"/>
+            <Entry x:Name="CaptchaEntry" Placeholder="Digite a resposta" Keyboard="Numeric" MaximumWidthRequest="300" />
+            <Label x:Name="CaptchaErrorLabel" Text="Captcha incorreto" TextColor="Red" IsVisible="False" FontSize="12" HorizontalOptions="Center"/>
+
+            <Button Text="Enviar"
+                    BackgroundColor="Gray"
+                    MaximumWidthRequest="170"
+                    Clicked="OnEnviarClicked" />
+
+            <Button Text="Voltar"
+                    BackgroundColor="LightGray"
+                    MaximumWidthRequest="170"
+                    Clicked="OnVoltarClicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

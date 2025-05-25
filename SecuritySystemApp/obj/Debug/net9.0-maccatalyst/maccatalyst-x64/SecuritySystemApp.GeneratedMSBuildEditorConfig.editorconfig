@@ -30,6 +30,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = SecuritySystemApp.AppShell
 build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
 build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
 
+[C:/Users/Edivaldo/Desktop/MURILO/PDTCC/SecuritySystemApp/SecuritySystemApp/CadastroPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SecuritySystemApp.CadastroPage.xaml
+build_metadata.AdditionalFiles.TargetPath = CadastroPage.xaml
+build_metadata.AdditionalFiles.RelativePath = CadastroPage.xaml
+
 [C:/Users/Edivaldo/Desktop/MURILO/PDTCC/SecuritySystemApp/SecuritySystemApp/MainPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = SecuritySystemApp.MainPage.xaml
