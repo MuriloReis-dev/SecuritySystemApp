@@ -8,14 +8,14 @@
             Spacing="25">
             <Image />
             <Button
-                x:Name="CadrastroBtn"
-                Text="Cadrastro" 
-                HorizontalOptions="Fill" 
-                Background="Gray"
-                MaximumWidthRequest="170"/>
-            <Button
                 x:Name="LoginBtn"
                 Text="Login" 
+                HorizontalOptions="Fill" 
+                Background="#FF25A8FF"
+                MaximumWidthRequest="170"/>
+            <Button
+                x:Name="CadrastroBtn"
+                Text="Cadrastro" 
                 HorizontalOptions="Fill" 
                 Background="Gray"
                 MaximumWidthRequest="170"/>
