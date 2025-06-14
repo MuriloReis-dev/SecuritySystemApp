@@ -2,14 +2,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SecuritySystemApp.LoginPage"
-             Title="Login"
-             BackgroundColor="White">
+             Title="Login">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15" >
+            <!-- Campo Email -->
             <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" MaximumWidthRequest="300" />
             <Label x:Name="EmailErrorLabel" Text="Email inválido" TextColor="Red" IsVisible="False" FontSize="12" HorizontalOptions="Center"/>
 
+            <!-- Campo Senha -->
             <Entry x:Name="SenhaEntry" Placeholder="Senha" IsPassword="True" MaximumWidthRequest="300" />
             <Label x:Name="SenhaErrorLabel" Text="Senha incoreta" TextColor="Red" IsVisible="False" FontSize="12" HorizontalOptions="Center"/>
             
@@ -18,6 +19,8 @@
             <Entry x:Name="CaptchaEntry" Placeholder="Digite a resposta" Keyboard="Numeric" MaximumWidthRequest="300" />
             <Label x:Name="CaptchaErrorLabel" Text="Captcha incorreto" TextColor="Red" IsVisible="False" FontSize="12" HorizontalOptions="Center"/>
 
+
+            <!-- Submit -->
             <Button Text="Enviar"
                     BackgroundColor="Gray"
                     MaximumWidthRequest="170"
