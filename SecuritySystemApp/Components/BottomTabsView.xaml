@@ -11,7 +11,8 @@
 
         <!-- Colocar todas as páginas que aparecem na Navigation Bar -->
         <Button Text="outra" Grid.Column="0" Clicked="GoToOutra" />
-        <Button Text="Home" Grid.Column="1" Clicked="GoToHome" />
+        <!-- <Button Text="Home" Grid.Column="1" Clicked="GoToHome" /> -->
+        <ImageButton Source="Home.png" Grid.Column="1" Clicked="GoToHome"/>
         <Button Text="Configurações" Grid.Column="2" Clicked="GoToConfig" />
     </Grid>
 </ContentView>

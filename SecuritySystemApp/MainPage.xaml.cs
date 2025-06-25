@@ -2,6 +2,7 @@
 
 public partial class MainPage : ContentPage
 {
+    // No futuro, mudar a MainPage para uma tela de carregamento e alterar o código para redirecionar para a tela de Login (ou para Home caso esteja logado)
     public MainPage()
     {
         InitializeComponent();
