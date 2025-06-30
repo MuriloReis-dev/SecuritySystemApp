@@ -1,4 +1,6 @@
-﻿namespace SecuritySystemApp;
+﻿using SecuritySystemApp.AppTestes;
+
+namespace SecuritySystemApp;
 
 public partial class MainPage : ContentPage
 {
@@ -38,5 +40,14 @@ public partial class MainPage : ContentPage
         {
             Application.Current.UserAppTheme = e.Value ? AppTheme.Light : AppTheme.Dark;
         }
+    }
+
+    // Método para carregar dados do arquivo JSON ao carregar a MainPage
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        var service = new LeituraDB();
+        var dados = await service.CarregarAsync();
+        LeiturasList.ItemsSource = dados;
     }
 }

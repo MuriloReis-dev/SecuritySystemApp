@@ -11,29 +11,45 @@
                 Padding="20,0"
                 Spacing="25">
             
-                <Button
-                    x:Name="LoginBtn"
-                    Text="Login" 
-                    HorizontalOptions="Fill" 
-                    Background="Blue"
-                    MaximumWidthRequest="170"/>
-                <Button
-                    x:Name="CadrastroBtn"
-                    Text="Cadrastro" 
-                    HorizontalOptions="Fill" 
-                    Background="Gray"
-                    MaximumWidthRequest="170"/>
-                <Button
-                    x:Name="HomeBtn"
-                    Text="Home" 
-                    HorizontalOptions="Fill" 
-                    Background="Green"
-                    MaximumWidthRequest="170"/>
+            <Button
+                x:Name="LoginBtn"
+                Text="Login" 
+                HorizontalOptions="Fill" 
+                Background="Blue"
+                MaximumWidthRequest="170"/>
+            <Button
+                x:Name="CadrastroBtn"
+                Text="Cadrastro" 
+                HorizontalOptions="Fill" 
+                Background="Gray"
+                MaximumWidthRequest="170"/>
+            <Button
+                x:Name="HomeBtn"
+                Text="Home" 
+                HorizontalOptions="Fill" 
+                Background="Green"
+                MaximumWidthRequest="170"/>
 
-                
-                <!-- Switch para trocar tema (Claro ou Escuro) *MUDAR PARA A PÁGINA DE CONFIGURAÇÃO* -->
-                <Label Text="Modo escuro" FontSize="20" HorizontalOptions="Center" />
-                <Switch x:Name="ThemeSwitch" Toggled="OnThemeToggled" IsToggled="{Binding IsDarkMode}" />
+            
+            <!-- Switch para trocar tema (Claro ou Escuro) *MUDAR PARA A PÁGINA DE CONFIGURAÇÃO* -->
+            <Label Text="Modo escuro" FontSize="20" HorizontalOptions="Center" />
+            <Switch x:Name="ThemeSwitch" Toggled="OnThemeToggled" IsToggled="{Binding IsDarkMode}" />
+
+            <!-- Lista de dados do leitor JSON (Mover para HomePage e modificar)-->
+            <CollectionView x:Name="LeiturasList">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout Padding="10">
+                            <Label Text="{Binding id_status}" FontSize="20"/>
+                            <Label Text="{Binding ligado}" FontSize="16"/>
+                            <Label Text="{Binding data_hora}" FontSize="12"/>
+                            <Label Text="{Binding permitidos}" FontSize="12"/>
+                            <Label Text="{Binding id_usuario}" FontSize="12"/>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
         </VerticalStackLayout>
         <!-- Barra de Navegação (Adicionar em todas as páginas que precisam)-->
         <components:BottomTabsView Grid.Row="1" />

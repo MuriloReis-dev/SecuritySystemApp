@@ -1,0 +1,11 @@
+{
+  "Alarme": [
+    {
+        "id_status": 1,
+        "ligado": true,
+        "data_hora": "2025-06-30",
+        "permitidos": "sim",
+        "id_usuario": 1
+    }
+  ]
+}
