@@ -1,11 +1,18 @@
 {
   "Alarme": [
     {
-        "id_status": 1,
-        "ligado": true,
-        "data_hora": "2025-06-30",
-        "permitidos": "sim",
-        "id_usuario": 1
+      "id_status": 1,
+      "ligado": true,
+      "data_hora": "2025-06-30",
+      "permitidos": "sim",
+      "id_usuario": 1
+    },
+    {
+      "id_status": 2,
+      "ligado": false,
+      "data_hora": "2025-07-03",
+      "permitidos": "nao",
+      "id_usuario": 1
     }
   ]
 }

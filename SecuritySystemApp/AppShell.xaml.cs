@@ -1,4 +1,6 @@
-﻿namespace SecuritySystemApp;
+﻿using SecuritySystemApp.Views;
+
+namespace SecuritySystemApp;
 
 public partial class AppShell : Shell
 {

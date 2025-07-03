@@ -1,3 +1,5 @@
+using SecuritySystemApp.Views;
+
 namespace SecuritySystemApp.Components;
 
 public partial class BottomTabsView : ContentView

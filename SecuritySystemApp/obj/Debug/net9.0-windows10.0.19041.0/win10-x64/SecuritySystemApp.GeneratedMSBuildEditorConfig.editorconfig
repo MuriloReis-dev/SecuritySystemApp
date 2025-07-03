@@ -34,41 +34,11 @@ build_metadata.AdditionalFiles.ManifestResourceName = SecuritySystemApp.AppShell
 build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
 build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
 
-[C:/Users/Edivaldo/Desktop/MURILO/PDTCC/SecuritySystemApp/SecuritySystemApp/CadastroPage.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = SecuritySystemApp.CadastroPage.xaml
-build_metadata.AdditionalFiles.TargetPath = CadastroPage.xaml
-build_metadata.AdditionalFiles.RelativePath = CadastroPage.xaml
-
 [C:/Users/Edivaldo/Desktop/MURILO/PDTCC/SecuritySystemApp/SecuritySystemApp/Components/BottomTabsView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = SecuritySystemApp.Components.BottomTabsView.xaml
 build_metadata.AdditionalFiles.TargetPath = Components\BottomTabsView.xaml
 build_metadata.AdditionalFiles.RelativePath = Components\BottomTabsView.xaml
-
-[C:/Users/Edivaldo/Desktop/MURILO/PDTCC/SecuritySystemApp/SecuritySystemApp/ConfigPage.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = SecuritySystemApp.ConfigPage.xaml
-build_metadata.AdditionalFiles.TargetPath = ConfigPage.xaml
-build_metadata.AdditionalFiles.RelativePath = ConfigPage.xaml
-
-[C:/Users/Edivaldo/Desktop/MURILO/PDTCC/SecuritySystemApp/SecuritySystemApp/HomePage.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = SecuritySystemApp.HomePage.xaml
-build_metadata.AdditionalFiles.TargetPath = HomePage.xaml
-build_metadata.AdditionalFiles.RelativePath = HomePage.xaml
-
-[C:/Users/Edivaldo/Desktop/MURILO/PDTCC/SecuritySystemApp/SecuritySystemApp/LoginPage.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = SecuritySystemApp.LoginPage.xaml
-build_metadata.AdditionalFiles.TargetPath = LoginPage.xaml
-build_metadata.AdditionalFiles.RelativePath = LoginPage.xaml
-
-[C:/Users/Edivaldo/Desktop/MURILO/PDTCC/SecuritySystemApp/SecuritySystemApp/MainPage.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = SecuritySystemApp.MainPage.xaml
-build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
-build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
 
 [C:/Users/Edivaldo/Desktop/MURILO/PDTCC/SecuritySystemApp/SecuritySystemApp/Resources/Styles/Colors.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
@@ -81,3 +51,33 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = SecuritySystemApp.Resources.Styles.Styles.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml
+
+[C:/Users/Edivaldo/Desktop/MURILO/PDTCC/SecuritySystemApp/SecuritySystemApp/Views/CadastroPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SecuritySystemApp.Views.CadastroPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\CadastroPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\CadastroPage.xaml
+
+[C:/Users/Edivaldo/Desktop/MURILO/PDTCC/SecuritySystemApp/SecuritySystemApp/Views/ConfigPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SecuritySystemApp.Views.ConfigPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ConfigPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ConfigPage.xaml
+
+[C:/Users/Edivaldo/Desktop/MURILO/PDTCC/SecuritySystemApp/SecuritySystemApp/Views/HomePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SecuritySystemApp.Views.HomePage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\HomePage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\HomePage.xaml
+
+[C:/Users/Edivaldo/Desktop/MURILO/PDTCC/SecuritySystemApp/SecuritySystemApp/Views/LoginPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SecuritySystemApp.Views.LoginPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\LoginPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\LoginPage.xaml
+
+[C:/Users/Edivaldo/Desktop/MURILO/PDTCC/SecuritySystemApp/SecuritySystemApp/Views/MainPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SecuritySystemApp.Views.MainPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\MainPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\MainPage.xaml
