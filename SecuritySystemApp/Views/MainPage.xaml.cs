@@ -47,7 +47,7 @@ public partial class MainPage : ContentPage
     {
         base.OnAppearing();
         var service = new LeituraDB();
-        var dados = await service.CarregarAsync();
+        var dados = await service.CarregarAsync<Alarme>();
         LeiturasList.ItemsSource = dados;
     }
 }

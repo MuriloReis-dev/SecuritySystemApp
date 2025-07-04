@@ -6,7 +6,7 @@ namespace SecuritySystemApp.AppTestes;
 // Classe para converter dados do json para um objeto
 public class LeituraDB
 {
-    public async Task<List<Alarme>> CarregarAsync()
+    public async Task<List<T>> CarregarAsync<T>() where T : class
     {
         try
         {
@@ -20,12 +20,21 @@ public class LeituraDB
             var json = await reader.ReadToEndAsync();
 
             var resultado = JsonSerializer.Deserialize<TabelasDB>(json);
-            return resultado?.Alarme ?? new List<Alarme>();
+
+            var propriedade = typeof(TabelasDB).GetProperties().FirstOrDefault(p => p.PropertyType == typeof(List<T>));
+
+            if (propriedade != null)
+            {
+                var valor = propriedade.GetValue(resultado) as List<T>;
+                return valor ?? new List<T>();
+            }
+
+            return new List<T>();
         }
         catch (Exception ex)
         {
             Console.WriteLine("Erro: " + ex.Message);
-            return new List<Alarme>();
+            return new List<T>();
         }
     }
 }

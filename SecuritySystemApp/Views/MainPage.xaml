@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:components="clr-namespace:SecuritySystemApp.Components"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:SecuritySystemApp.Components"
+             xmlns:model="clr-namespace:SecuritySystemApp.AppTestes"
              x:Class="SecuritySystemApp.Views.MainPage"
              Title="MainPage">
     <!-- No futuro, mudar a MainPage para uma tela de carregamento e alterar o código para redirecionar para a tela de Login (ou para Home caso esteja logado) -->
@@ -39,7 +40,7 @@
             <ScrollView>
                 <CollectionView x:Name="LeiturasList">
                     <CollectionView.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="model:Alarme">
                             <VerticalStackLayout Padding="10">
                                 <Label Text="{Binding id_status}" FontSize="20"/>
                                 <Label Text="{Binding ligado}" FontSize="16"/>
