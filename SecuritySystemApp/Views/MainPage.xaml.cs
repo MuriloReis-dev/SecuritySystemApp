@@ -1,13 +1,19 @@
-﻿using SecuritySystemApp.AppTestes;
+﻿using SecuritySystemApp.Services;
+using SecuritySystemApp.Models;
+using SecuritySystemApp.Interfaces;
 
 namespace SecuritySystemApp.Views;
 
 public partial class MainPage : ContentPage
 {
     // No futuro, mudar a MainPage para uma tela de carregamento e alterar o código para redirecionar para a tela de Login (ou para Home caso esteja logado)
+    private readonly INavigationService _navigationService;
+
     public MainPage()
     {
         InitializeComponent();
+        _navigationService = new NavigationService();
+        
         CadrastroBtn.Clicked += OnCadrastroBtnClicked;
         LoginBtn.Clicked += OnLoginBtnClicked;
         HomeBtn.Clicked += OnHomeBtnClicked;
@@ -20,17 +26,17 @@ public partial class MainPage : ContentPage
     }
     private async void OnCadrastroBtnClicked(object? sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(CadastroPage));
+        await _navigationService.NavegarParaAsync(nameof(CadastroPage));
     }
 
     private async void OnLoginBtnClicked(object? sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(LoginPage));
+        await _navigationService.NavegarParaAsync(nameof(LoginPage));
     }
 
     private async void OnHomeBtnClicked(object? sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(HomePage));
+        await _navigationService.NavegarParaAsync(nameof(HomePage));
     }
 
     // Switch para trocar tema (Claro ou Escuro) *MUDAR PARA A PÁGINA DE CONFIGURAÇÃO*
@@ -46,7 +52,7 @@ public partial class MainPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        var service = new LeituraDB();
+        var service = new LeituraDBService();
         var dados = await service.CarregarAsync<Alarme>();
         LeiturasList.ItemsSource = dados;
     }
