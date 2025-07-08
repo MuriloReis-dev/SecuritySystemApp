@@ -1,8 +1,34 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:SecuritySystemApp.Components"
+             xmlns:model="clr-namespace:SecuritySystemApp.Models"
              x:Class="SecuritySystemApp.Views.HomePage"
              Title="HomePage">
              
     <!-- Adicionar conteúdo da página -->
+    <Grid RowDefinitions="*, Auto">
+        <ScrollView>
+            <CollectionView x:Name="LeiturasList">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Alarme">
+                        <Border Margin="10"
+                                Padding="10"
+                                StrokeShape="RoundRectangle 10"
+                                StrokeThickness="1"
+                                BackgroundColor="Gray"
+                                Shadow="5,5,10,Black">
+                            <Grid ColumnDefinitions="Auto, *">
+                                <Image Source="Home.png"></Image> <!-- Trocar para imagem de alarme -->
+                                <VerticalStackLayout Padding="10" Grid.Column="1">
+                                    <Label Text="{Binding id_status}" FontSize="20"/>
+                                    <Label Text="{Binding ligado}" FontSize="16"/>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+    </Grid>
 </ContentPage>
