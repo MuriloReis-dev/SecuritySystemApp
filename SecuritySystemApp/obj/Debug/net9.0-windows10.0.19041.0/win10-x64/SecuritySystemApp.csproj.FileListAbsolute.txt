@@ -469,3 +469,7 @@ C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\D
 C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\qualifiers.txt
 C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\qualifiers.txt.intermediate
 C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\MultipleQualifiersPerDimensionFound.txt
+C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\alarme_on.scale-100.png
+C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\alarme_off.scale-100.png
+C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\resizetizer\r\alarme_on.scale-100.png
+C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\resizetizer\r\alarme_off.scale-100.png

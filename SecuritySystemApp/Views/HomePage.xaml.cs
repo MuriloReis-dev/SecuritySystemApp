@@ -1,21 +1,22 @@
 using SecuritySystemApp.Services;
 using SecuritySystemApp.Models;
+using SecuritySystemApp.ViewModels;
 using SecuritySystemApp.Interfaces;
 namespace SecuritySystemApp.Views;
 
 public partial class HomePage : ContentPage
 {
+    HomeViewModel ViewModel;
     public HomePage()
     {
         InitializeComponent();
+        ViewModel = new HomeViewModel();
+        BindingContext = ViewModel;
     }
 
-    // Método para carregar dados do arquivo JSON ao carregar a MainPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        var service = new LeituraDBService();
-        var dados = await service.CarregarAsync<Alarme>();
-        LeiturasList.ItemsSource = dados;
+        await ViewModel.CarregarAlarmesAsync();
     }
 }

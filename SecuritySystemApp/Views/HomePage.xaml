@@ -9,7 +9,7 @@
     <!-- Adicionar conteúdo da página -->
     <Grid RowDefinitions="*, Auto">
         <ScrollView>
-            <CollectionView x:Name="LeiturasList">
+            <CollectionView ItemsSource="{Binding Alarmes}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Alarme">
                         <Border Margin="10"
@@ -19,7 +19,7 @@
                                 BackgroundColor="Gray"
                                 Shadow="5,5,10,Black">
                             <Grid ColumnDefinitions="Auto, *">
-                                <Image Source="Home.png"></Image> <!-- Trocar para imagem de alarme -->
+                                <Image Source="{Binding ImagemAlarmeSource}"></Image>
                                 <VerticalStackLayout Padding="10" Grid.Column="1">
                                     <Label Text="{Binding id_status}" FontSize="20"/>
                                     <Label Text="{Binding ligado}" FontSize="16"/>
