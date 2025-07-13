@@ -11,12 +11,11 @@ public partial class HomePage : ContentPage
     {
         InitializeComponent();
         ViewModel = new HomeViewModel();
-        BindingContext = ViewModel;
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await ViewModel.CarregarAlarmesAsync();
+        AlarmesList.ItemsSource = await ViewModel.CarregarAlarmesAsync();
     }
 }

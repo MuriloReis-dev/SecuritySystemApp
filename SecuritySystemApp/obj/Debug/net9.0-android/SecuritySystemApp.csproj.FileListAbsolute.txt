@@ -929,3 +929,5 @@ C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\D
 C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\Debug\net9.0-android\stamp\_GenerateJavaStubs.stamp
 C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\Debug\net9.0-android\stamp\_GeneratePackageManagerJava.stamp
 C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\Debug\net9.0-android\stamp\_ResolveLibraryProjectImports.stamp
+C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\Debug\net9.0-android\resizetizer\r\drawable\alarme_off.png
+C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\Debug\net9.0-android\resizetizer\r\drawable\alarme_on.png

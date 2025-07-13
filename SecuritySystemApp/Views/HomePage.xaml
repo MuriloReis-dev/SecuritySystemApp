@@ -6,29 +6,54 @@
              x:Class="SecuritySystemApp.Views.HomePage"
              Title="HomePage">
              
-    <!-- Adicionar conteúdo da página -->
     <Grid RowDefinitions="*, Auto">
         <ScrollView>
-            <CollectionView ItemsSource="{Binding Alarmes}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Alarme">
-                        <Border Margin="10"
+            <Grid RowDefinitions="Auto, *">
+                <!-- Trocar imagem pelo grafico funcional -->
+                <Image
+                    Source="https://cdn-icons-png.flaticon.com/512/4435/4435924.png"
+                    Aspect="AspectFit"
+                    MaximumWidthRequest="200">
+                </Image>
+                <CollectionView x:Name="AlarmesList" x:DataType="model:Alarme" Grid.Row="1">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Alarme">
+                            <Border
+                                Margin="10"
                                 Padding="10"
+                                MaximumHeightRequest="80"
+                                VerticalOptions="Fill"
                                 StrokeShape="RoundRectangle 10"
                                 StrokeThickness="1"
-                                BackgroundColor="Gray"
                                 Shadow="5,5,10,Black">
-                            <Grid ColumnDefinitions="Auto, *">
-                                <Image Source="{Binding ImagemAlarmeSource}"></Image>
-                                <VerticalStackLayout Padding="10" Grid.Column="1">
-                                    <Label Text="{Binding id_status}" FontSize="20"/>
-                                    <Label Text="{Binding ligado}" FontSize="16"/>
-                                </VerticalStackLayout>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                                <Border.Triggers>
+                                    <DataTrigger TargetType="Border" Binding="{Binding ligado}" Value="true">
+                                        <!-- Definir style para ligado = true -->
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Border" Binding="{Binding ligado}" Value="false">
+                                        <!-- Definir style para ligado = false -->
+                                    </DataTrigger>
+                                </Border.Triggers>
+                                <Grid ColumnDefinitions="Auto, *">
+                                    <Image Aspect="AspectFit">
+                                        <Image.Triggers>
+                                            <DataTrigger TargetType="Image" Binding="{Binding ligado}" Value="true">
+                                                <Setter Property="Source" Value="alarme_on.png"></Setter> <!-- Imagem para ligado = true -->
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Image" Binding="{Binding ligado}" Value="false">
+                                                <Setter Property="Source" Value="alarme_off.png"></Setter> <!-- Imagem para ligado = false -->
+                                            </DataTrigger>
+                                        </Image.Triggers>
+                                    </Image>
+                                    <VerticalStackLayout Padding="10" Grid.Column="1" VerticalOptions="Center">
+                                        <Label Text="{Binding id_status}" FontSize="20"/>
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
         </ScrollView>
     </Grid>
 </ContentPage>
