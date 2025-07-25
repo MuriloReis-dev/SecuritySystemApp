@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SecuritySystemApp.Components.BottomTabsView">
 
-    <Grid BackgroundColor="White" HeightRequest="60" Padding="10" ColumnSpacing="20">
+    <Grid BackgroundColor="Gray" HeightRequest="60" Padding="10" ColumnSpacing="20">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
@@ -11,8 +11,7 @@
 
         <!-- Colocar todas as páginas que aparecem na Navigation Bar -->
         <Button Text="outra" Grid.Column="0" Clicked="GoToOutra" />
-        <!-- <Button Text="Home" Grid.Column="1" Clicked="GoToHome" /> -->
-        <ImageButton Source="Home.png" Grid.Column="1" Clicked="GoToHome"/>
+        <ImageButton Source="homeicon.png" Grid.Column="1" Clicked="GoToHome"/>
         <Button Text="Configurações" Grid.Column="2" Clicked="GoToConfig" />
     </Grid>
 </ContentView>

@@ -1,16 +1,15 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using SecuritySystemApp.Models;
 using SecuritySystemApp.Services;
 
 namespace SecuritySystemApp.ViewModels;
 
 public class HomeViewModel
 {
-    public async Task<List<Alarme>> CarregarAlarmesAsync()
+    public async Task<List<Dictionary<string, object>>> CarregarAlarmesAsync()
     {
         var service = new LeituraDBService();
-        var dados = await service.CarregarAsync<Alarme>();
+        var dados = await service.LerConsultasAsync();
         return dados;
     }
 }

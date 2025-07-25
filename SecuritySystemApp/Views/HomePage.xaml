@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:components="clr-namespace:SecuritySystemApp.Components"
-             xmlns:model="clr-namespace:SecuritySystemApp.Models"
              x:Class="SecuritySystemApp.Views.HomePage"
              Title="HomePage">
              
@@ -15,9 +14,9 @@
                     Aspect="AspectFit"
                     MaximumWidthRequest="200">
                 </Image>
-                <CollectionView x:Name="AlarmesList" x:DataType="model:Alarme" Grid.Row="1">
+                <CollectionView x:Name="AlarmesList" Grid.Row="1">
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="model:Alarme">
+                        <DataTemplate>
                             <Border
                                 Margin="10"
                                 Padding="10"
@@ -27,26 +26,27 @@
                                 StrokeThickness="1"
                                 Shadow="5,5,10,Black">
                                 <Border.Triggers>
-                                    <DataTrigger TargetType="Border" Binding="{Binding ligado}" Value="true">
+                                    <DataTrigger TargetType="Border" Binding="{Binding [ligado]}" Value="True">
                                         <!-- Definir style para ligado = true -->
                                     </DataTrigger>
-                                    <DataTrigger TargetType="Border" Binding="{Binding ligado}" Value="false">
+                                    <DataTrigger TargetType="Border" Binding="{Binding [ligado]}" Value="False">
                                         <!-- Definir style para ligado = false -->
                                     </DataTrigger>
                                 </Border.Triggers>
                                 <Grid ColumnDefinitions="Auto, *">
                                     <Image Aspect="AspectFit">
                                         <Image.Triggers>
-                                            <DataTrigger TargetType="Image" Binding="{Binding ligado}" Value="true">
+                                            <DataTrigger TargetType="Image" Binding="{Binding [ligado]}" Value="True">
                                                 <Setter Property="Source" Value="alarme_on.png"></Setter> <!-- Imagem para ligado = true -->
                                             </DataTrigger>
-                                            <DataTrigger TargetType="Image" Binding="{Binding ligado}" Value="false">
+                                            <DataTrigger TargetType="Image" Binding="{Binding [ligado]}" Value="False">
                                                 <Setter Property="Source" Value="alarme_off.png"></Setter> <!-- Imagem para ligado = false -->
                                             </DataTrigger>
                                         </Image.Triggers>
                                     </Image>
                                     <VerticalStackLayout Padding="10" Grid.Column="1" VerticalOptions="Center">
-                                        <Label Text="{Binding id_status}" FontSize="20"/>
+                                        <Label Text="{Binding [id_status]}" FontSize="20"/>
+                                        <Label Text="{Binding [ligado]}" />
                                     </VerticalStackLayout>
                                 </Grid>
                             </Border>

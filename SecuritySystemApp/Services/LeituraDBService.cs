@@ -1,13 +1,13 @@
 using System.Reflection;
 using System.Text.Json;
-using SecuritySystemApp.Models;
 
 namespace SecuritySystemApp.Services;
 
-// Classe para converter dados do json para um objeto
+// Classe para converter dados do json para uma lista de dicionários, simulando uma tabela
 public class LeituraDBService
 {
-    public async Task<List<T>> CarregarAsync<T>() where T : class
+    // converter os dados para string antes de retornar valor para que o DataTrigger funcione
+    public async Task<List<Dictionary<string, object>>> LerConsultasAsync()
     {
         try
         {
@@ -20,22 +20,14 @@ public class LeituraDBService
             using StreamReader reader = new StreamReader(stream);
             var json = await reader.ReadToEndAsync();
 
-            var resultado = JsonSerializer.Deserialize<TabelasDB>(json);
+            var consulta = JsonSerializer.Deserialize<List<Dictionary<string, object>>>(json);
 
-            var propriedade = typeof(TabelasDB).GetProperties().FirstOrDefault(p => p.PropertyType == typeof(List<T>));
-
-            if (propriedade != null)
-            {
-                var valor = propriedade.GetValue(resultado) as List<T>;
-                return valor ?? new List<T>();
-            }
-
-            return new List<T>();
+            return consulta ?? new List<Dictionary<string, object>>();
         }
         catch (Exception ex)
         {
             Console.WriteLine("Erro: " + ex.Message);
-            return new List<T>();
+            return new List<Dictionary<string, object>>();
         }
     }
 }
