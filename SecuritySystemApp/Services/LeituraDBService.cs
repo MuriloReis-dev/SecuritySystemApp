@@ -6,7 +6,6 @@ namespace SecuritySystemApp.Services;
 // Classe para converter dados do json para uma lista de dicionários, simulando uma tabela
 public class LeituraDBService
 {
-    // converter os dados para string antes de retornar valor para que o DataTrigger funcione
     public async Task<List<Dictionary<string, object>>> LerConsultasAsync()
     {
         try

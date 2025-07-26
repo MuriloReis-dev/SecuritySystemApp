@@ -1,17 +1,41 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SecuritySystemApp.Components.BottomTabsView">
+             x:Class="SecuritySystemApp.Components.BottomTabsView"
+             Visual="Material">
 
-    <Grid BackgroundColor="Gray" HeightRequest="60" Padding="10" ColumnSpacing="20">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+        <VerticalStackLayout>
+            <BoxView HeightRequest="2" BackgroundColor="{StaticResource Gray600}" />
+            <Grid
+                HeightRequest="60"
+                ColumnSpacing="20"
+                BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-        <!-- Colocar todas as páginas que aparecem na Navigation Bar -->
-        <Button Text="outra" Grid.Column="0" Clicked="GoToOutra" />
-        <ImageButton Source="homeicon.png" Grid.Column="1" Clicked="GoToHome"/>
-        <Button Text="Configurações" Grid.Column="2" Clicked="GoToConfig" />
-    </Grid>
+                <!-- Colocar todas as páginas que aparecem na Navigation Bar -->
+                <Button
+                    ImageSource="homeicon.png"
+                    BackgroundColor="Transparent"
+                    Clicked="OnNotifyClicked"
+                    Grid.Column="0">
+                </Button>
+
+                <Button
+                    ImageSource="homeicon.png"
+                    BackgroundColor="Transparent"
+                    Clicked="OnHomeClicked"
+                    Grid.Column="1">
+                </Button>
+                    
+                <Button
+                    ImageSource="homeicon.png"
+                    BackgroundColor="Transparent"
+                    Clicked="OnConfigClicked"
+                    Grid.Column="2">
+                </Button>
+            </Grid>
+        </VerticalStackLayout>
 </ContentView>
