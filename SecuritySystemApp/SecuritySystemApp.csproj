@@ -21,7 +21,7 @@
 		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>SecuritySystemApp</ApplicationTitle>
+		<ApplicationTitle>Alarme Arduíno</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.securitysystemapp</ApplicationId>

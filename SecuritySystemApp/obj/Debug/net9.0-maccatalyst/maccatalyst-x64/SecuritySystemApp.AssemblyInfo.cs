@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SecuritySystemApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+2547f90a1e209bf75a13c3f4a610b183d9a38f54")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+df252612f76820de05f15686ece73ef3848c3c3c")]
 [assembly: System.Reflection.AssemblyProductAttribute("SecuritySystemApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SecuritySystemApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
