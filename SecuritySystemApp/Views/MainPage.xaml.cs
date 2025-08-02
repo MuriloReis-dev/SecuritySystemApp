@@ -1,18 +1,25 @@
 ﻿using SecuritySystemApp.Services;
 using SecuritySystemApp.Interfaces;
+using SecuritySystemApp.Models;
+using SecuritySystemApp.ViewModels;
 
 namespace SecuritySystemApp.Views;
 
 public partial class MainPage : ContentPage
 {
     // No futuro, mudar a MainPage para uma tela de carregamento e alterar o código para redirecionar para a tela de Login (ou para Home caso esteja logado)
+    MainViewModel ViewModel;
+
     private readonly INavigationService _navigationService;
+    private readonly ApiService _apiService;
 
     public MainPage()
     {
         InitializeComponent();
+        ViewModel = new MainViewModel();
         _navigationService = new NavigationService();
-        
+        _apiService = new ApiService();
+
         CadrastroBtn.Clicked += OnCadrastroBtnClicked;
         LoginBtn.Clicked += OnLoginBtnClicked;
         HomeBtn.Clicked += OnHomeBtnClicked;
@@ -46,4 +53,12 @@ public partial class MainPage : ContentPage
             Application.Current.UserAppTheme = e.Value ? AppTheme.Light : AppTheme.Dark;
         }
     }
+
+    // Teste de conexão com a API
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        UsuariosList.ItemsSource = await ViewModel.CarregarUsuariosAsync();
+    }
+
 }
