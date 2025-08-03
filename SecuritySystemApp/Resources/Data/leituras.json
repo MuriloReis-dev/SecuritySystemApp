@@ -1,5 +1,4 @@
-{
-  "Alarme": [
+[
     {
       "id_status": 1,
       "ligado": true,
@@ -14,5 +13,4 @@
       "permitidos": "nao",
       "id_usuario": 1
     }
-  ]
-}
+]

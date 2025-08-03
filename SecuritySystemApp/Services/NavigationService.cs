@@ -6,7 +6,7 @@ public class NavigationService : INavigationService
 {
     public async Task NavegarParaAsync(string pageName)
     {
-        await Shell.Current.GoToAsync(pageName);
+        await Shell.Current.GoToAsync(pageName, animate: false);
     }
 
     public async Task VoltarAsync()

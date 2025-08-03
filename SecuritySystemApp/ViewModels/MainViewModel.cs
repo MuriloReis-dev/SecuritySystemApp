@@ -5,10 +5,10 @@ using SecuritySystemApp.Models;
 
 namespace SecuritySystemApp.ViewModels;
 
-public class HomeViewModel
+public class MainViewModel
 {
-    // Propriedade para armazenar a lista de alarmes (trocar Usuario por Alarme após criar a Model Alarme)
-    public async Task<List<Usuario>> CarregarAlarmesAsync()
+    // Teste de conexão com a API
+    public async Task<List<Usuario>> CarregarUsuariosAsync()
     {
         var service = new ApiService();
         var dados = await service.LerConsultasAsync<Usuario>();

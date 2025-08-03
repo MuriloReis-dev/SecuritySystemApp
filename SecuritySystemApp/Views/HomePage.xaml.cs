@@ -1,5 +1,4 @@
 using SecuritySystemApp.Services;
-using SecuritySystemApp.Models;
 using SecuritySystemApp.ViewModels;
 using SecuritySystemApp.Interfaces;
 namespace SecuritySystemApp.Views;

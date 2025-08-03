@@ -1,19 +1,25 @@
 ﻿using SecuritySystemApp.Services;
-using SecuritySystemApp.Models;
 using SecuritySystemApp.Interfaces;
+using SecuritySystemApp.Models;
+using SecuritySystemApp.ViewModels;
 
 namespace SecuritySystemApp.Views;
 
 public partial class MainPage : ContentPage
 {
     // No futuro, mudar a MainPage para uma tela de carregamento e alterar o código para redirecionar para a tela de Login (ou para Home caso esteja logado)
+    MainViewModel ViewModel;
+
     private readonly INavigationService _navigationService;
+    private readonly ApiService _apiService;
 
     public MainPage()
     {
         InitializeComponent();
+        ViewModel = new MainViewModel();
         _navigationService = new NavigationService();
-        
+        _apiService = new ApiService();
+
         CadrastroBtn.Clicked += OnCadrastroBtnClicked;
         LoginBtn.Clicked += OnLoginBtnClicked;
         HomeBtn.Clicked += OnHomeBtnClicked;
@@ -48,12 +54,11 @@ public partial class MainPage : ContentPage
         }
     }
 
-    // Método para carregar dados do arquivo JSON ao carregar a MainPage
+    // Teste de conexão com a API
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        var service = new LeituraDBService();
-        var dados = await service.CarregarAsync<Alarme>();
-        LeiturasList.ItemsSource = dados;
+        UsuariosList.ItemsSource = await ViewModel.CarregarUsuariosAsync();
     }
+
 }

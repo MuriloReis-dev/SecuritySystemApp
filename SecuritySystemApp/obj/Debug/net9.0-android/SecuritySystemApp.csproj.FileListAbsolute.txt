@@ -21,7 +21,6 @@ C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\D
 C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\Debug\net9.0-android\resizetizer\r\drawable-xhdpi\dotnet_bot.png
 C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\Debug\net9.0-android\resizetizer\r\drawable-xxhdpi\dotnet_bot.png
 C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\Debug\net9.0-android\resizetizer\r\drawable-xxxhdpi\dotnet_bot.png
-C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\Debug\net9.0-android\resizetizer\r\drawable\home.png
 C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\Debug\net9.0-android\resizetizer\r\mipmap-anydpi-v26\appicon.xml
 C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\Debug\net9.0-android\resizetizer\r\mipmap-anydpi-v26\appicon_round.xml
 C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\Debug\net9.0-android\resizetizer\r\mipmap-hdpi\appicon.png
@@ -931,3 +930,4 @@ C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\D
 C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\Debug\net9.0-android\stamp\_ResolveLibraryProjectImports.stamp
 C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\Debug\net9.0-android\resizetizer\r\drawable\alarme_off.png
 C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\Debug\net9.0-android\resizetizer\r\drawable\alarme_on.png
+C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\obj\Debug\net9.0-android\resizetizer\r\drawable\homeicon.png
