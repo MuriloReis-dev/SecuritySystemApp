@@ -5,48 +5,50 @@
              x:Class="SecuritySystemApp.Views.HomePage"
              Title="Seus Alarmes">
              
-    <Grid RowDefinitions="*, Auto">
-        <ScrollView>
-            <Grid RowDefinitions="Auto, *">
-                <!-- Trocar imagem pelo grafico funcional -->
-                <Image
-                    Source="https://cdn-icons-png.flaticon.com/512/4435/4435924.png"
-                    Aspect="AspectFit"
-                    MaximumWidthRequest="200">
-                </Image>
-                <CollectionView x:Name="AlarmesList" Grid.Row="1">
+    <Grid RowDefinitions="Auto, *, Auto">
+        <ScrollView Grid.Row="1">
+            <Grid RowDefinitions="Auto, Auto, *">
+                <Label Text="Gráfico geral"
+                       FontSize="28"
+                       FontFamily="Cursive"
+                       HorizontalOptions="Center"
+                       TextColor="Black"
+                       Grid.Row="0"/>
+                <!-- Gráfico falso precisamos do Banco para fazer o de verdade -->
+                <Border Stroke="#E0A100" StrokeShape="RoundRectangle 20" Margin="10" Padding="10" Grid.Row="1">
+                    <BoxView Color="Gray" HeightRequest="150" CornerRadius="20"/>
+                </Border>
+                <CollectionView x:Name="AlarmesList" Grid.Row="2">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Border
-                                Margin="10"
+                                Margin="3"
                                 Padding="10"
                                 MaximumHeightRequest="80"
                                 VerticalOptions="Fill"
                                 StrokeShape="RoundRectangle 10"
-                                StrokeThickness="1"
-                                Shadow="5,5,10,Black">
+                                StrokeThickness="1">
                                 <Border.Triggers>
-                                    <DataTrigger TargetType="Border" Binding="{Binding [ligado]}" Value="True">
+                                    <DataTrigger TargetType="Border" Binding="{Binding Ligado}" Value="True">
                                         <!-- Definir style para ligado = true -->
                                     </DataTrigger>
-                                    <DataTrigger TargetType="Border" Binding="{Binding [ligado]}" Value="False">
+                                    <DataTrigger TargetType="Border" Binding="{Binding Ligado}" Value="False">
                                         <!-- Definir style para ligado = false -->
                                     </DataTrigger>
                                 </Border.Triggers>
                                 <Grid ColumnDefinitions="Auto, *">
                                     <Image Aspect="AspectFit">
                                         <Image.Triggers>
-                                            <DataTrigger TargetType="Image" Binding="{Binding [ligado]}" Value="True">
+                                            <DataTrigger TargetType="Image" Binding="{Binding Ligado}" Value="True">
                                                 <Setter Property="Source" Value="alarme_on.png"></Setter> <!-- Imagem para ligado = true -->
                                             </DataTrigger>
-                                            <DataTrigger TargetType="Image" Binding="{Binding [ligado]}" Value="False">
+                                            <DataTrigger TargetType="Image" Binding="{Binding Ligado}" Value="False">
                                                 <Setter Property="Source" Value="alarme_off.png"></Setter> <!-- Imagem para ligado = false -->
                                             </DataTrigger>
                                         </Image.Triggers>
                                     </Image>
                                     <VerticalStackLayout Padding="10" Grid.Column="1" VerticalOptions="Center">
-                                        <Label Text="{Binding [id_status]}" FontSize="20"/>
-                                        <Label Text="{Binding [ligado]}" />
+                                        <Label Text="{Binding Nome}" FontSize="20"/>
                                     </VerticalStackLayout>
                                 </Grid>
                             </Border>
@@ -55,5 +57,6 @@
                 </CollectionView>
             </Grid>
         </ScrollView>
+        <components:BottomTabsView Grid.Row="2" />
     </Grid>
 </ContentPage>
