@@ -7,6 +7,10 @@
     xmlns:views="clr-namespace:SecuritySystemApp.Views"
     Title="SecuritySystemApp">
 
+    <Shell.ToolbarItems>
+        <ToolbarItem IconImageSource="homeicon.png" />
+    </Shell.ToolbarItems>
+
     <ShellContent
         Title="MainPage"
         ContentTemplate="{DataTemplate views:MainPage}"
