@@ -1,15 +1,19 @@
 using System.Text.RegularExpressions;
 namespace SecuritySystemApp.Views;
+using SecuritySystemApp.ViewModels;
 
 public partial class CadastroPage : ContentPage
 {
+    CadastroViewModel ViewModel;
     public CadastroPage()
     {
         InitializeComponent();
+        ViewModel = new CadastroViewModel();
     }
 
     private async void OnEnviarClicked(object? sender, EventArgs e)
     {
+        string nome = NomeEntry.Text?.Trim() ?? "";
         string email = EmailEntry.Text?.Trim() ?? "";
         string captcha = CaptchaEntry.Text?.Trim() ?? "";
         string senha = SenhaEntry.Text.Trim();
@@ -25,9 +29,10 @@ public partial class CadastroPage : ContentPage
 
         if (emailValido && captchaValido && senhavalida)
         {
-            await DisplayAlert("Sucesso", "Cadastro enviado com sucesso!", "OK");
-            // Adicionar sistema de cadastro
-            
+            if (await ViewModel.CadastrarUsuarioAsync(nome, email, senha))
+            {
+                await DisplayAlert("Sucesso", "Cadastro enviado com sucesso!", "OK");
+            }
         }
     }
 

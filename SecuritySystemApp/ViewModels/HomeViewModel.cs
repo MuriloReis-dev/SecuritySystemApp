@@ -12,7 +12,7 @@ public class HomeViewModel
     {
         // Leitura dos dados pela API
         var service = new ApiService();
-        var dados = await service.LerConsultasAsync<Alarme>();
+        var dados = await service.GetConsultaAsync<Alarme>("alarmes/get"); // URL do endpoint para obter os alarmes
 
         // Simulação de dados para teste, remover após implementar a API
         dados = new List<Alarme>
