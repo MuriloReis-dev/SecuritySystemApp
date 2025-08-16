@@ -7,19 +7,23 @@ namespace SecuritySystemApp.ViewModels;
 
 public class CadastroViewModel
 {
-    public async Task<bool> CadastrarUsuarioAsync(string nome, string email, string senha)
+    // Método para realizar cadastro
+    // Retorna o usuário cadastrado e um booleano indicando sucesso ou falha
+    public async Task<(Usuario?, bool)> CadastrarAsync(string nome, string email, string senha)
     {
         var service = new ApiService();
 
-        var usuario = new CadastroDTO
+        var cadastro = new CadastroDTO
         {
             Nome = nome,
             Email = email,
             Senha = senha
         };
 
-        var resposta = await service.PostConsultaAsync("cadastro/post", usuario); // URL do endpoint de cadastro
+        var (usuario, resposta) = await service.PostConsultaAsync<CadastroDTO, Usuario>("cadastro/post", cadastro); // URL do endpoint de cadastro
 
-        return resposta.IsSuccessStatusCode;
+        bool sucesso = resposta != null && resposta.IsSuccessStatusCode;
+
+        return (usuario, sucesso);
     }
 }

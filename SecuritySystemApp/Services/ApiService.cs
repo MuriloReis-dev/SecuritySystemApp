@@ -18,6 +18,7 @@ public class ApiService
     }
 
     // Método GET
+    // T: Tipo do objeto esperado na resposta
     public async Task<List<T>> GetConsultaAsync<T>(string httppath) where T : class
     {
         try
@@ -32,19 +33,28 @@ public class ApiService
         }
     }
 
-    // Método POST
-    public async Task<HttpResponseMessage> PostConsultaAsync<T>(string httppath, T dados) where T : class
+    // Método POST que retorna objeto desserializado
+    // T: Tipo do objeto a ser enviado
+    // Result: Tipo do objeto esperado na resposta
+    // Response: Resposta de status Http
+    public async Task<(TResult? Result, HttpResponseMessage? Response)> PostConsultaAsync<T, TResult>(string httppath, T dados)
+        where T : class
+        where TResult : class
     {
         try
         {
             var resposta = await _httpClient.PostAsJsonAsync(httppath, dados);
             resposta.EnsureSuccessStatusCode();
-            return resposta;
+
+            var json = await resposta.Content.ReadAsStringAsync();
+            var result = JsonSerializer.Deserialize<TResult>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            return (result, resposta); // Retorna uma tupla com o resultado e a resposta
         }
         catch (HttpRequestException ex)
         {
             Console.WriteLine($"Erro ao fazer a requisição: {ex.Message}");
-            throw;
+            return (null, null);
         }
     }
 

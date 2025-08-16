@@ -54,11 +54,4 @@ public partial class MainPage : ContentPage
         }
     }
 
-    // Teste de conexão com a API
-    protected override async void OnAppearing()
-    {
-        base.OnAppearing();
-        UsuariosList.ItemsSource = await ViewModel.CarregarUsuariosAsync();
-    }
-
 }

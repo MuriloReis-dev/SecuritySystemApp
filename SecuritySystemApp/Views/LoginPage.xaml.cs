@@ -1,14 +1,17 @@
 using System.Text.RegularExpressions;
 namespace SecuritySystemApp.Views;
+using SecuritySystemApp.ViewModels;
 
 public partial class LoginPage : ContentPage
 {
+    LoginViewModel ViewModel;
     public LoginPage()
     {
         InitializeComponent();
+        ViewModel = new LoginViewModel();
     }
 
-    private void OnEnviarClicked(object? sender, EventArgs e)
+    private async void OnEnviarClicked(object? sender, EventArgs e)
     {
         string email = EmailEntry.Text?.Trim() ?? "";
         string captcha = CaptchaEntry.Text?.Trim() ?? "";
@@ -22,7 +25,11 @@ public partial class LoginPage : ContentPage
 
         if (emailValido && captchaValido)
         {
-            //add validação de login
+            var (_, sucesso) = await ViewModel.EntrarAsync(email, senha);
+            if (sucesso)
+            {
+                await DisplayAlert("Sucesso", "Login enviado com sucesso!", "OK");
+            }
         }
     }
 
