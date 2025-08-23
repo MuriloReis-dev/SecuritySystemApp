@@ -19,10 +19,16 @@ public class LoginViewModel
             Senha = senha
         };
 
-        var (usuario, resposta) = await service.PostConsultaAsync<LoginDTO, Usuario>("login/post", login); // URL do endpoint de login
+        var (loginResponse, status) = await service.PostConsultaAsync<LoginDTO, LoginResponseDTO>("login/post", login); // URL do endpoint de login
 
-        bool sucesso = resposta != null && resposta.IsSuccessStatusCode;
+        // Token para o usuário continuar logado (gerado na API)
+        if (loginResponse?.Token != null)
+        {
+            Preferences.Set("AuthToken", loginResponse.Token);
+        }
 
-        return (usuario, sucesso);
+        bool sucesso = status != null && status.IsSuccessStatusCode;
+
+        return (loginResponse?.Usuario, sucesso);
     }
 }

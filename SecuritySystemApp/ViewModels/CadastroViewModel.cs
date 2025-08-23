@@ -20,9 +20,9 @@ public class CadastroViewModel
             Senha = senha
         };
 
-        var (usuario, resposta) = await service.PostConsultaAsync<CadastroDTO, Usuario>("cadastro/post", cadastro); // URL do endpoint de cadastro
+        var (usuario, status) = await service.PostConsultaAsync<CadastroDTO, Usuario>("cadastro/post", cadastro); // URL do endpoint de cadastro
 
-        bool sucesso = resposta != null && resposta.IsSuccessStatusCode;
+        bool sucesso = status != null && status.IsSuccessStatusCode;
 
         return (usuario, sucesso);
     }
