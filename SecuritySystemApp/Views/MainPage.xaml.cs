@@ -52,6 +52,8 @@ public partial class MainPage : ContentPage
         {
             Application.Current.UserAppTheme = e.Value ? AppTheme.Light : AppTheme.Dark;
         }
+
+        Console.WriteLine($"Token armazenado: {Preferences.Get("AuthToken", string.Empty)}");
     }
 
 }

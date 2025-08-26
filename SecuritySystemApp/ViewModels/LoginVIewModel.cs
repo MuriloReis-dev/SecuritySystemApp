@@ -7,28 +7,16 @@ namespace SecuritySystemApp.ViewModels;
 
 public class LoginViewModel
 {
-    // Método para realizar login
-    // Retorna o usuário logado e um booleano indicando sucesso ou falha
-    public async Task<(Usuario?, bool)> EntrarAsync(string email, string senha)
+    private readonly AuthService _authService;
+
+    public LoginViewModel()
     {
-        var service = new ApiService();
+        _authService = new AuthService();
+    }
 
-        var login = new LoginDTO
-        {
-            Email = email,
-            Senha = senha
-        };
-
-        var (loginResponse, status) = await service.PostConsultaAsync<LoginDTO, LoginResponseDTO>("login/post", login); // URL do endpoint de login
-
-        // Token para o usuário continuar logado (gerado na API)
-        if (loginResponse?.Token != null)
-        {
-            Preferences.Set("AuthToken", loginResponse.Token);
-        }
-
-        bool sucesso = status != null && status.IsSuccessStatusCode;
-
-        return (loginResponse?.Usuario, sucesso);
+    // Método para realizar login
+    public async Task<bool> Entrar(string email, string senha)
+    {
+        return await _authService.LoginAsync(email, senha);
     }
 }

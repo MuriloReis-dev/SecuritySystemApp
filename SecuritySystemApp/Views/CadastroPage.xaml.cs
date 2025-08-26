@@ -29,7 +29,8 @@ public partial class CadastroPage : ContentPage
 
         if (emailValido && captchaValido && senhavalida)
         {
-            var (_, sucesso) = await ViewModel.CadastrarAsync(nome, email, senha);
+            //realiza cadastro
+            var sucesso = await ViewModel.Cadastrar(nome, email, senha);
             if (sucesso)
             {
                 await DisplayAlert("Sucesso", "Cadastro enviado com sucesso!", "OK");
