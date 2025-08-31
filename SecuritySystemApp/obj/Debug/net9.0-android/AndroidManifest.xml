@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
     Este código foi gerado por uma ferramenta.
-    Ele foi gerado de C:\Users\Edivaldo\Desktop\MURILO\PDTCC\SecuritySystemApp\SecuritySystemApp\Platforms\Android\AndroidManifest.xml
+    Ele foi gerado de C:\Users\Edivaldo\SecuritySystemApp\SecuritySystemApp\Platforms\Android\AndroidManifest.xml
     As alterações feitas neste arquivo poderão causar comportamento incorreto e serão perdidas se
     o conteúdo for regenerado.
     -->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" package="com.companyname.securitysystemapp" android:versionName="1.0">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" package="com.rapazes.alarmeapp" android:versionName="1.0">
   <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="35" />
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
   <uses-permission android:name="android.permission.INTERNET" />
@@ -17,7 +17,7 @@
       </intent-filter>
     </activity>
     <activity android:configChanges="orientation|screenSize" android:exported="false" android:name="crc6468b6408a11370c2f.WebAuthenticatorIntermediateActivity" />
-    <provider android:authorities="com.companyname.securitysystemapp.fileProvider" android:exported="false" android:grantUriPermissions="true" android:name="microsoft.maui.essentials.fileProvider">
+    <provider android:authorities="com.rapazes.alarmeapp.fileProvider" android:exported="false" android:grantUriPermissions="true" android:name="microsoft.maui.essentials.fileProvider">
       <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/microsoft_maui_essentials_fileprovider_file_paths" />
     </provider>
     <receiver android:enabled="true" android:exported="false" android:label="Essentials Connectivity Broadcast Receiver" android:name="crc64e53d2f592022988e.ConnectivityBroadcastReceiver" />
@@ -25,6 +25,6 @@
     <receiver android:enabled="true" android:exported="false" android:label="Essentials Battery Broadcast Receiver" android:name="crc640a8d9a12ddbf2cf2.BatteryBroadcastReceiver" />
     <receiver android:enabled="true" android:exported="false" android:label="Essentials Energy Saver Broadcast Receiver" android:name="crc640a8d9a12ddbf2cf2.EnergySaverBroadcastReceiver" />
     <service android:name="crc64396a3fe5f8138e3f.KeepAliveService" />
-    <provider android:name="mono.MonoRuntimeProvider" android:exported="false" android:initOrder="1999999999" android:authorities="com.companyname.securitysystemapp.mono.MonoRuntimeProvider.__mono_init__" />
+    <provider android:name="mono.MonoRuntimeProvider" android:exported="false" android:initOrder="1999999999" android:authorities="com.rapazes.alarmeapp.mono.MonoRuntimeProvider.__mono_init__" />
   </application>
 </manifest>

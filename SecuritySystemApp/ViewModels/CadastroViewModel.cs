@@ -11,6 +11,7 @@ public class CadastroViewModel
 
     public CadastroViewModel()
     {
+        // Definição dos Serviços
         _authService = new AuthService();
     }
 

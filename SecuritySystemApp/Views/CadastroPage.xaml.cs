@@ -1,14 +1,22 @@
 using System.Text.RegularExpressions;
-namespace SecuritySystemApp.Views;
 using SecuritySystemApp.ViewModels;
+using SecuritySystemApp.Services;
+
+namespace SecuritySystemApp.Views;
 
 public partial class CadastroPage : ContentPage
 {
-    CadastroViewModel ViewModel;
+    private readonly CadastroViewModel _viewModel;
+    private readonly NavigationService _navigationService;
     public CadastroPage()
     {
         InitializeComponent();
-        ViewModel = new CadastroViewModel();
+
+        // Definição da ViewModel
+        _viewModel = new CadastroViewModel();
+
+        // Definição de Serviços
+        _navigationService = new NavigationService();
     }
 
     private async void OnEnviarClicked(object? sender, EventArgs e)
@@ -30,16 +38,20 @@ public partial class CadastroPage : ContentPage
         if (emailValido && captchaValido && senhavalida)
         {
             //realiza cadastro
-            var sucesso = await ViewModel.Cadastrar(nome, email, senha);
-            if (sucesso)
+            var sucesso = await _viewModel.Cadastrar(nome, email, senha);
+            if (!sucesso)
             {
-                await DisplayAlert("Sucesso", "Cadastro enviado com sucesso!", "OK");
+                await DisplayAlert("Erro", "O usuário não foi cadastrado", "OK");
+            }
+            else
+            {
+                await _navigationService.NavegarParaAsync(nameof(HomePage));
             }
         }
     }
 
     private async void OnVoltarClicked(object? sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(".."); // volta uma página no histórico
+        await _navigationService.VoltarAsync(); // volta uma página no histórico
     }
 }

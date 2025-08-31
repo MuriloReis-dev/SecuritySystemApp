@@ -1,14 +1,22 @@
 using System.Text.RegularExpressions;
-namespace SecuritySystemApp.Views;
 using SecuritySystemApp.ViewModels;
+using SecuritySystemApp.Services;
+
+namespace SecuritySystemApp.Views;
 
 public partial class LoginPage : ContentPage
 {
-    LoginViewModel ViewModel;
+    private readonly LoginViewModel _viewModel;
+    private readonly NavigationService _navigationService;
     public LoginPage()
     {
         InitializeComponent();
-        ViewModel = new LoginViewModel();
+
+        // Definição da ViewModel
+        _viewModel = new LoginViewModel();
+
+        // Definição de Serviços
+        _navigationService = new NavigationService();
     }
 
     private async void OnEnviarClicked(object? sender, EventArgs e)
@@ -25,16 +33,20 @@ public partial class LoginPage : ContentPage
 
         if (emailValido && captchaValido)
         {
-            var sucesso = await ViewModel.Entrar(email, senha);
-            if (sucesso)
+            var sucesso = await _viewModel.Entrar(email, senha);
+            if (!sucesso)
             {
-                await DisplayAlert("Sucesso", "Login enviado com sucesso!", "OK");
+                await DisplayAlert("Erro", "Email ou Senha incorretos", "OK");
+            }
+            else
+            {
+                await _navigationService.NavegarParaAsync(nameof(HomePage));
             }
         }
     }
 
     private async void OnVoltarClicked(object? sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(".."); // volta uma página no histórico
+        await _navigationService.VoltarAsync(); // volta uma página no histórico
     }
 }

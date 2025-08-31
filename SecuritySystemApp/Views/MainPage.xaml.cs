@@ -8,7 +8,7 @@ namespace SecuritySystemApp.Views;
 public partial class MainPage : ContentPage
 {
     // No futuro, mudar a MainPage para uma tela de carregamento e alterar o código para redirecionar para a tela de Login (ou para Home caso esteja logado)
-    MainViewModel ViewModel;
+    private readonly MainViewModel _viewModel;
 
     private readonly INavigationService _navigationService;
     private readonly ApiService _apiService;
@@ -17,7 +17,7 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
-        ViewModel = new MainViewModel();
+        _viewModel = new MainViewModel();
         _navigationService = new NavigationService();
         _apiService = new ApiService();
         _authService = new AuthService();
@@ -25,6 +25,7 @@ public partial class MainPage : ContentPage
         CadrastroBtn.Clicked += OnCadrastroBtnClicked;
         LoginBtn.Clicked += OnLoginBtnClicked;
         HomeBtn.Clicked += OnHomeBtnClicked;
+        Appearing += OnAppearing;
         ThemeSwitch.Toggled += OnThemeToggled;
 
         // Switch para trocar tema (Claro ou Escuro) *MUDAR PARA A PÁGINA DE CONFIGURAÇÃO*

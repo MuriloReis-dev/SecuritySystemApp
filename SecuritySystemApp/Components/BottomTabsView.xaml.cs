@@ -10,6 +10,8 @@ public partial class BottomTabsView : ContentView
     public BottomTabsView()
     {
         InitializeComponent();
+
+        // Definição dos Serviços
         _navigationService = new NavigationService();
     }
 

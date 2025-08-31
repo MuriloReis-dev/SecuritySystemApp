@@ -11,6 +11,7 @@ public class LoginViewModel
 
     public LoginViewModel()
     {
+        // Definição dos Serviços
         _authService = new AuthService();
     }
 

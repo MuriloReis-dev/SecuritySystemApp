@@ -7,19 +7,24 @@ namespace SecuritySystemApp.Services;
 
 public class AuthService
 {
+    private readonly ApiService _apiService;
+
+    public AuthService()
+    {
+        _apiService = new ApiService();
+    }
+
     // Método para realizar login
     // Retorna o e um booleano indicando sucesso ou falha
     public async Task<bool> LoginAsync(string email, string senha)
     {
-        var service = new ApiService();
-
         var login = new LoginDTO
         {
             Email = email,
             Senha = senha
         };
 
-        var (loginResponse, status) = await service.PostConsultaAsync<LoginDTO, LoginResponseDTO>("logindto/login", login); // URL do endpoint de login
+        var (loginResponse, status) = await _apiService.PostConsultaAsync<LoginDTO, LoginResponseDTO>("logindto/login", login); // URL do endpoint de login
 
         // Token para o usuário continuar logado (gerado na API)
         if (loginResponse?.Token != null && loginResponse.Usuario != null)
@@ -44,8 +49,6 @@ public class AuthService
     // Retorna um booleano indicando sucesso ou falha
     public async Task<bool> RegisterAsync(string nome, string email, string senha)
     {
-        var service = new ApiService();
-
         var cadastro = new CadastroDTO
         {
             Nome = nome,
@@ -53,7 +56,7 @@ public class AuthService
             Senha = senha
         };
 
-        var status = await service.PostConsultaAsync("cadastrodto/cadastro", cadastro); // URL do endpoint de cadastro
+        var status = await _apiService.PostConsultaAsync("cadastrodto/cadastro", cadastro); // URL do endpoint de cadastro
 
         bool sucesso = status != null && status.IsSuccessStatusCode;
 
@@ -76,8 +79,6 @@ public class AuthService
     // Retorna um booleano indicando se o token é válido ou não
     public async Task<bool> ValidateLoginAsync()
     {
-        var service = new ApiService();
-
         var token = Preferences.Get("AuthToken", null);
 
         // Verifica se o token foi definido
@@ -87,7 +88,7 @@ public class AuthService
         }
 
         // Validação do token na API
-        var status = await service.PostConsultaAsync("auth/validar", new Usuario
+        var status = await _apiService.PostConsultaAsync("auth/validar", new Usuario
         {
             Id = int.Parse(Preferences.Get("UserId", "0")),
             Nome = Preferences.Get("UserName", string.Empty),

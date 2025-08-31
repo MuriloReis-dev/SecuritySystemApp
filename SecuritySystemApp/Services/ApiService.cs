@@ -14,7 +14,8 @@ public class ApiService
     public ApiService()
     {
         _httpClient = new HttpClient();
-        _httpClient.BaseAddress = new Uri("http://localhost:5000/api/"); // URL base da API
+        _httpClient.BaseAddress = new Uri("http://localhost:5000/api/"); // URL base da API (Windows localhost)
+        //_httpClient.BaseAddress = new Uri("http://192.168.15.63:5000/api/"); // URL base da API (Android mesma rede wifi)
 
         // Adiciona o token no cabeçalho Authorization, se existir
         var token = Preferences.Get("AuthToken", null);
