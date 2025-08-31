@@ -8,7 +8,7 @@ namespace SecuritySystemApp.Services;
 public class AuthService
 {
     // Método para realizar login
-    // Retorna o usuário logado e um booleano indicando sucesso ou falha
+    // Retorna o e um booleano indicando sucesso ou falha
     public async Task<bool> LoginAsync(string email, string senha)
     {
         var service = new ApiService();
@@ -87,13 +87,16 @@ public class AuthService
         }
 
         // Validação do token na API
-        var status = service.PostConsultaAsync("auth/validar", "");
-        if (!status.Result.IsSuccessStatusCode)
+        var status = await service.PostConsultaAsync("auth/validar", new Usuario
         {
-            Preferences.Remove("AuthToken");
-            Preferences.Remove("UserId");
-            Preferences.Remove("UserName");
-            Preferences.Remove("UserEmail");
+            Id = int.Parse(Preferences.Get("UserId", "0")),
+            Nome = Preferences.Get("UserName", string.Empty),
+            Email = Preferences.Get("UserEmail", string.Empty)
+        });
+        
+        if (!status.IsSuccessStatusCode)
+        {
+            await LogoutAsync();
             return false;
         }
 

@@ -16,7 +16,7 @@ public partial class BottomTabsView : ContentView
     private async void OnNotifyClicked(object sender, EventArgs e)
     {
         // Configurar rota para alguma página
-        await _navigationService.NavegarParaAsync("nameof(Outra)");
+        await _navigationService.NavegarParaAsync(nameof(NotifyPage));
     }
 
     private async void OnHomeClicked(object sender, EventArgs e)

@@ -25,7 +25,7 @@ public partial class LoginPage : ContentPage
 
         if (emailValido && captchaValido)
         {
-            var (_, sucesso) = await ViewModel.Entrar(email, senha);
+            var sucesso = await ViewModel.Entrar(email, senha);
             if (sucesso)
             {
                 await DisplayAlert("Sucesso", "Login enviado com sucesso!", "OK");

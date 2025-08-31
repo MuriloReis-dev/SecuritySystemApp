@@ -29,7 +29,13 @@
                 HorizontalOptions="Fill" 
                 Background="Green"
                 MaximumWidthRequest="170"/>
-
+            <!-- Botão para testar o token armazenado (remover depois) -->
+            <Button
+                x:Name="TestaTokenBtn"
+                Text="Login" 
+                HorizontalOptions="Fill" 
+                Background="Red"
+                MaximumWidthRequest="170"/>
             
             <!-- Switch para trocar tema (Claro ou Escuro) *MUDAR PARA A PÁGINA DE CONFIGURAÇÃO* -->
             <Label Text="Modo escuro" FontSize="20" HorizontalOptions="Center" />

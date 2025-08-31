@@ -12,6 +12,7 @@ public partial class MainPage : ContentPage
 
     private readonly INavigationService _navigationService;
     private readonly ApiService _apiService;
+    private readonly AuthService _authService;
 
     public MainPage()
     {
@@ -19,10 +20,12 @@ public partial class MainPage : ContentPage
         ViewModel = new MainViewModel();
         _navigationService = new NavigationService();
         _apiService = new ApiService();
+        _authService = new AuthService();
 
         CadrastroBtn.Clicked += OnCadrastroBtnClicked;
         LoginBtn.Clicked += OnLoginBtnClicked;
         HomeBtn.Clicked += OnHomeBtnClicked;
+        ThemeSwitch.Toggled += OnThemeToggled;
 
         // Switch para trocar tema (Claro ou Escuro) *MUDAR PARA A PÁGINA DE CONFIGURAÇÃO*
         if (Application.Current != null)
@@ -30,6 +33,22 @@ public partial class MainPage : ContentPage
             ThemeSwitch.IsToggled = Application.Current.UserAppTheme == AppTheme.Dark;
         }
     }
+
+    // Evento disparado quando a página aparece
+    private async void OnAppearing(object? sender, EventArgs e)
+    {
+        base.OnAppearing();
+
+        // Colocar aqui todo o código executado ao abrir o app
+        Console.WriteLine($"UserID: {Preferences.Get("UserId", string.Empty)}");
+        Console.WriteLine($"UserName: {Preferences.Get("UserName", string.Empty)}");
+        Console.WriteLine($"UserEmail: {Preferences.Get("UserEmail", string.Empty)}");
+        Console.WriteLine($"AuthToken: {Preferences.Get("AuthToken", string.Empty)}");
+        
+        bool tokenValido = await _authService.ValidateLoginAsync();
+        Console.WriteLine($"Validação do token de usuário: {tokenValido}");
+    }
+
     private async void OnCadrastroBtnClicked(object? sender, EventArgs e)
     {
         await _navigationService.NavegarParaAsync(nameof(CadastroPage));
@@ -46,14 +65,11 @@ public partial class MainPage : ContentPage
     }
 
     // Switch para trocar tema (Claro ou Escuro) *MUDAR PARA A PÁGINA DE CONFIGURAÇÃO*
-    private void OnThemeToggled(object sender, ToggledEventArgs e)
+    private void OnThemeToggled(object? sender, ToggledEventArgs e)
     {
         if (Application.Current != null)
         {
             Application.Current.UserAppTheme = e.Value ? AppTheme.Light : AppTheme.Dark;
         }
-
-        Console.WriteLine($"Token armazenado: {Preferences.Get("AuthToken", string.Empty)}");
     }
-
 }
