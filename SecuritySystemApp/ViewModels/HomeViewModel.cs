@@ -18,7 +18,7 @@ public class HomeViewModel
     // Propriedade para armazenar a lista de alarmes
     public async Task<List<Alarme>> CarregarAlarmesAsync()
     {
-        var dados = await _apiService.GetConsultaAsync<Alarme>("alarmes/get"); // URL do endpoint para obter os alarmes
+        var (dados, status) = await _apiService.GetConsultaAsync<List<Alarme>>("alarmes/get"); // URL do endpoint para obter os alarmes
 
         // Simulação de dados para teste, remover após implementar a API
         dados = new List<Alarme>

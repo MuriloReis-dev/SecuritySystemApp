@@ -94,8 +94,10 @@ public class AuthService
             Nome = Preferences.Get("UserName", string.Empty),
             Email = Preferences.Get("UserEmail", string.Empty)
         });
+
+        bool sucesso = status != null && status.IsSuccessStatusCode;
         
-        if (!status.IsSuccessStatusCode)
+        if (sucesso)
         {
             await LogoutAsync();
             return false;
