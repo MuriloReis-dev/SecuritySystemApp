@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:components="clr-namespace:SecuritySystemApp.Components"
              x:Class="SecuritySystemApp.Views.MainPage"
-             Title="MainPage">
+             Title="MainPage"
+             BackgroundColor="#666666">
     <!-- No futuro, mudar a MainPage para uma tela de carregamento e alterar o código para redirecionar para a tela de Login (ou para Home caso esteja logado) -->
     
     <Grid RowDefinitions="*, Auto"> <!-- Conteúdo da página, Barra de Navegação -->
