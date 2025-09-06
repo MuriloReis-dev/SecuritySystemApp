@@ -10,6 +10,7 @@ public partial class HomePage : ContentPage
     {
         InitializeComponent();
         ViewModel = new HomeViewModel();
+        BindingContext = ViewModel;
     }
 
     protected override async void OnAppearing()

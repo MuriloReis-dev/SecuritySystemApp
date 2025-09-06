@@ -26227,11 +26227,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Edivaldo\\Desktop\\MURILO\\PDTCC\\SecuritySystemApp\\SecuritySystemApp\\SecuritySystemApp.csproj",
+      "projectUniqueName": "C:\\Users\\Edivaldo\\SecuritySystemApp\\SecuritySystemApp\\SecuritySystemApp.csproj",
       "projectName": "SecuritySystemApp",
-      "projectPath": "C:\\Users\\Edivaldo\\Desktop\\MURILO\\PDTCC\\SecuritySystemApp\\SecuritySystemApp\\SecuritySystemApp.csproj",
+      "projectPath": "C:\\Users\\Edivaldo\\SecuritySystemApp\\SecuritySystemApp\\SecuritySystemApp.csproj",
       "packagesPath": "C:\\Users\\Edivaldo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Edivaldo\\Desktop\\MURILO\\PDTCC\\SecuritySystemApp\\SecuritySystemApp\\obj\\",
+      "outputPath": "C:\\Users\\Edivaldo\\SecuritySystemApp\\SecuritySystemApp\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "configFilePaths": [

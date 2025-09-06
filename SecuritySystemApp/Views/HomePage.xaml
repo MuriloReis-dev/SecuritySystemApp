@@ -3,60 +3,80 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:components="clr-namespace:SecuritySystemApp.Components"
              x:Class="SecuritySystemApp.Views.HomePage"
-             Title="Seus Alarmes">
+             Title="Seus Alarmes"
+             BackgroundColor="#666666">
              
-    <Grid RowDefinitions="Auto, *, Auto">
-        <ScrollView Grid.Row="1">
-            <Grid RowDefinitions="Auto, Auto, *">
-                <Label Text="Gráfico geral"
-                       FontSize="28"
-                       FontFamily="Cursive"
-                       HorizontalOptions="Center"
-                       TextColor="Black"
-                       Grid.Row="0"/>
-                <!-- Gráfico falso precisamos do Banco para fazer o de verdade -->
-                <Border Stroke="#E0A100" StrokeShape="RoundRectangle 20" Margin="10" Padding="10" Grid.Row="1">
-                    <BoxView Color="Gray" HeightRequest="150" CornerRadius="20"/>
+    <Grid ColumnDefinitions="*" RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="20" Spacing="20">
+
+                <!--  Título  -->
+                <Label
+                    FontFamily="Cursive"
+                    FontSize="28"
+                    HorizontalOptions="Center"
+                    Text="Gráfico geral"
+                    TextColor="Black" />
+
+                <!--  Gráfico falso (aqui você usaria uma lib ou desenharia com graphics API)  -->
+                <Border
+                    Padding="10"
+                    Stroke="#E0A100"
+                    StrokeShape="RoundRectangle 20"
+                    StrokeThickness="2">
+                    <BoxView HeightRequest="150" Color="Gray" />
                 </Border>
-                <CollectionView x:Name="AlarmesList" Grid.Row="2">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Border
-                                Margin="3"
-                                Padding="10"
-                                MaximumHeightRequest="80"
-                                VerticalOptions="Fill"
-                                StrokeShape="RoundRectangle 10"
-                                StrokeThickness="1">
-                                <Border.Triggers>
-                                    <DataTrigger TargetType="Border" Binding="{Binding Ligado}" Value="True">
-                                        <!-- Definir style para ligado = true -->
-                                    </DataTrigger>
-                                    <DataTrigger TargetType="Border" Binding="{Binding Ligado}" Value="False">
-                                        <!-- Definir style para ligado = false -->
-                                    </DataTrigger>
-                                </Border.Triggers>
-                                <Grid ColumnDefinitions="Auto, *">
-                                    <Image Aspect="AspectFit">
-                                        <Image.Triggers>
-                                            <DataTrigger TargetType="Image" Binding="{Binding Ligado}" Value="True">
-                                                <Setter Property="Source" Value="alarme_on.png"></Setter> <!-- Imagem para ligado = true -->
-                                            </DataTrigger>
-                                            <DataTrigger TargetType="Image" Binding="{Binding Ligado}" Value="False">
-                                                <Setter Property="Source" Value="alarme_off.png"></Setter> <!-- Imagem para ligado = false -->
-                                            </DataTrigger>
-                                        </Image.Triggers>
-                                    </Image>
-                                    <VerticalStackLayout Padding="10" Grid.Column="1" VerticalOptions="Center">
-                                        <Label Text="{Binding Nome}" FontSize="20"/>
-                                    </VerticalStackLayout>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </Grid>
+                <!--  Lista de portas  -->
+                <Border
+                    Margin="10"
+                    Padding="10"
+                    Background="#a09c9c"
+                    HorizontalOptions="Fill"
+                    Stroke="#d8d8d8"
+                    StrokeThickness="3"
+                    VerticalOptions="Start">
+                    <CollectionView
+                        HeightRequest="300"
+                        x:Name="AlarmesList"
+                        SelectionMode="None"
+                        VerticalScrollBarVisibility="Always">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border
+                                    Margin="5"
+                                    Padding="10"
+                                    StrokeShape="RoundRectangle 10">
+                                    <Border.Triggers>
+                                        <DataTrigger TargetType="Border" Binding="{Binding Ligado}" Value="True">
+                                            <Setter Property="Background" Value="#a8e6a1" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Border" Binding="{Binding Ligado}" Value="False">
+                                            <Setter Property="Background" Value="#f7a8a8" />
+                                        </DataTrigger>
+                                    </Border.Triggers>
+                                    <HorizontalStackLayout Spacing="10">
+                                        <Image WidthRequest="30">
+                                            <Image.Triggers>
+                                                <DataTrigger TargetType="Image" Binding="{Binding Ligado}" Value="True">
+                                                    <Setter Property="Source" Value="alarme_on.png" />
+                                                </DataTrigger>
+                                                <DataTrigger TargetType="Image" Binding="{Binding Ligado}" Value="False">
+                                                    <Setter Property="Source" Value="alarme_off.png" />
+                                                </DataTrigger>
+                                            </Image.Triggers>
+                                        </Image>
+                                        <VerticalStackLayout>
+                                            <Label Text="{Binding Id}" TextColor="Black" />
+                                            <Label Text="{Binding Nome}" TextColor="Black" />
+                                        </VerticalStackLayout>
+                                    </HorizontalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Border>
+            </VerticalStackLayout>
         </ScrollView>
-        <components:BottomTabsView Grid.Row="2" />
+        <components:BottomTabsView Grid.Row="1" />
     </Grid>
 </ContentPage>

@@ -4,5 +4,45 @@
              x:Class="SecuritySystemApp.Views.ConfigPage"
              Title="Configurações">
              
-    <!-- Adicionar conteúdo da página -->
+    <ScrollView>
+        <Grid
+            Padding="20"
+            RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+            RowSpacing="15">
+
+            <!--  Nome  -->
+            <VerticalStackLayout Grid.Row="0">
+                <Label FontSize="16" Text="Nome" />
+                <Entry x:Name="NomeEntry" Placeholder="Digite seu nome" />
+            </VerticalStackLayout>
+
+            <!--  Email  -->
+            <VerticalStackLayout Grid.Row="1">
+                <Label FontSize="16" Text="E-mail" />
+                <Entry
+                    x:Name="EmailEntry"
+                    Keyboard="Email"
+                    Placeholder="Digite seu e-mail" />
+            </VerticalStackLayout>
+
+            <!--  Senha  -->
+            <VerticalStackLayout Grid.Row="2">
+                <Label FontSize="16" Text="Senha" />
+                <Entry
+                    x:Name="SenhaEntry"
+                    IsPassword="True"
+                    Placeholder="Digite sua senha" />
+            </VerticalStackLayout>
+
+            <!--  Botão salvar  -->
+            <Button
+                Grid.Row="3"
+                BackgroundColor="#2E86DE"
+                Clicked="OnSalvarClicked"
+                CornerRadius="10"
+                HeightRequest="50"
+                Text="Salvar Configurações"
+                TextColor="White" />
+        </Grid>
+    </ScrollView>
 </ContentPage>

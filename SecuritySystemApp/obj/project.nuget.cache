@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BANf1J9fNbk=",
+  "dgSpecHash": "bNaHlCliw/0=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Edivaldo\\Desktop\\MURILO\\PDTCC\\SecuritySystemApp\\SecuritySystemApp\\SecuritySystemApp.csproj",
+  "projectFilePath": "C:\\Users\\Edivaldo\\SecuritySystemApp\\SecuritySystemApp\\SecuritySystemApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Edivaldo\\.nuget\\packages\\googlegson\\2.11.0.5\\googlegson.2.11.0.5.nupkg.sha512",
     "C:\\Users\\Edivaldo\\.nuget\\packages\\microsoft.extensions.configuration\\9.0.0\\microsoft.extensions.configuration.9.0.0.nupkg.sha512",
