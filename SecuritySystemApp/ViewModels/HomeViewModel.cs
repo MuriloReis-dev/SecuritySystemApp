@@ -7,12 +7,18 @@ namespace SecuritySystemApp.ViewModels;
 
 public class HomeViewModel
 {
+    private readonly ApiService _apiService;
+
+    public HomeViewModel()
+    {
+        // Definição dos Serviços
+        _apiService = new ApiService();
+    }
+
     // Propriedade para armazenar a lista de alarmes
     public async Task<List<Alarme>> CarregarAlarmesAsync()
     {
-        // Leitura dos dados pela API
-        var service = new ApiService();
-        var dados = await service.LerConsultasAsync<Alarme>();
+        var (dados, status) = await _apiService.GetConsultaAsync<List<Alarme>>("alarmes/get"); // URL do endpoint para obter os alarmes
 
         // Simulação de dados para teste, remover após implementar a API
         dados = new List<Alarme>
