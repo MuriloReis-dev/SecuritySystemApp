@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SecuritySystemApp.Views.LoginPage"
              Shell.NavBarIsVisible="False"
-             Title="Login"
-             BackgroundColor="#666666">
+             Title="Login">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15" >

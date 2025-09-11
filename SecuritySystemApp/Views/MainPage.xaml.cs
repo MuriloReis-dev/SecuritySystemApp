@@ -26,13 +26,6 @@ public partial class MainPage : ContentPage
         LoginBtn.Clicked += OnLoginBtnClicked;
         HomeBtn.Clicked += OnHomeBtnClicked;
         Appearing += OnAppearing;
-        ThemeSwitch.Toggled += OnThemeToggled;
-
-        // Switch para trocar tema (Claro ou Escuro) *MUDAR PARA A PÁGINA DE CONFIGURAÇÃO*
-        if (Application.Current != null)
-        {
-            ThemeSwitch.IsToggled = Application.Current.UserAppTheme == AppTheme.Dark;
-        }
     }
 
     // Evento disparado quando a página aparece
@@ -63,14 +56,5 @@ public partial class MainPage : ContentPage
     private async void OnHomeBtnClicked(object? sender, EventArgs e)
     {
         await _navigationService.NavegarParaAsync(nameof(HomePage));
-    }
-
-    // Switch para trocar tema (Claro ou Escuro) *MUDAR PARA A PÁGINA DE CONFIGURAÇÃO*
-    private void OnThemeToggled(object? sender, ToggledEventArgs e)
-    {
-        if (Application.Current != null)
-        {
-            Application.Current.UserAppTheme = e.Value ? AppTheme.Light : AppTheme.Dark;
-        }
     }
 }

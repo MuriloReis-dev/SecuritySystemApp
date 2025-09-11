@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:components="clr-namespace:SecuritySystemApp.Components"
              x:Class="SecuritySystemApp.Views.HomePage"
-             Title="Seus Alarmes"
-             BackgroundColor="#666666">
+             Title="Seus Alarmes">
              
     <Grid ColumnDefinitions="*" RowDefinitions="*,Auto">
         <ScrollView Grid.Row="0">
@@ -15,8 +14,7 @@
                     FontFamily="Cursive"
                     FontSize="28"
                     HorizontalOptions="Center"
-                    Text="Gráfico geral"
-                    TextColor="Black" />
+                    Text="Gráfico geral" />
 
                 <!--  Gráfico falso (aqui você usaria uma lib ou desenharia com graphics API)  -->
                 <Border
@@ -26,7 +24,7 @@
                     StrokeThickness="2">
                     <BoxView HeightRequest="150" Color="Gray" />
                 </Border>
-                <!--  Lista de portas  -->
+                <!--  Lista de alarmes  -->
                 <Border
                     Margin="10"
                     Padding="10"

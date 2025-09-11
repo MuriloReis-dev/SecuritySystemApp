@@ -2,47 +2,50 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SecuritySystemApp.Views.ConfigPage"
+             xmlns:components="clr-namespace:SecuritySystemApp.Components"
              Title="Configurações">
              
-    <ScrollView>
-        <Grid
-            Padding="20"
-            RowDefinitions="Auto,Auto,Auto,Auto,Auto"
-            RowSpacing="15">
+    <Grid ColumnDefinitions="*" RowDefinitions="*,Auto">
+        <ScrollView>
+            <VerticalStackLayout Margin="10">
+                <!-- Aparência -->
+                <Border
+                    Padding="15"
+                    Stroke="LightGray"
+                    StrokeShape="RoundRectangle 8"
+                    StrokeThickness="1">
+                    <VerticalStackLayout>
+                        <Label Text="Aparência" FontSize="20"/>
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="Tema" VerticalOptions="Center" FontSize="16"/>
+                            <Switch x:Name="ThemeSwitch" IsToggled="{Binding IsDarkMode}" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
 
-            <!--  Nome  -->
-            <VerticalStackLayout Grid.Row="0">
-                <Label FontSize="16" Text="Nome" />
-                <Entry x:Name="NomeEntry" Placeholder="Digite seu nome" />
+                <!-- Perfil -->
+                <Border
+                    Padding="15"
+                    Stroke="LightGray"
+                    StrokeShape="RoundRectangle 8"
+                    StrokeThickness="1">
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="Perfil" FontSize="20" FontAttributes="Bold"/>
+                        <Label Text="Senha atual" VerticalOptions="Center" FontSize="16"/>
+                        <Entry x:Name="SenhaAtualEntry" Placeholder="Digite sua senha atual" IsPassword="True"/>
+                        <Label Text="Nova Senha" VerticalOptions="Center" FontSize="16"/>
+                        <Entry x:Name="NovaSenhaEntry" Placeholder="Digite sua nova senha" IsPassword="True"/>
+                        <Button
+                            Text="Salvar Alterações"
+                            x:Name="SaveProfileButton"
+                            BackgroundColor="#FF00A2FF"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            CornerRadius="8"/>
+                    </VerticalStackLayout>
+                </Border>
             </VerticalStackLayout>
-
-            <!--  Email  -->
-            <VerticalStackLayout Grid.Row="1">
-                <Label FontSize="16" Text="E-mail" />
-                <Entry
-                    x:Name="EmailEntry"
-                    Keyboard="Email"
-                    Placeholder="Digite seu e-mail" />
-            </VerticalStackLayout>
-
-            <!--  Senha  -->
-            <VerticalStackLayout Grid.Row="2">
-                <Label FontSize="16" Text="Senha" />
-                <Entry
-                    x:Name="SenhaEntry"
-                    IsPassword="True"
-                    Placeholder="Digite sua senha" />
-            </VerticalStackLayout>
-
-            <!--  Botão salvar  -->
-            <Button
-                Grid.Row="3"
-                BackgroundColor="#2E86DE"
-                Clicked="OnSalvarClicked"
-                CornerRadius="10"
-                HeightRequest="50"
-                Text="Salvar Configurações"
-                TextColor="White" />
-        </Grid>
-    </ScrollView>
+        </ScrollView>
+        <components:BottomTabsView Grid.Row="1" />
+    </Grid>
 </ContentPage>

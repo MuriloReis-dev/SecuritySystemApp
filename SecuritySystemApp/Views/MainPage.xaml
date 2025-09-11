@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:components="clr-namespace:SecuritySystemApp.Components"
              x:Class="SecuritySystemApp.Views.MainPage"
-             Title="MainPage"
-             BackgroundColor="#666666">
+             Title="MainPage">
     <!-- No futuro, mudar a MainPage para uma tela de carregamento e alterar o código para redirecionar para a tela de Login (ou para Home caso esteja logado) -->
     
     <Grid RowDefinitions="*, Auto"> <!-- Conteúdo da página, Barra de Navegação -->
@@ -30,24 +29,6 @@
                 HorizontalOptions="Fill" 
                 Background="Green"
                 MaximumWidthRequest="170"/>
-            
-            <!-- Switch para trocar tema (Claro ou Escuro) *MUDAR PARA A PÁGINA DE CONFIGURAÇÃO* -->
-            <Label Text="Modo escuro" FontSize="20" HorizontalOptions="Center" />
-            <Switch x:Name="ThemeSwitch" Toggled="OnThemeToggled" IsToggled="{Binding IsDarkMode}" />
-
-            <!-- Teste de conexão com a API -->
-            <CollectionView x:Name="UsuariosList">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <VerticalStackLayout>
-                            <Label Text="{Binding Id}" FontSize="20" />
-                            <Label Text="{Binding Nome}" FontSize="20" />
-                            <Label Text="{Binding Email}" FontSize="16" />
-                            <Label Text="{Binding Senha}" FontSize="16" />
-                        </VerticalStackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
         </VerticalStackLayout>
         <!-- Barra de Navegação (Adicionar em todas as páginas que precisam)-->
         <components:BottomTabsView Grid.Row="1" />

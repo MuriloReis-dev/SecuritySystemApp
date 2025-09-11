@@ -64,10 +64,5 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
 	</ItemGroup>
 
-	<!-- Teste de leituda de dados json -->
-	<ItemGroup>
-		<EmbeddedResource Include="Resources\Data\leituras.json" />
-	</ItemGroup>
-
 
 </Project>
