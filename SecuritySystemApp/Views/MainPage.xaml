@@ -15,7 +15,7 @@
                 x:Name="LoginBtn"
                 Text="Login" 
                 HorizontalOptions="Fill" 
-                Background="Blue"
+                Background="Gray"
                 MaximumWidthRequest="170"/>
             <Button
                 x:Name="CadrastroBtn"
@@ -27,7 +27,7 @@
                 x:Name="HomeBtn"
                 Text="Home" 
                 HorizontalOptions="Fill" 
-                Background="Green"
+                Background="Gray"
                 MaximumWidthRequest="170"/>
         </VerticalStackLayout>
         <!-- Barra de Navegação (Adicionar em todas as páginas que precisam)-->

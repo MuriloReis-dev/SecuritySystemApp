@@ -1,0 +1,49 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/SecuritySystemApp/SecuritySystemApp.csproj"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "build-windows",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "-f",
+        "net9.0-windows10.0.19041.0",
+        "${workspaceFolder}/SecuritySystemApp/SecuritySystemApp.csproj"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "build-android",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "-f",
+        "net9.0-android",
+        "${workspaceFolder}/SecuritySystemApp/SecuritySystemApp.csproj"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "run-windows",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "run",
+        "net9.0-windows10.0.19041.0"
+      ],
+      "problemMatcher": "$msCompile"
+    }
+  ]
+}
