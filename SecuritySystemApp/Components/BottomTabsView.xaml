@@ -17,13 +17,15 @@
 
                 <!-- Colocar todas as páginas que aparecem na Navigation Bar -->
                 <Button
-                    ImageSource="notify.png"
+                    x:Name="NotifyButton"
+                    ImageSource="{AppThemeBinding Light='notify_black.png', Dark='notify_white.png'}"
                     BackgroundColor="Transparent"
                     Clicked="OnNotifyClicked"
                     Grid.Column="0">
                 </Button>
 
                 <Button
+                    x:Name="HomeButton"
                     ImageSource="homeicon.png"
                     BackgroundColor="Transparent"
                     Clicked="OnHomeClicked"
@@ -31,7 +33,8 @@
                 </Button>
                     
                 <Button
-                    ImageSource="config.png"
+                    x:Name="ConfigButton"
+                    ImageSource="{AppThemeBinding Light='config_black.png', Dark='config_white.png'}"
                     BackgroundColor="Transparent"
                     Clicked="OnConfigClicked"
                     Grid.Column="2">

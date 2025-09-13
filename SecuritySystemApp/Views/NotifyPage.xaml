@@ -10,6 +10,6 @@
         <ScrollView>
 
         </ScrollView>
-        <components:BottomTabsView Grid.Row="1" />
+        <components:BottomTabsView CurrentPage="NotifyPage" Grid.Row="1" />
     </Grid>
 </ContentPage>

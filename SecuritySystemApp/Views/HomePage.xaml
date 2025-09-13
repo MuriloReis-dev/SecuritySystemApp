@@ -56,10 +56,10 @@
                                         <Image WidthRequest="30">
                                             <Image.Triggers>
                                                 <DataTrigger TargetType="Image" Binding="{Binding Ligado}" Value="True">
-                                                    <Setter Property="Source" Value="alarme_on.png" />
+                                                    <Setter Property="Source" Value="alarme_green_full.png" />
                                                 </DataTrigger>
                                                 <DataTrigger TargetType="Image" Binding="{Binding Ligado}" Value="False">
-                                                    <Setter Property="Source" Value="alarme_off.png" />
+                                                    <Setter Property="Source" Value="alarme_red_full.png" />
                                                 </DataTrigger>
                                             </Image.Triggers>
                                         </Image>
@@ -75,6 +75,6 @@
                 </Border>
             </VerticalStackLayout>
         </ScrollView>
-        <components:BottomTabsView Grid.Row="1" />
+        <components:BottomTabsView CurrentPage="HomePage" Grid.Row="1" />
     </Grid>
 </ContentPage>

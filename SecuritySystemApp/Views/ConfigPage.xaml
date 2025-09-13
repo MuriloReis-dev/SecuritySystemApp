@@ -21,7 +21,7 @@
                                 x:Name="ThemeArea"
                                 BackgroundColor="Transparent"
                                 ColumnDefinitions="Auto, *">
-                                <Image Source="theme.png" WidthRequest="30"></Image>
+                                <Image Source="{AppThemeBinding Light='sun_black.png', Dark='moon_white.png'}" WidthRequest="30"></Image>
                                 <VerticalStackLayout Grid.Column="1" Padding="10,0">
                                     <Label Text="Tema" VerticalOptions="Center" FontSize="16" />
                                     <Label Text="{AppThemeBinding Light='Claro', Dark='Escuro'}" VerticalOptions="Center" FontSize="16" />
@@ -57,6 +57,6 @@
                 </Border>
             </VerticalStackLayout>
         </ScrollView>
-        <components:BottomTabsView Grid.Row="1" />
+        <components:BottomTabsView CurrentPage="ConfigPage" Grid.Row="1" />
     </Grid>
 </ContentPage>
