@@ -22,7 +22,6 @@ public partial class ConfigPage : ContentPage
 
         // Eventos
         SaveProfileButton.Clicked += OnSaveProfileButtonClicked;
-        ThemeSwitch.Toggled += OnThemeToggled;
     }
     private async void OnSaveProfileButtonClicked(object? sender, EventArgs e)
     {
@@ -32,11 +31,31 @@ public partial class ConfigPage : ContentPage
         await DisplayAlert("Sucesso", "Configurações salvas com sucesso!", "OK");
     }
 
-    private void OnThemeToggled(object? sender, ToggledEventArgs e)
+    private async void OnThemeAreaTapped(object? sender, EventArgs e)
     {
+        string action = await DisplayActionSheet(
+            "Escolha o tema",
+            "Cancelar",
+            null,
+            "Claro",
+            "Escuro",
+            "Automático"
+        );
+
         if (Application.Current != null)
         {
-            Application.Current.UserAppTheme = e.Value ? AppTheme.Light : AppTheme.Dark;
+            switch (action)
+            {
+                case "Claro":
+                    Application.Current.UserAppTheme = AppTheme.Light;
+                    break;
+                case "Escuro":
+                    Application.Current.UserAppTheme = AppTheme.Dark;
+                    break;
+                case "Automático":
+                    Application.Current.UserAppTheme = AppTheme.Unspecified;
+                    break;
+            }
         }
     }
 }

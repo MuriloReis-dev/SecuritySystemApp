@@ -17,7 +17,7 @@
 
                 <!-- Colocar todas as páginas que aparecem na Navigation Bar -->
                 <Button
-                    ImageSource="homeicon.png"
+                    ImageSource="notify.png"
                     BackgroundColor="Transparent"
                     Clicked="OnNotifyClicked"
                     Grid.Column="0">
@@ -31,7 +31,7 @@
                 </Button>
                     
                 <Button
-                    ImageSource="homeicon.png"
+                    ImageSource="config.png"
                     BackgroundColor="Transparent"
                     Clicked="OnConfigClicked"
                     Grid.Column="2">

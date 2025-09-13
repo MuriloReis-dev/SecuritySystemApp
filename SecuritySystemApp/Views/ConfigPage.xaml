@@ -17,8 +17,19 @@
                     <VerticalStackLayout>
                         <Label Text="Aparência" FontSize="20"/>
                         <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
-                            <Label Text="Tema" VerticalOptions="Center" FontSize="16"/>
-                            <Switch x:Name="ThemeSwitch" IsToggled="{Binding IsDarkMode}" />
+                            <Grid
+                                x:Name="ThemeArea"
+                                BackgroundColor="Transparent"
+                                ColumnDefinitions="Auto, *">
+                                <Image Source="theme.png" WidthRequest="30"></Image>
+                                <VerticalStackLayout Grid.Column="1" Padding="10,0">
+                                    <Label Text="Tema" VerticalOptions="Center" FontSize="16" />
+                                    <Label Text="{AppThemeBinding Light='Claro', Dark='Escuro'}" VerticalOptions="Center" FontSize="16" />
+                                </VerticalStackLayout>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnThemeAreaTapped"/>
+                                </Grid.GestureRecognizers>
+                            </Grid>
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </Border>
