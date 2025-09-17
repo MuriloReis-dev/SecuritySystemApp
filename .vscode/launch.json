@@ -15,7 +15,7 @@
       "name": ".NET MAUI - Android",
       "type": "coreclr",
       "request": "launch",
-      "preLaunchTask": "run-android",
+      "preLaunchTask": "build-android",
       "program": "",
       "cwd": "${workspaceFolder}/SecuritySystemApp",
       "console": "internalConsole",

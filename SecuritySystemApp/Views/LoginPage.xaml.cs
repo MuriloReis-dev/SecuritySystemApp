@@ -40,7 +40,7 @@ public partial class LoginPage : ContentPage
             }
             else
             {
-                await _navigationService.NavegarParaAsync(nameof(HomePage));
+                await _navigationService.NavegarResetAsync(nameof(HomePage));
             }
         }
     }

@@ -45,16 +45,16 @@ public partial class MainPage : ContentPage
 
     private async void OnCadrastroBtnClicked(object? sender, EventArgs e)
     {
-        await _navigationService.NavegarParaAsync(nameof(CadastroPage));
+        await _navigationService.NavegarAsync(nameof(CadastroPage));
     }
 
     private async void OnLoginBtnClicked(object? sender, EventArgs e)
     {
-        await _navigationService.NavegarParaAsync(nameof(LoginPage));
+        await _navigationService.NavegarAsync(nameof(LoginPage));
     }
 
     private async void OnHomeBtnClicked(object? sender, EventArgs e)
     {
-        await _navigationService.NavegarParaAsync(nameof(HomePage));
+        await _navigationService.NavegarAsync(nameof(HomePage));
     }
 }

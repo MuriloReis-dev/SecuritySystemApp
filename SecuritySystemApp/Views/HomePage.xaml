@@ -36,7 +36,8 @@
                     <CollectionView
                         HeightRequest="300"
                         x:Name="AlarmesList"
-                        SelectionMode="None"
+                        SelectionMode="Single"
+                        SelectionChanged="OnAlarmeSelected"
                         VerticalScrollBarVisibility="Always">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>

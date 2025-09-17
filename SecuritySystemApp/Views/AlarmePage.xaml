@@ -6,4 +6,51 @@
              Title="Detalhes do Alarme">
              
     <!-- Adicionar conteúdo da página -->
+    <Grid ColumnDefinitions="*" RowDefinitions="*,Auto">
+        <ScrollView>
+            <VerticalStackLayout Margin="10">
+                <!-- Alarme -->
+                <Border
+                    Padding="15"
+                    Stroke="LightGray"
+                    StrokeShape="RoundRectangle 8"
+                    StrokeThickness="1">
+                    <VerticalStackLayout>
+                        <VerticalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnAlarmAreaTapped"/>
+                        </VerticalStackLayout.GestureRecognizers>
+                        <Label Text="Nome" FontSize="12"/>
+
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="{Binding Nome}" FontSize="20"/>
+                            <Image Source="homeicon.png" WidthRequest="20" HeightRequest="20"></Image>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Botão para ligar/desligar -->
+                <Border
+                    Padding="15"
+                    Stroke="LightGray"
+                    StrokeShape="RoundRectangle 8"
+                    StrokeThickness="1">
+                    <VerticalStackLayout Spacing="15">
+                        
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Usuários Relacionados -->
+                <Border
+                    Padding="15"
+                    Stroke="LightGray"
+                    StrokeShape="RoundRectangle 8"
+                    StrokeThickness="1">
+                    <VerticalStackLayout Spacing="15">
+                        
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+        <components:BottomTabsView CurrentPage="HomePage" Grid.Row="1" />
+    </Grid>
 </ContentPage>

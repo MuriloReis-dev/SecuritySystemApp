@@ -45,7 +45,7 @@ public partial class CadastroPage : ContentPage
             }
             else
             {
-                await _navigationService.NavegarParaAsync(nameof(HomePage));
+                await _navigationService.NavegarResetAsync(nameof(HomePage));
             }
         }
     }

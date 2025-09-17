@@ -37,24 +37,25 @@ public partial class ConfigPage : ContentPage
             "Escolha o tema",
             "Cancelar",
             null,
+            "Sistema",
             "Claro",
-            "Escuro",
-            "Automático"
+            "Escuro"
         );
 
         if (Application.Current != null)
         {
             switch (action)
             {
+                case "Sistema":
+                    Application.Current.UserAppTheme = AppTheme.Unspecified;
+                    break;
                 case "Claro":
                     Application.Current.UserAppTheme = AppTheme.Light;
                     break;
                 case "Escuro":
                     Application.Current.UserAppTheme = AppTheme.Dark;
                     break;
-                case "Automático":
-                    Application.Current.UserAppTheme = AppTheme.Unspecified;
-                    break;
+                
             }
         }
     }

@@ -36,21 +36,25 @@ public partial class BottomTabsView : ContentView
 
         // Definição dos Serviços
         _navigationService = new NavigationService();
+
+        // Atualiza ícones quando o tema do app mudar
+        if (Application.Current != null)
+            Application.Current.RequestedThemeChanged += OnRequestedThemeChanged;
     }
 
     private async void OnNotifyClicked(object sender, EventArgs e)
     {
-        await _navigationService.NavegarParaAsync(nameof(NotifyPage));
+        await _navigationService.NavegarAsync(nameof(NotifyPage));
     }
 
     private async void OnHomeClicked(object sender, EventArgs e)
     {
-        await _navigationService.NavegarParaAsync(nameof(HomePage));
+        await _navigationService.NavegarAsync(nameof(HomePage));
     }
 
     private async void OnConfigClicked(object sender, EventArgs e)
     {
-        await _navigationService.NavegarParaAsync(nameof(ConfigPage));
+        await _navigationService.NavegarAsync(nameof(ConfigPage));
     }
 
     private static void OnCurrentPageChanged(BindableObject bindable, object oldValue, object newValue)
@@ -59,24 +63,29 @@ public partial class BottomTabsView : ContentView
         control.UpdateIcons();
     }
 
+    private void OnRequestedThemeChanged(object? sender, AppThemeChangedEventArgs e)
+    {
+        UpdateIcons();
+    }
+
     private void UpdateIcons()
     {
-        if (CurrentPage == BottomTabPage.NotifyPage)
+        if (Application.Current?.RequestedTheme == AppTheme.Dark)
         {
-            if (Application.Current?.RequestedTheme == AppTheme.Dark)
+            if (CurrentPage == BottomTabPage.NotifyPage)
                 NotifyButton.ImageSource = "notify_white_full.png";
-            else
-                NotifyButton.ImageSource = "notify_black_full.png";
-        }
-        if (CurrentPage == BottomTabPage.HomePage)
-        {
-            HomeButton.ImageSource = "homeicon.png";
-        }
-        if (CurrentPage == BottomTabPage.ConfigPage)
-        {
-            if (Application.Current?.RequestedTheme == AppTheme.Dark)
+            else if (CurrentPage == BottomTabPage.HomePage)
+                HomeButton.ImageSource = "homeicon.png";
+            else if (CurrentPage == BottomTabPage.ConfigPage)
                 ConfigButton.ImageSource = "config_white_full.png";
-            else
+        }
+        else
+        {
+            if (CurrentPage == BottomTabPage.NotifyPage)
+                NotifyButton.ImageSource = "notify_black_full.png";
+            else if (CurrentPage == BottomTabPage.HomePage)
+                HomeButton.ImageSource = "homeicon.png";
+            else if (CurrentPage == BottomTabPage.ConfigPage)
                 ConfigButton.ImageSource = "config_black_full.png";
         }
     }

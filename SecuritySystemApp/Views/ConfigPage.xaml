@@ -21,14 +21,15 @@
                                 x:Name="ThemeArea"
                                 BackgroundColor="Transparent"
                                 ColumnDefinitions="Auto, *">
-                                <Image Source="{AppThemeBinding Light='sun_black.png', Dark='moon_white.png'}" WidthRequest="30"></Image>
-                                <VerticalStackLayout Grid.Column="1" Padding="10,0">
-                                    <Label Text="Tema" VerticalOptions="Center" FontSize="16" />
-                                    <Label Text="{AppThemeBinding Light='Claro', Dark='Escuro'}" VerticalOptions="Center" FontSize="16" />
-                                </VerticalStackLayout>
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnThemeAreaTapped"/>
                                 </Grid.GestureRecognizers>
+
+                                <Image Source="{AppThemeBinding Light='sun_black.png', Dark='moon_white.png'}" WidthRequest="30" Margin="5"></Image>
+                                <VerticalStackLayout Grid.Column="1" Padding="10,0">
+                                    <Label Text="Tema" VerticalOptions="Center" FontSize="16" />
+                                    <Label Text="{AppThemeBinding Light='Claro', Dark='Escuro'}" VerticalOptions="Center" FontSize="12" TextColor="Gray" />
+                                </VerticalStackLayout>
                             </Grid>
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
