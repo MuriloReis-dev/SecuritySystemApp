@@ -44,17 +44,15 @@
                                 <Border
                                     Margin="5"
                                     Padding="10"
-                                    StrokeShape="RoundRectangle 10">
+                                    StrokeShape="RoundRectangle 10"
+                                    BackgroundColor="{StaticResource Gray600}">
                                     <Border.Triggers>
-                                        <DataTrigger TargetType="Border" Binding="{Binding Ligado}" Value="True">
-                                            <Setter Property="Background" Value="#a8e6a1" />
-                                        </DataTrigger>
                                         <DataTrigger TargetType="Border" Binding="{Binding Ligado}" Value="False">
-                                            <Setter Property="Background" Value="#f7a8a8" />
+                                            <Setter Property="Opacity" Value="0.5" />
                                         </DataTrigger>
                                     </Border.Triggers>
-                                    <HorizontalStackLayout Spacing="10">
-                                        <Image WidthRequest="30">
+                                    <Grid ColumnSpacing="10" ColumnDefinitions="Auto,*,Auto">
+                                        <Image WidthRequest="30" Grid.Column="0">
                                             <Image.Triggers>
                                                 <DataTrigger TargetType="Image" Binding="{Binding Ligado}" Value="True">
                                                     <Setter Property="Source" Value="alarme_green_full.png" />
@@ -64,11 +62,20 @@
                                                 </DataTrigger>
                                             </Image.Triggers>
                                         </Image>
-                                        <VerticalStackLayout>
-                                            <Label Text="{Binding Id}" TextColor="Black" />
-                                            <Label Text="{Binding Nome}" TextColor="Black" />
+                                        <VerticalStackLayout Grid.Column="1">
+                                            <Label Text="{Binding Id}" TextColor="White" />
+                                            <Label Text="{Binding Nome}" TextColor="White" />
                                         </VerticalStackLayout>
-                                    </HorizontalStackLayout>
+
+                                        <!-- Texto indicando alrmes do propretário -->
+                                        <Label VerticalOptions="Center" Text="ADM" FontSize="15" TextColor="White" Grid.Column="2">
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding Adm}" Value="False">
+                                                    <Setter Property="IsVisible" Value="False" />
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                    </Grid>
                                 </Border>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>

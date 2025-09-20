@@ -26,7 +26,7 @@ public partial class HomePage : ContentPage
 
     private async void OnAlarmeSelected(object sender, SelectionChangedEventArgs e)
     {
-        if (e.CurrentSelection.FirstOrDefault() is Alarme alarmeSelecionado)
+        if (e.CurrentSelection.FirstOrDefault() is AlarmeDTO alarmeSelecionado)
         {
             await _navigationService.NavegarAsync(nameof(AlarmePage), new Dictionary<string, object>
             {

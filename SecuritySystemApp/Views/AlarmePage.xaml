@@ -34,9 +34,34 @@
                     Stroke="LightGray"
                     StrokeShape="RoundRectangle 8"
                     StrokeThickness="1">
-                    <VerticalStackLayout Spacing="15">
-                        
-                    </VerticalStackLayout>
+                    <Border
+                        Padding="0"
+                        StrokeThickness="0"
+                        BackgroundColor="Transparent"
+                        Margin="0,20,0,20">
+                        <Grid>
+                            <Button
+                                x:Name="ToggleAlarmButton"
+                                HeightRequest="60"
+                                CornerRadius="30"
+                                TextColor="White"
+                                FontSize="22"
+                                FontAttributes="Bold"
+                                Shadow="10,0,0,Black"
+                                Clicked="OnToggleAlarmClicked">
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button" Binding="{Binding Ligado}" Value="True">
+                                        <Setter Property="BackgroundColor" Value="LightGreen" />
+                                        <Setter Property="Text" Value="Desligar Alarme" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Button" Binding="{Binding Ligado}" Value="False">
+                                        <Setter Property="BackgroundColor" Value="Red" />
+                                        <Setter Property="Text" Value="Ligar Alarme" />
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </Grid>
+                    </Border>
                 </Border>
 
                 <!-- Usuários Relacionados -->

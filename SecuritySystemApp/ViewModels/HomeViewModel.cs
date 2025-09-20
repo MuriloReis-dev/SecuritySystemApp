@@ -16,20 +16,20 @@ public class HomeViewModel
     }
 
     // Propriedade para armazenar a lista de alarmes
-    public async Task<List<Alarme>> CarregarAlarmesAsync()
+    public async Task<List<AlarmeDTO>> CarregarAlarmesAsync()
     {
-        var (dados, status) = await _apiService.GetConsultaAsync<List<Alarme>>("alarmes/get"); // URL do endpoint para obter os alarmes
+        var (dados, status) = await _apiService.GetConsultaAsync<List<AlarmeDTO>>("alarmedto/listagem"); // URL do endpoint para obter os alarmes
 
         // Simulação de dados para teste, remover após implementar a API
-        dados = new List<Alarme>
+        dados = new List<AlarmeDTO>
         {
-            new Alarme { Id = "1", Nome = "Alarme 1", Ligado = true, DataHora = DateTime.Now },
-            new Alarme { Id = "2", Nome = "Alarme 2", Ligado = false, DataHora = DateTime.Now.AddMinutes(-30) },
-            new Alarme { Id = "3", Nome = "Alarme 3", Ligado = true, DataHora = DateTime.Now.AddHours(-1) },
-            new Alarme { Id = "4", Nome = "Alarme 4", Ligado = true, DataHora = DateTime.Now },
-            new Alarme { Id = "5", Nome = "Alarme 5", Ligado = false, DataHora = DateTime.Now.AddMinutes(-30) },
-            new Alarme { Id = "6", Nome = "Alarme 6", Ligado = true, DataHora = DateTime.Now.AddHours(-1) }
-        }.Cast<Alarme>().ToList();
+            new AlarmeDTO { Id = "1", Nome = "Alarme 1", Ligado = true, DataHora = DateTime.Now, Adm = true },
+            new AlarmeDTO { Id = "2", Nome = "Alarme 2", Ligado = false, DataHora = DateTime.Now.AddMinutes(-30), Adm = false },
+            new AlarmeDTO { Id = "3", Nome = "Alarme 3", Ligado = true, DataHora = DateTime.Now.AddHours(-1), Adm = false },
+            new AlarmeDTO { Id = "4", Nome = "Alarme 4", Ligado = true, DataHora = DateTime.Now, Adm = true },
+            new AlarmeDTO { Id = "5", Nome = "Alarme 5", Ligado = false, DataHora = DateTime.Now.AddMinutes(-30), Adm = false },
+            new AlarmeDTO { Id = "6", Nome = "Alarme 6", Ligado = true, DataHora = DateTime.Now.AddHours(-1), Adm = false }
+        }.Cast<AlarmeDTO>().ToList();
 
         return dados;
     }

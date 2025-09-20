@@ -14,8 +14,7 @@ public class ApiService
     public ApiService()
     {
         _httpClient = new HttpClient();
-        //_httpClient.BaseAddress = new Uri("http://localhost:5000/api/"); // URL base da API (Windows localhost)
-        _httpClient.BaseAddress = new Uri("http://192.168.15.63:5000/api/"); // URL base da API (Android mesma rede wifi)
+        _httpClient.BaseAddress = new Uri("http://alarmeapi.runasp.net/api/"); // URL base da API (Windows localhost)
 
         // Adiciona o token no cabeçalho Authorization, se existir
         var token = Preferences.Get("AuthToken", null);
@@ -78,7 +77,6 @@ public class ApiService
     // Result: Tipo do objeto esperado na resposta
     // Response: Resposta de status Http
     public async Task<(TResult? Result, HttpResponseMessage? Response)> PostConsultaAsync<T, TResult>(string httppath, T dados)
-        where T : class
         where TResult : class
     {
         try
@@ -104,7 +102,7 @@ public class ApiService
     }
 
     // Método PUT
-    public async Task<HttpResponseMessage?> PutConsultaAsync<T>(string httppath, T dados) where T : class
+    public async Task<HttpResponseMessage?> PutConsultaAsync<T>(string httppath, T dados)
     {
         try
         {
