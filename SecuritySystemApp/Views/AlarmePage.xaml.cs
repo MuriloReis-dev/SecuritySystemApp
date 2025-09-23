@@ -3,27 +3,30 @@ using SecuritySystemApp.ViewModels;
 
 namespace SecuritySystemApp.Views;
 
-[QueryProperty(nameof(Alarme), "Alarme")]
+[QueryProperty(nameof(AlarmeId), "AlarmeId")]
 public partial class AlarmePage : ContentPage
 {
-    private AlarmeDTO? _alarme;
-    public AlarmeDTO? Alarme
-    {
-        get => _alarme;
-        set
-        {
-            _alarme = value;
-            BindingContext = value;
-        }
-    }
+    private int AlarmeId { get; set; }
 
     private readonly AlarmeViewModel _viewModel;
+
+    public AlarmeDTO? Alarme;
 
     public AlarmePage()
     {
         InitializeComponent();
 
         _viewModel = new AlarmeViewModel();
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        Alarme = await _viewModel.CarregarAlarmeAsync(AlarmeId);
+
+        if (Alarme != null)
+            BindingContext = Alarme;
     }
 
     public void OnAlarmAreaTapped(object sender, EventArgs e)
@@ -34,8 +37,8 @@ public partial class AlarmePage : ContentPage
 
     public async void OnToggleAlarmClicked(object sender, EventArgs e)
     {
-        if (Alarme != null && Alarme.Id != null)
-            await _viewModel.AlarmeOnOffAsync(Alarme.Id, Alarme.Ligado);
+        if (Alarme != null && Alarme != null)
+            await _viewModel.AlarmeOnOffAsync(Alarme.Id, !Alarme.Ligado);
         else
             Console.WriteLine("Id do Alarme não pode ser nulo.");
     }

@@ -26,13 +26,13 @@ public partial class HomePage : ContentPage
 
     private async void OnAlarmeSelected(object sender, SelectionChangedEventArgs e)
     {
-        if (e.CurrentSelection.FirstOrDefault() is AlarmeDTO alarmeSelecionado)
+        var alarmeSelecionado = e.CurrentSelection.FirstOrDefault() as AlarmeDTO;
+        if (alarmeSelecionado != null)
         {
             await _navigationService.NavegarAsync(nameof(AlarmePage), new Dictionary<string, object>
             {
-                ["Alarme"] = alarmeSelecionado
+                ["AlarmeId"] = alarmeSelecionado.Id
             });
-            // Opcional: desmarcar o item após o clique
             ((CollectionView)sender).SelectedItem = null;
         }
     }

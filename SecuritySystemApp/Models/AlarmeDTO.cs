@@ -2,7 +2,7 @@ namespace SecuritySystemApp.Models;
 
 public class AlarmeDTO
 {
-    public string? Id { get; set; }
+    public int Id { get; set; }
     public string? Nome { get; set; }
     public bool Ligado { get; set; }
     public DateTime? DataHora { get; set; }
