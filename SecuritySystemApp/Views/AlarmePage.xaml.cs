@@ -38,7 +38,7 @@ public partial class AlarmePage : ContentPage
     public async void OnToggleAlarmClicked(object sender, EventArgs e)
     {
         if (Alarme != null && Alarme != null)
-            await _viewModel.AlarmeOnOffAsync(Alarme.Id, !Alarme.Ligado);
+            await _viewModel.AlarmeOnOffAsync(Alarme.Id_Alarme, !Alarme.Ligado);
         else
             Console.WriteLine("Id do Alarme não pode ser nulo.");
     }

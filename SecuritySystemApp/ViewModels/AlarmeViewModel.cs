@@ -18,16 +18,15 @@ public class AlarmeViewModel
     public async Task<AlarmeDTO?> CarregarAlarmeAsync(int id_alarme)
     {
         var (result, response) = await _apiService.GetConsultaAsync<AlarmeDTO>($"alarmedto/{id_alarme}/{int.Parse(Preferences.Get("UserId", "0"))}/detalhes");
-        if (response != null && response.IsSuccessStatusCode)
-        {
-            return result;
-        }
-        return null;
+
+        return result;
     }
 
     // Propriedade para ligar/desligar alarme
-    public async Task AlarmeOnOffAsync(int id_alarme, bool ligado)
+    public async Task<bool> AlarmeOnOffAsync(int id_alarme, bool ligado)
     {
         var resposta = await _apiService.PutConsultaAsync($"alarmedto/{id_alarme}/toggle", ligado);
+
+        return resposta != null && resposta.IsSuccessStatusCode;
     }
 }

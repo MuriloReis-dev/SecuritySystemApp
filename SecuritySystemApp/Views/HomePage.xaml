@@ -63,14 +63,14 @@
                                             </Image.Triggers>
                                         </Image>
                                         <VerticalStackLayout Grid.Column="1">
-                                            <Label Text="{Binding Id}" TextColor="White" />
+                                            <Label Text="{Binding Id_Alarme}" TextColor="White" />
                                             <Label Text="{Binding Nome}" TextColor="White" />
                                         </VerticalStackLayout>
 
                                         <!-- Texto indicando alrmes do propretário -->
                                         <Label VerticalOptions="Center" Text="ADM" FontSize="15" TextColor="White" Grid.Column="2">
                                             <Label.Triggers>
-                                                <DataTrigger TargetType="Label" Binding="{Binding Adm}" Value="False">
+                                                <DataTrigger TargetType="Label" Binding="{Binding Tipo_Acesso}" Value="adm">
                                                     <Setter Property="IsVisible" Value="False" />
                                                 </DataTrigger>
                                             </Label.Triggers>

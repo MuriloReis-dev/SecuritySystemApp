@@ -45,7 +45,7 @@ public partial class CadastroPage : ContentPage
             }
             else
             {
-                await _navigationService.NavegarResetAsync(nameof(HomePage));
+                await _navigationService.NavegarResetAsync("HomePageReset"); // Navega para a HomePage e reseta a pilha de navegação
             }
         }
     }

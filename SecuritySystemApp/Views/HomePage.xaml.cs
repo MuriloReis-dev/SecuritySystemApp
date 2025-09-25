@@ -31,7 +31,7 @@ public partial class HomePage : ContentPage
         {
             await _navigationService.NavegarAsync(nameof(AlarmePage), new Dictionary<string, object>
             {
-                ["AlarmeId"] = alarmeSelecionado.Id
+                ["AlarmeId"] = alarmeSelecionado.Id_Alarme
             });
             ((CollectionView)sender).SelectedItem = null;
         }
