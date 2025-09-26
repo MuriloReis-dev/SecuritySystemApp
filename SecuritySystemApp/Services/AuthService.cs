@@ -95,9 +95,11 @@ public class AuthService
             Email = Preferences.Get("UserEmail", string.Empty)
         });
 
+        Console.WriteLine($"Status da validação do token: {status.StatusCode}");
+
         bool sucesso = status != null && status.IsSuccessStatusCode;
         
-        if (sucesso)
+        if (!sucesso)
         {
             await LogoutAsync();
             return false;

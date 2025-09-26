@@ -6,11 +6,11 @@ namespace SecuritySystemApp.Views;
 [QueryProperty(nameof(AlarmeId), "AlarmeId")]
 public partial class AlarmePage : ContentPage
 {
-    private int AlarmeId { get; set; }
+    public int AlarmeId { get; set; }
 
     private readonly AlarmeViewModel _viewModel;
 
-    public AlarmeDTO? Alarme;
+    public AlarmeDetailsDTO? Alarme;
 
     public AlarmePage()
     {
@@ -38,8 +38,10 @@ public partial class AlarmePage : ContentPage
     public async void OnToggleAlarmClicked(object sender, EventArgs e)
     {
         if (Alarme != null && Alarme != null)
-            await _viewModel.AlarmeOnOffAsync(Alarme.Id_Alarme, !Alarme.Ligado);
+            await _viewModel.AlarmeOnOffAsync(Alarme.Alarme.Id_Alarme, !Alarme.Alarme.Ligado);
         else
             Console.WriteLine("Id do Alarme não pode ser nulo.");
+        
+        OnAppearing(); // Recarrega os dados do alarme
     }
 }

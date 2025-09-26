@@ -22,7 +22,7 @@
                         <Label Text="Nome" FontSize="12"/>
 
                         <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
-                            <Label Text="{Binding Nome}" FontSize="20"/>
+                            <Label Text="{Binding Alarme.Nome}" FontSize="20"/>
                             <Image Source="homeicon.png" WidthRequest="20" HeightRequest="20"></Image>
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
@@ -50,11 +50,11 @@
                                 Shadow="10,0,0,Black"
                                 Clicked="OnToggleAlarmClicked">
                                 <Button.Triggers>
-                                    <DataTrigger TargetType="Button" Binding="{Binding Ligado}" Value="True">
+                                    <DataTrigger TargetType="Button" Binding="{Binding Alarme.Ligado}" Value="True">
                                         <Setter Property="BackgroundColor" Value="LightGreen" />
                                         <Setter Property="Text" Value="Desligar Alarme" />
                                     </DataTrigger>
-                                    <DataTrigger TargetType="Button" Binding="{Binding Ligado}" Value="False">
+                                    <DataTrigger TargetType="Button" Binding="{Binding Alarme.Ligado}" Value="False">
                                         <Setter Property="BackgroundColor" Value="Red" />
                                         <Setter Property="Text" Value="Ligar Alarme" />
                                     </DataTrigger>

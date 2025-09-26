@@ -15,9 +15,9 @@ public class AlarmeViewModel
         _apiService = new ApiService();
     }
 
-    public async Task<AlarmeDTO?> CarregarAlarmeAsync(int id_alarme)
+    public async Task<AlarmeDetailsDTO?> CarregarAlarmeAsync(int id_alarme)
     {
-        var (result, response) = await _apiService.GetConsultaAsync<AlarmeDTO>($"alarmedto/{id_alarme}/{int.Parse(Preferences.Get("UserId", "0"))}/detalhes");
+        var (result, response) = await _apiService.GetConsultaAsync<AlarmeDetailsDTO>($"alarmedto/{id_alarme}/{int.Parse(Preferences.Get("UserId", "0"))}/detalhes");
 
         return result;
     }

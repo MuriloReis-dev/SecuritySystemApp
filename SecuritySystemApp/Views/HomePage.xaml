@@ -37,7 +37,6 @@
                         HeightRequest="300"
                         x:Name="AlarmesList"
                         SelectionMode="Single"
-                        SelectionChanged="OnAlarmeSelected"
                         VerticalScrollBarVisibility="Always">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
@@ -51,6 +50,12 @@
                                             <Setter Property="Opacity" Value="0.5" />
                                         </DataTrigger>
                                     </Border.Triggers>
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Tapped="OnAlarmeTapped"
+                                            CommandParameter="{Binding Id_Alarme}" />
+                                    </Border.GestureRecognizers>
+                                            
                                     <Grid ColumnSpacing="10" ColumnDefinitions="Auto,*,Auto">
                                         <Image WidthRequest="30" Grid.Column="0">
                                             <Image.Triggers>

@@ -24,16 +24,15 @@ public partial class HomePage : ContentPage
         AlarmesList.ItemsSource = await _viewModel.CarregarAlarmesAsync();
     }
 
-    private async void OnAlarmeSelected(object sender, SelectionChangedEventArgs e)
+    private async void OnAlarmeTapped(object sender, TappedEventArgs e)
     {
-        var alarmeSelecionado = e.CurrentSelection.FirstOrDefault() as AlarmeDTO;
-        if (alarmeSelecionado != null)
+        int alarmeId = (int)((TappedEventArgs)e).Parameter;
+        if (alarmeId != null)
         {
             await _navigationService.NavegarAsync(nameof(AlarmePage), new Dictionary<string, object>
             {
-                ["AlarmeId"] = alarmeSelecionado.Id_Alarme
+                ["AlarmeId"] = alarmeId
             });
-            ((CollectionView)sender).SelectedItem = null;
         }
     }
 }
