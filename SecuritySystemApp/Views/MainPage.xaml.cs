@@ -25,6 +25,7 @@ public partial class MainPage : ContentPage
         CadrastroBtn.Clicked += OnCadrastroBtnClicked;
         LoginBtn.Clicked += OnLoginBtnClicked;
         HomeBtn.Clicked += OnHomeBtnClicked;
+        CadastroPessoaBtn.Clicked += OnCadastroPessoaBtnClicked;
         Appearing += OnAppearing;
     }
 
@@ -56,5 +57,10 @@ public partial class MainPage : ContentPage
     private async void OnHomeBtnClicked(object? sender, EventArgs e)
     {
         await _navigationService.NavegarAsync(nameof(HomePage));
+    }
+
+    private async void OnCadastroPessoaBtnClicked(object? sender, EventArgs e)
+    {
+        await _navigationService.NavegarAsync(nameof(CadastroPessoaPage));
     }
 }
