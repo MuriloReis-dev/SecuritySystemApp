@@ -1,6 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using SecuritySystemApp.Services;
 using System.Linq;
 using System.Threading.Tasks;
 using SecuritySystemApp.Models;
@@ -8,74 +9,30 @@ using System;
 
 namespace SecuritySystemApp.ViewModels;
 
-public partial class CadastroPessoaViewModel : ObservableObject
+public class CadastroPessoaViewModel
 {
-    // Inicializa para evitar warnings de nullability
-    [ObservableProperty]
-    private string nome = string.Empty;
-
-    [ObservableProperty]
-    private string senha = string.Empty;
-
-    // Lista de portas para mostrar na UI
-    public ObservableCollection<PortaViewModel> Portas { get; } = new ObservableCollection<PortaViewModel>
+    private readonly ApiService _apiService;
+    public CadastroPessoaViewModel()
     {
-        new PortaViewModel { Id = 1, Nome = "Porta 1" },
-        new PortaViewModel { Id = 2, Nome = "Porta 2" },
-        new PortaViewModel { Id = 3, Nome = "Porta 3" },
-        new PortaViewModel { Id = 4, Nome = "Porta 4" },
-        new PortaViewModel { Id = 5, Nome = "Porta 5" }
-    };
-
-    // Comando gerado pelo [RelayCommand] — método assíncrono que cria a pessoa
-    [RelayCommand]
-    private async Task CadastrarAsync()
-    {
-        // validações
-        if (string.IsNullOrWhiteSpace(Nome))
-        {
-            await Shell.Current.DisplayAlert("Erro", "Informe o nome", "OK");
-            return;
-        }
-
-        if (string.IsNullOrWhiteSpace(Senha) || Senha.Length != 5 || !Senha.All(c => "123456789".Contains(c)))
-        {
-            await Shell.Current.DisplayAlert("Erro", "A senha deve ter 5 dígitos (1 a 9)", "OK");
-            return;
-        }
-
-        var selecionadas = Portas.Where(p => p.IsSelecionada).ToList();
-        if (!selecionadas.Any())
-        {
-            await Shell.Current.DisplayAlert("Erro", "Selecione pelo menos uma porta", "OK");
-            return;
-        }
-
-        // criar objeto pessoa (aqui só em memória; salve em DB/API se quiser)
-        var pessoa = new Pessoa
-        {
-            Nome = Nome,
-            Senha = Senha,
-            PortasIds = selecionadas.Select(p => p.Id).ToList()
-        };
-
-        // *AQUI É ONDE COLOQUEI O DisplayAlert* — após criar a pessoa
-        await Shell.Current.DisplayAlert("Sucesso", $"Pessoa {pessoa.Nome} cadastrada com sucesso!", "OK");
-
-        // resetar formulário
-        Nome = string.Empty;
-        Senha = string.Empty;
-        foreach (var p in Portas) p.IsSelecionada = false;
+        // Definição dos Serviços
+        _apiService = new ApiService();
     }
-}
 
-public partial class PortaViewModel : ObservableObject
-{
-    public int Id { get; set; }
+    public async Task<List<AlarmeDTO>?> CarregarAlarmesAsync()
+    {
+        var (dados, status) = await _apiService.GetConsultaAsync<List<AlarmeDTO>>($"alarmedto/{int.Parse(Preferences.Get("UserId", "0"))}/listagem"); // URL do endpoint para obter os alarmes
 
-    [ObservableProperty]
-    private string nome = string.Empty;
+        return dados;
+    }
 
-    [ObservableProperty]
-    private bool isSelecionada;
+    public async Task<bool> CadastrarAsync(string nome, string senha, List<AlarmeDTO> alarmes)
+    {
+        Console.WriteLine($"Nome: {nome}");
+        Console.WriteLine($"Senha: {senha}");
+        Console.WriteLine($"Alarmes:");
+        foreach (var alarme in alarmes)
+            Console.WriteLine(alarme.Nome);
+
+        return await Task.FromResult(false);
+    }
 }

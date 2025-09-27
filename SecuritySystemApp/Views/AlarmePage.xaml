@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SecuritySystemApp.Views.AlarmePage"
              xmlns:components="clr-namespace:SecuritySystemApp.Components"
+             xmlns:models="clr-namespace:SecuritySystemApp.Models"
+             x:DataType="models:AlarmeDetailsDTO"
              Title="Detalhes do Alarme">
              
     <!-- Adicionar conteúdo da página -->
@@ -47,7 +49,6 @@
                                 TextColor="White"
                                 FontSize="22"
                                 FontAttributes="Bold"
-                                Shadow="10,0,0,Black"
                                 Clicked="OnToggleAlarmClicked">
                                 <Button.Triggers>
                                     <DataTrigger TargetType="Button" Binding="{Binding Alarme.Ligado}" Value="True">

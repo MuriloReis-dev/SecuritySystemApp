@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:components="clr-namespace:SecuritySystemApp.Components"
              x:Class="SecuritySystemApp.Views.HomePage"
+             xmlns:vm="clr-namespace:SecuritySystemApp.ViewModels"
+             xmlns:models="clr-namespace:SecuritySystemApp.Models"
+             x:DataType="vm:HomeViewModel"
              Title="Seus Alarmes">
              
     <Grid ColumnDefinitions="*" RowDefinitions="*,Auto">
@@ -39,7 +42,7 @@
                         SelectionMode="Single"
                         VerticalScrollBarVisibility="Always">
                         <CollectionView.ItemTemplate>
-                            <DataTemplate>
+                            <DataTemplate x:DataType="models:AlarmeDTO">
                                 <Border
                                     Margin="5"
                                     Padding="10"

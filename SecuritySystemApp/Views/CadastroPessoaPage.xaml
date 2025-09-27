@@ -4,6 +4,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:SecuritySystemApp.ViewModels"
+    xmlns:models="clr-namespace:SecuritySystemApp.Models"
+    x:DataType="vm:CadastroPessoaViewModel"
     Title="Cadastro de Pessoa">
 
     <ContentPage.BindingContext>
@@ -14,16 +16,12 @@
         <VerticalStackLayout Padding="20" Spacing="18">
 
             <Label FontAttributes="Bold" Text="Nome" />
-            <Entry Placeholder="Digite o nome" Text="{Binding Nome}" />
+            <Entry x:Name="NomeEntry" Placeholder="Digite o nome" />
 
             <Label FontAttributes="Bold" Text="Senha (5 dígitos de 1 a 9)" />
-            <Entry
-                Keyboard="Numeric"
-                MaxLength="5"
-                Placeholder="Ex: 12345"
-                Text="{Binding Senha}" />
+            <Entry x:Name="SenhaEntry" Keyboard="Numeric" MaxLength="5" Placeholder="Ex: 12345" />
 
-            <Label FontAttributes="Bold" Text="Portas" />
+            <Label FontAttributes="Bold" Text="Alarmes" />
             <Border
                 Padding="8"
                 Background="#f5f5f5"
@@ -32,15 +30,15 @@
                 StrokeThickness="2">
                 <CollectionView
                     HeightRequest="220"
-                    ItemsSource="{Binding Portas}"
+                    x:Name="AlarmesList"
                     SelectionMode="None">
                     <CollectionView.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="models:AlarmeDTO">
                             <HorizontalStackLayout
                                 Padding="8"
                                 Spacing="12"
                                 VerticalOptions="Center">
-                                <CheckBox IsChecked="{Binding IsSelecionada}" VerticalOptions="Center" />
+                                <CheckBox CheckedChanged="OnCheckBoxCheckedChanged" VerticalOptions="Center" />
                                 <Label Text="{Binding Nome}" VerticalOptions="Center" />
                             </HorizontalStackLayout>
                         </DataTemplate>
@@ -50,7 +48,7 @@
 
             <Button
                 BackgroundColor="#4CAF50"
-                Command="{Binding CadastrarCommand}"
+                Clicked="OnSalvarClicked"
                 CornerRadius="8"
                 HeightRequest="48"
                 Text="Salvar"

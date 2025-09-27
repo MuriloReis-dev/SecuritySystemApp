@@ -26,8 +26,8 @@ public partial class HomePage : ContentPage
 
     private async void OnAlarmeTapped(object sender, TappedEventArgs e)
     {
-        int alarmeId = (int)((TappedEventArgs)e).Parameter;
-        if (alarmeId != null)
+        int alarmeId = e.Parameter == null ? 0 : (int)e.Parameter;
+        if (alarmeId != 0)
         {
             await _navigationService.NavegarAsync(nameof(AlarmePage), new Dictionary<string, object>
             {
