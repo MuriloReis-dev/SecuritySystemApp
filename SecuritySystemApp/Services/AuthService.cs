@@ -30,7 +30,7 @@ public class AuthService
         if (loginResponse?.Token != null && loginResponse.Usuario != null)
         {
             Preferences.Set("AuthToken", loginResponse.Token);
-            Preferences.Set("UserId", loginResponse.Usuario.Id_Usuario.ToString());
+            Preferences.Set("UserId", loginResponse.Usuario.Id.ToString());
             Preferences.Set("UserName", loginResponse.Usuario.Nome);
             Preferences.Set("UserEmail", loginResponse.Usuario.Email);
 
@@ -90,7 +90,7 @@ public class AuthService
         // Validação do token na API
         var status = await _apiService.PostConsultaAsync("auth/validar", new Usuario
         {
-            Id_Usuario = int.Parse(Preferences.Get("UserId", "0")),
+            Id = int.Parse(Preferences.Get("UserId", "0")),
             Nome = Preferences.Get("UserName", string.Empty),
             Email = Preferences.Get("UserEmail", string.Empty)
         });

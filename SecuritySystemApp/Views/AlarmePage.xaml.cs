@@ -10,7 +10,7 @@ public partial class AlarmePage : ContentPage
 
     private readonly AlarmeViewModel _viewModel;
 
-    public AlarmeDetailsDTO? Alarme;
+    public AlarmeDetailsDTO? Dados;
 
     public AlarmePage()
     {
@@ -23,10 +23,12 @@ public partial class AlarmePage : ContentPage
     {
         base.OnAppearing();
 
-        Alarme = await _viewModel.CarregarAlarmeAsync(AlarmeId);
+        Dados = await _viewModel.CarregarAlarmeAsync(AlarmeId);
 
-        if (Alarme != null)
-            BindingContext = Alarme;
+        UsuariosList.ItemsSource = Dados?.Usuarios;
+
+        if (Dados != null)
+            BindingContext = Dados;
     }
 
     public void OnAlarmAreaTapped(object sender, EventArgs e)
@@ -37,11 +39,11 @@ public partial class AlarmePage : ContentPage
 
     public async void OnToggleAlarmClicked(object sender, EventArgs e)
     {
-        if (Alarme != null && Alarme.Alarme != null)
-            await _viewModel.AlarmeOnOffAsync(Alarme.Alarme.Id_Alarme, !Alarme.Alarme.Ligado);
+        if (Dados != null && Dados.Alarme != null)
+            await _viewModel.AlarmeOnOffAsync(Dados.Alarme.Id, !Dados.Alarme.Ligado);
         else
             Console.WriteLine("Id do Alarme não pode ser nulo.");
         
-        OnAppearing(); // Recarrega os dados do alarme
+        OnAppearing(); // Recarrega os dados
     }
 }

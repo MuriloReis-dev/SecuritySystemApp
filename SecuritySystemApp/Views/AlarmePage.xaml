@@ -71,9 +71,35 @@
                     Stroke="LightGray"
                     StrokeShape="RoundRectangle 8"
                     StrokeThickness="1">
-                    <VerticalStackLayout Spacing="15">
-                        
-                    </VerticalStackLayout>
+                    <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, *">
+                        <Label Text="Usuários Permitidos" FontSize="20" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" />
+                        <Button
+                            Text="Adicionar Usuário"
+                            HorizontalOptions="Fill"
+                            Background="Green"
+                            Grid.Row="0"
+                            Grid.Column="1" />
+
+                        <CollectionView
+                            HeightRequest="220"
+                            x:Name="UsuariosList"
+                            SelectionMode="None"
+                            Grid.Row="1"
+                            Grid.ColumnSpan="2">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:Usuario">
+                                    <HorizontalStackLayout
+                                        Padding="8"
+                                        Spacing="12"
+                                        VerticalOptions="Center">
+                                        <Label Text="{Binding Id}" VerticalOptions="Center" WidthRequest="30"/>
+                                        <Label Text="{Binding Nome}" VerticalOptions="Center" />
+                                        <Label Text="{Binding Email}" VerticalOptions="Center" />
+                                    </HorizontalStackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Grid>
                 </Border>
             </VerticalStackLayout>
         </ScrollView>
