@@ -18,12 +18,20 @@ public partial class HomePage : ContentPage
         _navigationService = new NavigationService();
     }
 
+    /// <summary>
+    /// Carrega os dados dos alarmes ao aparecer a página
+    /// </summary>
     protected override async void OnAppearing()
     {
         base.OnAppearing();
         AlarmesList.ItemsSource = await _viewModel.CarregarAlarmesAsync();
     }
 
+    /// <summary>
+    /// Evento ao tocar em um alarme para ver detalhes
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnAlarmeTapped(object sender, TappedEventArgs e)
     {
         int alarmeId = e.Parameter == null ? 0 : (int)e.Parameter;

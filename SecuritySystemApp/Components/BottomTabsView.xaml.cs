@@ -42,32 +42,61 @@ public partial class BottomTabsView : ContentView
             Application.Current.RequestedThemeChanged += OnRequestedThemeChanged;
     }
 
+    /// <summary>
+    /// Evento de clique no botão de notificações
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnNotifyClicked(object sender, EventArgs e)
     {
         await _navigationService.NavegarAsync(nameof(NotifyPage));
     }
 
+    /// <summary>
+    /// Evento de clique no botão de Home
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnHomeClicked(object sender, EventArgs e)
     {
         await _navigationService.NavegarAsync(nameof(HomePage));
     }
 
+    /// <summary>
+    /// Evento de clique no botão de Configurações
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnConfigClicked(object sender, EventArgs e)
     {
         await _navigationService.NavegarAsync(nameof(ConfigPage));
     }
 
+    /// <summary>
+    /// Atualiza os ícones com base na página atual
+    /// </summary>
+    /// <param name="bindable"></param>
+    /// <param name="oldValue"></param>
+    /// <param name="newValue"></param>
     private static void OnCurrentPageChanged(BindableObject bindable, object oldValue, object newValue)
     {
         var control = (BottomTabsView)bindable;
         control.UpdateIcons();
     }
 
+    /// <summary>
+    /// Atualiza os ícones quando o tema do app mudar
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void OnRequestedThemeChanged(object? sender, AppThemeChangedEventArgs e)
     {
         UpdateIcons();
     }
 
+    /// <summary>
+    /// Atualiza os ícones com base na página atual e tema
+    /// </summary>
     private void UpdateIcons()
     {
         if (Application.Current?.RequestedTheme == AppTheme.Dark)

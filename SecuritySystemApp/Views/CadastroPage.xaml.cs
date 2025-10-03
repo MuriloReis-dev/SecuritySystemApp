@@ -19,6 +19,11 @@ public partial class CadastroPage : ContentPage
         _navigationService = new NavigationService();
     }
 
+    /// <summary>
+    /// Evento ao clicar no botão de enviar o cadastro
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnEnviarClicked(object? sender, EventArgs e)
     {
         string nome = NomeEntry.Text?.Trim() ?? "";
@@ -50,6 +55,11 @@ public partial class CadastroPage : ContentPage
         }
     }
 
+    /// <summary>
+    /// Evento ao clicar no botão de voltar
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnVoltarClicked(object? sender, EventArgs e)
     {
         await _navigationService.VoltarAsync(); // volta uma página no histórico

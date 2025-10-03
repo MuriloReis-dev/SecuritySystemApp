@@ -15,7 +15,10 @@ public class HomeViewModel
         _apiService = new ApiService();
     }
 
-    // Propriedade para armazenar a lista de alarmes
+    /// <summary>
+    /// Carrega a lista de alarmes do usuário
+    /// </summary>
+    /// <returns>Lista de alarmes</returns>
     public async Task<List<AlarmeDTO>?> CarregarAlarmesAsync()
     {
         var (dados, status) = await _apiService.GetConsultaAsync<List<AlarmeDTO>>($"alarmedto/{int.Parse(Preferences.Get("UserId", "0"))}/listagem"); // URL do endpoint para obter os alarmes

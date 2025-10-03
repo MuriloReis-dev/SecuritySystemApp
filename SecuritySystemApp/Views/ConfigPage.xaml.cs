@@ -23,6 +23,12 @@ public partial class ConfigPage : ContentPage
         // Eventos
         SaveProfileButton.Clicked += OnSaveProfileButtonClicked;
     }
+
+    /// <summary>
+    /// Evento ao clicar no botão de salvar as configurações do perfil
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnSaveProfileButtonClicked(object? sender, EventArgs e)
     {
         string senhaAtual = SenhaAtualEntry.Text;
@@ -31,6 +37,11 @@ public partial class ConfigPage : ContentPage
         await DisplayAlert("Sucesso", "Configurações salvas com sucesso!", "OK");
     }
 
+    /// <summary>
+    /// Evento ao tocar na área de tema para escolher o tema do aplicativo
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnThemeAreaTapped(object? sender, EventArgs e)
     {
         string action = await DisplayActionSheet(
@@ -55,7 +66,7 @@ public partial class ConfigPage : ContentPage
                 case "Escuro":
                     Application.Current.UserAppTheme = AppTheme.Dark;
                     break;
-                
+
             }
         }
     }

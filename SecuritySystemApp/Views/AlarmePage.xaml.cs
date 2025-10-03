@@ -19,6 +19,9 @@ public partial class AlarmePage : ContentPage
         _viewModel = new AlarmeViewModel();
     }
 
+    /// <summary>
+    /// Carrega os dados do alarme ao aparecer a página
+    /// </summary>
     protected override async void OnAppearing()
     {
         base.OnAppearing();
@@ -31,19 +34,29 @@ public partial class AlarmePage : ContentPage
             BindingContext = Dados;
     }
 
+    /// <summary>
+    /// Evento ao tocar na área do alarme (apenas proprietário)
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     public void OnAlarmAreaTapped(object sender, EventArgs e)
     {
         // Área para editar o nome do alarme (apenas proprietário)
         Console.WriteLine("Área do alarme tocada para editar o nome.");
     }
 
+    /// <summary>
+    /// Evento ao clicar no botão de ligar/desligar o alarme
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     public async void OnToggleAlarmClicked(object sender, EventArgs e)
     {
         if (Dados != null && Dados.Alarme != null)
             await _viewModel.AlarmeOnOffAsync(Dados.Alarme.Id, !Dados.Alarme.Ligado);
         else
             Console.WriteLine("Id do Alarme não pode ser nulo.");
-        
+
         OnAppearing(); // Recarrega os dados
     }
 }

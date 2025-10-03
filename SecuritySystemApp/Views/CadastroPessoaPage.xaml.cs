@@ -17,12 +17,20 @@ public partial class CadastroPessoaPage : ContentPage
         BindingContext = _viewModel;
     }
 
+    /// <summary>
+    /// Carrega os dados dos alarmes ao aparecer a página
+    /// </summary>
     protected override async void OnAppearing()
     {
         base.OnAppearing();
         AlarmesList.ItemsSource = await _viewModel.CarregarAlarmesAsync();
     }
     
+    /// <summary>
+    /// Evento ao marcar/desmarcar um alarme
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
     {
         var checkbox = (CheckBox)sender;
@@ -40,6 +48,11 @@ public partial class CadastroPessoaPage : ContentPage
         }
     }
 
+    /// <summary>
+    /// Evento ao clicar no botão de salvar o cadastro
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnSalvarClicked(object sender, EventArgs e)
     {
         string nome = NomeEntry.Text?.Trim() ?? "";

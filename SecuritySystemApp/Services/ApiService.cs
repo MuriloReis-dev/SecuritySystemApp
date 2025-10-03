@@ -24,8 +24,12 @@ public class ApiService
         }
     }
 
-    // Método GET
-    // TResult: Tipo do objeto esperado na resposta
+    /// <summary>
+    /// Método GET que retorna objeto desserializado
+    /// </summary>
+    /// <typeparam name="TResult">Tipo do objeto esperado na resposta</typeparam>
+    /// <param name="httppath">Caminho url para a requisição na API</param>
+    /// <returns>Tupla com resultado da requisição e resposta HTTP</returns>
     public async Task<(TResult? Result, HttpResponseMessage? Response)> GetConsultaAsync<TResult>(string httppath)
         where TResult : class
     {
@@ -51,7 +55,13 @@ public class ApiService
         }
     }
 
-    // Método POST básico
+    /// <summary>
+    /// Método POST
+    /// </summary>
+    /// <typeparam name="T">Tipo de dado enviado na requisição</typeparam>
+    /// <param name="httppath">Caminho url para a requisição na API</param>
+    /// <param name="dados">Dados enviados na requisição</param>
+    /// <returns>Resposta HTTP</returns>
     public async Task<HttpResponseMessage?> PostConsultaAsync<T>(string httppath, T dados)
     {
         try
@@ -72,10 +82,14 @@ public class ApiService
         }
     }
 
-    // Método POST que retorna objeto desserializado
-    // T: Tipo do objeto a ser enviado
-    // Result: Tipo do objeto esperado na resposta
-    // Response: Resposta de status Http
+    /// <summary>
+    /// Método POST que retorna objeto desserializado
+    /// </summary>
+    /// <typeparam name="T">Tipo de dado enviado na requisição</typeparam>
+    /// <typeparam name="TResult">Tipo do objeto esperado na resposta</typeparam>
+    /// <param name="httppath">Caminho url para a requisição na API</param>
+    /// <param name="dados">Dados enviados na requisição</param>
+    /// <returns>Tupla com resultado da requisição e resposta HTTP</returns>
     public async Task<(TResult? Result, HttpResponseMessage? Response)> PostConsultaAsync<T, TResult>(string httppath, T dados)
         where TResult : class
     {
@@ -101,7 +115,13 @@ public class ApiService
         }
     }
 
-    // Método PUT
+    /// <summary>
+    /// Método PUT
+    /// </summary>
+    /// <typeparam name="T">Tipo de dado enviado na requisição</typeparam>
+    /// <param name="httppath">Caminho url para a requisição na API</param>
+    /// <param name="dados">Dados enviados na requisição</param>
+    /// <returns>Resposta HTTP</returns>
     public async Task<HttpResponseMessage?> PutConsultaAsync<T>(string httppath, T dados)
     {
         try
@@ -122,7 +142,11 @@ public class ApiService
         }
     }
 
-    // Método DELETE
+    /// <summary>
+    /// Método DELETE
+    /// </summary>
+    /// <param name="httppath">Caminho url para a requisição na API</param>
+    /// <returns>Resposta HTTP</returns>
     public async Task<HttpResponseMessage?> DeleteConsultaAsync(string httppath)
     {
         try
