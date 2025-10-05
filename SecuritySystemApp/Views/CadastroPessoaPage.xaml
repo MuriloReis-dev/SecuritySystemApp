@@ -18,8 +18,8 @@
             <Label FontAttributes="Bold" Text="Nome" />
             <Entry x:Name="NomeEntry" Placeholder="Digite o nome" />
 
-            <Label FontAttributes="Bold" Text="Senha (5 dígitos de 1 a 9)" />
-            <Entry x:Name="SenhaEntry" Keyboard="Numeric" MaxLength="5" Placeholder="Ex: 12345" />
+            <Label FontAttributes="Bold" Text="Senha" />
+            <Entry x:Name="SenhaEntry" Placeholder="Digite a senha" />
 
             <Label FontAttributes="Bold" Text="Alarmes" />
             <Border
@@ -39,7 +39,7 @@
                                 Spacing="12"
                                 VerticalOptions="Center">
                                 <CheckBox CheckedChanged="OnCheckBoxCheckedChanged" VerticalOptions="Center" />
-                                <Label Text="{Binding Nome}" VerticalOptions="Center" />
+                                <Label Text="{Binding Nome}" TextColor="{StaticResource Black}" VerticalOptions="Center" />
                             </HorizontalStackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

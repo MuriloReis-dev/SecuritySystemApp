@@ -26,7 +26,17 @@ public class CadastroPessoaViewModel
     {
         var (dados, status) = await _apiService.GetConsultaAsync<List<AlarmeDTO>>($"alarmedto/{int.Parse(Preferences.Get("UserId", "0"))}/listagem"); // URL do endpoint para obter os alarmes
 
-        return dados;
+        var alarmes = new List<AlarmeDTO>();
+        if (dados != null)
+        {
+            foreach (var alarme in dados)
+            {
+                if (alarme.TipoAcesso == "adm") // Filtra apenas os alarmes do proprietário
+                    alarmes.Add(alarme);
+            }
+        }
+
+        return alarmes;
     }
 
     /// <summary>

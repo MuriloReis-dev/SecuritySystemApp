@@ -19,9 +19,6 @@ public partial class ConfigPage : ContentPage
         _navigationService = new NavigationService();
         _apiService = new ApiService();
         _authService = new AuthService();
-
-        // Eventos
-        SaveProfileButton.Clicked += OnSaveProfileButtonClicked;
     }
 
     /// <summary>
@@ -34,7 +31,17 @@ public partial class ConfigPage : ContentPage
         string senhaAtual = SenhaAtualEntry.Text;
         string novaSenha = NovaSenhaEntry.Text;
 
-        await DisplayAlert("Sucesso", "Configurações salvas com sucesso!", "OK");
+        bool confirm = await DisplayAlert("Confirmação", "Tem certeza de que deseja alterar sua senha?", "Sim", "Não");
+    }
+
+    private async void OnLogoutButtonClicked(object? sender, EventArgs e)
+    {
+        bool confirm = await DisplayAlert("Confirmação", "Tem certeza que deseja sair?", "Sim", "Não");
+        if (confirm)
+        {
+            await _authService.LogoutAsync();
+            await _navigationService.NavegarResetAsync("LoginPageReset");
+        }
     }
 
     /// <summary>

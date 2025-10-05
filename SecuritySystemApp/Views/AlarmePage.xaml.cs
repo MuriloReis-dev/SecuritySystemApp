@@ -32,6 +32,12 @@ public partial class AlarmePage : ContentPage
 
         if (Dados != null)
             BindingContext = Dados;
+
+        // Ajusta visibilidade dos elementos com base nos dados carregados
+        if (Dados == null || Dados.Usuarios?.Count == 0)
+            UsuariosList.IsVisible = false;
+        else
+            ListaVaziaLabel.IsVisible = false;
     }
 
     /// <summary>

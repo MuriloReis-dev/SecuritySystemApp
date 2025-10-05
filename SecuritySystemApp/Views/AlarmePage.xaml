@@ -71,6 +71,11 @@
                     Stroke="LightGray"
                     StrokeShape="RoundRectangle 8"
                     StrokeThickness="1">
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border" Binding="{Binding Alarme.TipoAcesso}" Value="user">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                    </Border.Triggers>
                     <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, *">
                         <Label Text="Usuários Permitidos" FontSize="20" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" />
                         <Button
@@ -80,6 +85,17 @@
                             Grid.Row="0"
                             Grid.Column="1" />
 
+                        <!-- Mensagem para Lista Vazia -->
+                        <Label
+                            x:Name="ListaVaziaLabel"
+                            Text="Nenhum usuário encontrado."
+                            FontSize="16"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Grid.Row="1"
+                            Grid.ColumnSpan="2" />
+                        
+                        <!-- Lista de Usuários -->
                         <CollectionView
                             HeightRequest="220"
                             x:Name="UsuariosList"

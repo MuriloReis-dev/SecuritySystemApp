@@ -9,6 +9,8 @@ public partial class HomePage : ContentPage
 {
     private readonly HomeViewModel _viewModel;
     private readonly INavigationService _navigationService;
+
+    public List<AlarmeDTO>? Dados;
     public HomePage()
     {
         InitializeComponent();
@@ -24,7 +26,15 @@ public partial class HomePage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        AlarmesList.ItemsSource = await _viewModel.CarregarAlarmesAsync();
+
+        Dados = await _viewModel.CarregarAlarmesAsync();
+        AlarmesList.ItemsSource = Dados;
+
+        // Ajusta visibilidade dos elementos com base nos dados carregados
+        if (Dados == null || Dados.Count == 0)
+            AlarmesList.IsVisible = false;
+        else
+            ListaVaziaLabel.IsVisible = false;
     }
 
     /// <summary>
