@@ -56,6 +56,7 @@ public partial class CadastroPessoaPage : ContentPage
     private async void OnSalvarClicked(object sender, EventArgs e)
     {
         string nome = NomeEntry.Text?.Trim() ?? "";
+        string email = EmailEntry.Text?.Trim() ?? "";
         string senha = SenhaEntry.Text.Trim();
 
         // validações
@@ -65,19 +66,25 @@ public partial class CadastroPessoaPage : ContentPage
             return;
         }
 
-        if (string.IsNullOrWhiteSpace(senha) || senha.Length != 5 || !senha.All(c => "0123456789".Contains(c)))
+        if (string.IsNullOrWhiteSpace(email))
         {
-            await Shell.Current.DisplayAlert("Erro", "A senha deve ter 5 dígitos (0 a 9)", "OK");
+            await Shell.Current.DisplayAlert("Erro", "Informe o email", "OK");
             return;
         }
 
         if (!_selecionados.Any())
         {
-            await Shell.Current.DisplayAlert("Erro", "Selecione pelo menos uma porta", "OK");
+            await Shell.Current.DisplayAlert("Erro", "Selecione pelo menos um alarme", "OK");
             return;
         }
 
-        await _viewModel.CadastrarAsync(nome, senha, _selecionados);
+        bool sucesso = await _viewModel.CadastrarAsync(nome, email, senha, _selecionados);
+
+        if (!sucesso)
+        {
+            await Shell.Current.DisplayAlert("Erro", "Falha ao cadastrar usuário.", "OK");
+            return;
+        }
         await Shell.Current.DisplayAlert("Sucesso", $"Usuário {nome} cadastrado com sucesso!", "OK");
     }
 }

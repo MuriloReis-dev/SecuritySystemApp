@@ -46,14 +46,26 @@ public class CadastroPessoaViewModel
     /// <param name="senha">Senha da pessoa cadastrada</param>
     /// <param name="alarmes">Lista de alarmes relacionados à pessoa cadastrada</param>
     /// <returns>Booleano indicando sucesso ou falha</returns>
-    public async Task<bool> CadastrarAsync(string nome, string senha, List<AlarmeDTO> alarmes)
+    public async Task<bool> CadastrarAsync(string nome, string email, string senha, List<AlarmeDTO> alarmes)
     {
-        Console.WriteLine($"Nome: {nome}");
-        Console.WriteLine($"Senha: {senha}");
-        Console.WriteLine($"Alarmes:");
-        foreach (var alarme in alarmes)
-            Console.WriteLine(alarme.Nome);
+        List<int> idAlarmes = new List<int>();
 
-        return await Task.FromResult(false);
+        foreach (var alarme in alarmes)
+            idAlarmes.Add(alarme.Id);
+
+        var status = await _apiService.PostConsultaAsync($"cadastrodto/{int.Parse(Preferences.Get("UserId", "0"))}/cadastro/addacesso", new CadastroAddAcessoDTO
+        {
+            Usuario = new CadastroDTO
+            {
+                Nome = nome,
+                Email = email,
+                Senha = senha
+            },
+            Alarmes = idAlarmes
+        });
+        
+        bool sucesso = status != null && status.IsSuccessStatusCode;
+
+        return sucesso;
     }
 }

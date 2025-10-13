@@ -54,7 +54,7 @@ public class AuthService
     /// </summary>
     /// <param name="nome">Nome do usuário cadastrado</param>
     /// <param name="email">Email do usuário cadastrado</param>
-    /// <param name="senha">SEnha do usuário cadastrado</param>
+    /// <param name="senha">Senha do usuário cadastrado</param>
     /// <returns>Booleano indicando sucesso ou falha</returns>
     public async Task<bool> RegisterAsync(string nome, string email, string senha)
     {

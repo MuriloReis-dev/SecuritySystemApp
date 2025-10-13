@@ -18,6 +18,9 @@
             <Label FontAttributes="Bold" Text="Nome" />
             <Entry x:Name="NomeEntry" Placeholder="Digite o nome" />
 
+            <Label FontAttributes="Bold" Text="Email" />
+            <Entry x:Name="EmailEntry" Placeholder="Digite o email" />
+
             <Label FontAttributes="Bold" Text="Senha" />
             <Entry x:Name="SenhaEntry" Placeholder="Digite a senha" />
 
