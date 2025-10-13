@@ -19,5 +19,9 @@
         Title="HomePage"
         ContentTemplate="{DataTemplate views:HomePage}"
         Route="HomePageReset" />
+    <ShellContent
+        Title="LoginPage"
+        ContentTemplate="{DataTemplate views:LoginPage}"
+        Route="LoginPageReset" />
 
 </Shell>

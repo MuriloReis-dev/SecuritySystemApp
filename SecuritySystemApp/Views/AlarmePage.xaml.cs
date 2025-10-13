@@ -10,7 +10,7 @@ public partial class AlarmePage : ContentPage
 
     private readonly AlarmeViewModel _viewModel;
 
-    public AlarmeDetailsDTO? Alarme;
+    public AlarmeDetailsDTO? Dados;
 
     public AlarmePage()
     {
@@ -19,29 +19,50 @@ public partial class AlarmePage : ContentPage
         _viewModel = new AlarmeViewModel();
     }
 
+    /// <summary>
+    /// Carrega os dados do alarme ao aparecer a página
+    /// </summary>
     protected override async void OnAppearing()
     {
         base.OnAppearing();
 
-        Alarme = await _viewModel.CarregarAlarmeAsync(AlarmeId);
+        Dados = await _viewModel.CarregarAlarmeAsync(AlarmeId);
 
-        if (Alarme != null)
-            BindingContext = Alarme;
+        UsuariosList.ItemsSource = Dados?.Usuarios;
+
+        if (Dados != null)
+            BindingContext = Dados;
+
+        // Ajusta visibilidade dos elementos com base nos dados carregados
+        if (Dados == null || Dados.Usuarios?.Count == 0)
+            UsuariosList.IsVisible = false;
+        else
+            ListaVaziaLabel.IsVisible = false;
     }
 
+    /// <summary>
+    /// Evento ao tocar na área do alarme (apenas proprietário)
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     public void OnAlarmAreaTapped(object sender, EventArgs e)
     {
         // Área para editar o nome do alarme (apenas proprietário)
         Console.WriteLine("Área do alarme tocada para editar o nome.");
     }
 
+    /// <summary>
+    /// Evento ao clicar no botão de ligar/desligar o alarme
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     public async void OnToggleAlarmClicked(object sender, EventArgs e)
     {
-        if (Alarme != null && Alarme != null)
-            await _viewModel.AlarmeOnOffAsync(Alarme.Alarme.Id_Alarme, !Alarme.Alarme.Ligado);
+        if (Dados != null && Dados.Alarme != null)
+            await _viewModel.AlarmeOnOffAsync(Dados.Alarme.Id, !Dados.Alarme.Ligado);
         else
             Console.WriteLine("Id do Alarme não pode ser nulo.");
-        
-        OnAppearing(); // Recarrega os dados do alarme
+
+        OnAppearing(); // Recarrega os dados
     }
 }

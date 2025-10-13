@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SecuritySystemApp.Views.AlarmePage"
              xmlns:components="clr-namespace:SecuritySystemApp.Components"
+             xmlns:models="clr-namespace:SecuritySystemApp.Models"
+             x:DataType="models:AlarmeDetailsDTO"
              Title="Detalhes do Alarme">
              
     <!-- Adicionar conteúdo da página -->
@@ -47,7 +49,6 @@
                                 TextColor="White"
                                 FontSize="22"
                                 FontAttributes="Bold"
-                                Shadow="10,0,0,Black"
                                 Clicked="OnToggleAlarmClicked">
                                 <Button.Triggers>
                                     <DataTrigger TargetType="Button" Binding="{Binding Alarme.Ligado}" Value="True">
@@ -70,9 +71,51 @@
                     Stroke="LightGray"
                     StrokeShape="RoundRectangle 8"
                     StrokeThickness="1">
-                    <VerticalStackLayout Spacing="15">
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border" Binding="{Binding Alarme.TipoAcesso}" Value="user">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                    </Border.Triggers>
+                    <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, *">
+                        <Label Text="Usuários Permitidos" FontSize="20" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" />
+                        <Button
+                            Text="Adicionar Usuário"
+                            HorizontalOptions="Fill"
+                            Background="Green"
+                            Grid.Row="0"
+                            Grid.Column="1" />
+
+                        <!-- Mensagem para Lista Vazia -->
+                        <Label
+                            x:Name="ListaVaziaLabel"
+                            Text="Nenhum usuário encontrado."
+                            FontSize="16"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Grid.Row="1"
+                            Grid.ColumnSpan="2" />
                         
-                    </VerticalStackLayout>
+                        <!-- Lista de Usuários -->
+                        <CollectionView
+                            HeightRequest="220"
+                            x:Name="UsuariosList"
+                            SelectionMode="None"
+                            Grid.Row="1"
+                            Grid.ColumnSpan="2">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:Usuario">
+                                    <HorizontalStackLayout
+                                        Padding="8"
+                                        Spacing="12"
+                                        VerticalOptions="Center">
+                                        <Label Text="{Binding Id}" VerticalOptions="Center" WidthRequest="30"/>
+                                        <Label Text="{Binding Nome}" VerticalOptions="Center" />
+                                        <Label Text="{Binding Email}" VerticalOptions="Center" />
+                                    </HorizontalStackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Grid>
                 </Border>
             </VerticalStackLayout>
         </ScrollView>

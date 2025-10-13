@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:components="clr-namespace:SecuritySystemApp.Components"
              x:Class="SecuritySystemApp.Views.HomePage"
+             xmlns:vm="clr-namespace:SecuritySystemApp.ViewModels"
+             xmlns:models="clr-namespace:SecuritySystemApp.Models"
+             x:DataType="vm:HomeViewModel"
              Title="Seus Alarmes">
              
     <Grid ColumnDefinitions="*" RowDefinitions="*,Auto">
@@ -33,58 +36,69 @@
                     Stroke="#d8d8d8"
                     StrokeThickness="3"
                     VerticalOptions="Start">
-                    <CollectionView
-                        HeightRequest="300"
-                        x:Name="AlarmesList"
-                        SelectionMode="Single"
-                        VerticalScrollBarVisibility="Always">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <Border
-                                    Margin="5"
-                                    Padding="10"
-                                    StrokeShape="RoundRectangle 10"
-                                    BackgroundColor="{StaticResource Gray600}">
-                                    <Border.Triggers>
-                                        <DataTrigger TargetType="Border" Binding="{Binding Ligado}" Value="False">
-                                            <Setter Property="Opacity" Value="0.5" />
-                                        </DataTrigger>
-                                    </Border.Triggers>
-                                    <Border.GestureRecognizers>
-                                        <TapGestureRecognizer
-                                            Tapped="OnAlarmeTapped"
-                                            CommandParameter="{Binding Id_Alarme}" />
-                                    </Border.GestureRecognizers>
-                                            
-                                    <Grid ColumnSpacing="10" ColumnDefinitions="Auto,*,Auto">
-                                        <Image WidthRequest="30" Grid.Column="0">
-                                            <Image.Triggers>
-                                                <DataTrigger TargetType="Image" Binding="{Binding Ligado}" Value="True">
-                                                    <Setter Property="Source" Value="alarme_green_full.png" />
-                                                </DataTrigger>
-                                                <DataTrigger TargetType="Image" Binding="{Binding Ligado}" Value="False">
-                                                    <Setter Property="Source" Value="alarme_red_full.png" />
-                                                </DataTrigger>
-                                            </Image.Triggers>
-                                        </Image>
-                                        <VerticalStackLayout Grid.Column="1">
-                                            <Label Text="{Binding Id_Alarme}" TextColor="White" />
-                                            <Label Text="{Binding Nome}" TextColor="White" />
-                                        </VerticalStackLayout>
+                    <VerticalStackLayout>
+                        <!-- Mensagem para Lista Vazia -->
+                        <Label
+                            x:Name="ListaVaziaLabel"
+                            Text="Nenhum alarme encontrado."
+                            FontSize="16"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center" />
 
-                                        <!-- Texto indicando alrmes do propretário -->
-                                        <Label VerticalOptions="Center" Text="ADM" FontSize="15" TextColor="White" Grid.Column="2">
-                                            <Label.Triggers>
-                                                <DataTrigger TargetType="Label" Binding="{Binding Tipo_Acesso}" Value="adm">
-                                                    <Setter Property="IsVisible" Value="False" />
-                                                </DataTrigger>
-                                            </Label.Triggers>
-                                        </Label>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                        <!-- Lista de Alarmes -->
+                        <CollectionView
+                            HeightRequest="300"
+                            x:Name="AlarmesList"
+                            SelectionMode="Single"
+                            VerticalScrollBarVisibility="Always">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:AlarmeDTO">
+                                    <Border
+                                        Margin="5"
+                                        Padding="10"
+                                        StrokeShape="RoundRectangle 10"
+                                        BackgroundColor="{StaticResource Gray600}">
+                                        <Border.Triggers>
+                                            <DataTrigger TargetType="Border" Binding="{Binding Ligado}" Value="False">
+                                                <Setter Property="Opacity" Value="0.5" />
+                                            </DataTrigger>
+                                        </Border.Triggers>
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Tapped="OnAlarmeTapped"
+                                                CommandParameter="{Binding Id}" />
+                                        </Border.GestureRecognizers>
+                                                
+                                        <Grid ColumnSpacing="10" ColumnDefinitions="Auto,*,Auto">
+                                            <Image WidthRequest="30" Grid.Column="0">
+                                                <Image.Triggers>
+                                                    <DataTrigger TargetType="Image" Binding="{Binding Ligado}" Value="True">
+                                                        <Setter Property="Source" Value="alarme_green_full.png" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Image" Binding="{Binding Ligado}" Value="False">
+                                                        <Setter Property="Source" Value="alarme_red_full.png" />
+                                                    </DataTrigger>
+                                                </Image.Triggers>
+                                            </Image>
+                                            <VerticalStackLayout Grid.Column="1">
+                                                <Label Text="{Binding Id}" TextColor="White" />
+                                                <Label Text="{Binding Nome}" TextColor="White" />
+                                            </VerticalStackLayout>
+
+                                            <!-- Texto indicando alrmes do propretário -->
+                                            <Label VerticalOptions="Center" Text="ADM" FontSize="15" TextColor="White" Grid.Column="2">
+                                                <Label.Triggers>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding TipoAcesso}" Value="user">
+                                                        <Setter Property="IsVisible" Value="False" />
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+                                            </Label>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
                 </Border>
             </VerticalStackLayout>
         </ScrollView>

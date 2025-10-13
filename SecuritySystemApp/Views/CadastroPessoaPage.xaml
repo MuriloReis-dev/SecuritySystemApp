@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SecuritySystemApp.Views.CadastroPessoaPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:SecuritySystemApp.ViewModels"
+    xmlns:models="clr-namespace:SecuritySystemApp.Models"
+    x:DataType="vm:CadastroPessoaViewModel"
+    Title="Cadastro de Pessoa">
+
+    <ContentPage.BindingContext>
+        <vm:CadastroPessoaViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="18">
+
+            <Label FontAttributes="Bold" Text="Nome" />
+            <Entry x:Name="NomeEntry" Placeholder="Digite o nome" />
+
+            <Label FontAttributes="Bold" Text="Email" />
+            <Entry x:Name="EmailEntry" Placeholder="Digite o email" />
+
+            <Label FontAttributes="Bold" Text="Senha" />
+            <Entry x:Name="SenhaEntry" Placeholder="Digite a senha" />
+
+            <Label FontAttributes="Bold" Text="Alarmes" />
+            <Border
+                Padding="8"
+                Background="#f5f5f5"
+                Stroke="#E0A100"
+                StrokeShape="RoundRectangle 8"
+                StrokeThickness="2">
+                <CollectionView
+                    HeightRequest="220"
+                    x:Name="AlarmesList"
+                    SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:AlarmeDTO">
+                            <HorizontalStackLayout
+                                Padding="8"
+                                Spacing="12"
+                                VerticalOptions="Center">
+                                <CheckBox CheckedChanged="OnCheckBoxCheckedChanged" VerticalOptions="Center" />
+                                <Label Text="{Binding Nome}" TextColor="{StaticResource Black}" VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Border>
+
+            <Button
+                BackgroundColor="#4CAF50"
+                Clicked="OnSalvarClicked"
+                CornerRadius="8"
+                HeightRequest="48"
+                Text="Salvar"
+                TextColor="White" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

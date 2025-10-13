@@ -15,7 +15,12 @@ public class LoginViewModel
         _authService = new AuthService();
     }
 
-    // Método para realizar login
+    /// <summary>
+    /// Realiza o login do usuário
+    /// </summary>
+    /// <param name="email">Email do usuário</param>
+    /// <param name="senha">Senha do usuário</param>
+    /// <returns>Booleano indicando sucesso ou falha</returns>
     public async Task<bool> Entrar(string email, string senha)
     {
         return await _authService.LoginAsync(email, senha);

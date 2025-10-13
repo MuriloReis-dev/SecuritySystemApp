@@ -19,18 +19,36 @@ public partial class ConfigPage : ContentPage
         _navigationService = new NavigationService();
         _apiService = new ApiService();
         _authService = new AuthService();
-
-        // Eventos
-        SaveProfileButton.Clicked += OnSaveProfileButtonClicked;
     }
+
+    /// <summary>
+    /// Evento ao clicar no botão de salvar as configurações do perfil
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnSaveProfileButtonClicked(object? sender, EventArgs e)
     {
         string senhaAtual = SenhaAtualEntry.Text;
         string novaSenha = NovaSenhaEntry.Text;
 
-        await DisplayAlert("Sucesso", "Configurações salvas com sucesso!", "OK");
+        bool confirm = await DisplayAlert("Confirmação", "Tem certeza de que deseja alterar sua senha?", "Sim", "Não");
     }
 
+    private async void OnLogoutButtonClicked(object? sender, EventArgs e)
+    {
+        bool confirm = await DisplayAlert("Confirmação", "Tem certeza que deseja sair?", "Sim", "Não");
+        if (confirm)
+        {
+            await _authService.LogoutAsync();
+            await _navigationService.NavegarResetAsync("LoginPageReset");
+        }
+    }
+
+    /// <summary>
+    /// Evento ao tocar na área de tema para escolher o tema do aplicativo
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnThemeAreaTapped(object? sender, EventArgs e)
     {
         string action = await DisplayActionSheet(
@@ -55,7 +73,7 @@ public partial class ConfigPage : ContentPage
                 case "Escuro":
                     Application.Current.UserAppTheme = AppTheme.Dark;
                     break;
-                
+
             }
         }
     }

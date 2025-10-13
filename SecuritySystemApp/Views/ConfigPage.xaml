@@ -15,7 +15,8 @@
                     StrokeShape="RoundRectangle 8"
                     StrokeThickness="1">
                     <VerticalStackLayout>
-                        <Label Text="Aparência" FontSize="20"/>
+                        <Label Text="Aparência" FontSize="20" Margin="4" /> <!-- Título da seção -->
+
                         <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
                             <Grid
                                 x:Name="ThemeArea"
@@ -42,15 +43,27 @@
                     StrokeShape="RoundRectangle 8"
                     StrokeThickness="1">
                     <VerticalStackLayout Spacing="15">
-                        <Label Text="Perfil" FontSize="20" FontAttributes="Bold"/>
-                        <Label Text="Senha atual" VerticalOptions="Center" FontSize="16"/>
-                        <Entry x:Name="SenhaAtualEntry" Placeholder="Digite sua senha atual" IsPassword="True"/>
-                        <Label Text="Nova Senha" VerticalOptions="Center" FontSize="16"/>
-                        <Entry x:Name="NovaSenhaEntry" Placeholder="Digite sua nova senha" IsPassword="True"/>
+                        <Label Text="Perfil" FontSize="20" FontAttributes="Bold" Margin="4" /> <!-- Título da seção -->
+                        <Label Text="Alterar Senha" FontSize="18" FontAttributes="Bold" />
+                        <Label Text="Senha atual" VerticalOptions="Center" FontSize="16" />
+                        <Entry x:Name="SenhaAtualEntry" Placeholder="Digite sua senha atual" IsPassword="True" />
+                        <Label Text="Nova Senha" VerticalOptions="Center" FontSize="16" />
+                        <Entry x:Name="NovaSenhaEntry" Placeholder="Digite sua nova senha" IsPassword="True" />
                         <Button
                             Text="Salvar Alterações"
-                            x:Name="SaveProfileButton"
+                            Clicked="OnSaveProfileButtonClicked"
                             BackgroundColor="#FF00A2FF"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            CornerRadius="8"/>
+                        
+                        <Line Stroke="LightGray" />
+
+                        <Label Text="Sair da Conta" FontSize="18" FontAttributes="Bold" />
+                        <Button
+                            Text="Sair"
+                            Clicked="OnLogoutButtonClicked"
+                            BackgroundColor="#FFFF7777"
                             TextColor="White"
                             FontAttributes="Bold"
                             CornerRadius="8"/>

@@ -19,6 +19,11 @@ public partial class LoginPage : ContentPage
         _navigationService = new NavigationService();
     }
 
+    /// <summary>
+    /// Evento ao clicar no botão de enviar o login
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnEnviarClicked(object? sender, EventArgs e)
     {
         string email = EmailEntry.Text?.Trim() ?? "";
@@ -45,6 +50,11 @@ public partial class LoginPage : ContentPage
         }
     }
 
+    /// <summary>
+    /// Evento ao clicar no botão de voltar
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void OnVoltarClicked(object? sender, EventArgs e)
     {
         await _navigationService.VoltarAsync(); // volta uma página no histórico
