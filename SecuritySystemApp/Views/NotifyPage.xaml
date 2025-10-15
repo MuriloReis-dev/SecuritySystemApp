@@ -14,7 +14,7 @@
                 <!-- Mensagem para Lista Vazia -->
                 <Label
                     x:Name="ListaVaziaLabel"
-                    Text="Nenhum alarme encontrado."
+                    Text="Nenhuma notificação encontrada."
                     FontSize="16"
                     HorizontalOptions="Center"
                     VerticalOptions="Center" />
@@ -38,17 +38,20 @@
                                         FontAttributes="Bold"
                                         FontSize="16"
                                         Text="{Binding Mensagem}"
+                                        TextColor="White"
                                         VerticalOptions="Center"
                                         Grid.Column="0" />
                                     <VerticalStackLayout Grid.Column="1">
                                         <Label
                                             FontSize="12"
                                             Text="{Binding DataHora, StringFormat='{0:dd/MM/yyyy}'}"
+                                            TextColor="White"
                                             VerticalOptions="Center"
                                             HorizontalOptions="End" />
                                         <Label
                                             FontSize="12"
                                             Text="{Binding DataHora, StringFormat='{0:HH:mm}'}"
+                                            TextColor="White"
                                             VerticalOptions="Center"
                                             HorizontalOptions="End" />
                                     </VerticalStackLayout>

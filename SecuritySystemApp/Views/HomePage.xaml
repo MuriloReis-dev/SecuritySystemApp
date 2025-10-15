@@ -27,6 +27,7 @@
                     StrokeThickness="2">
                     <BoxView HeightRequest="150" Color="Gray" />
                 </Border>
+                
                 <!--  Lista de alarmes  -->
                 <Border
                     Margin="10"

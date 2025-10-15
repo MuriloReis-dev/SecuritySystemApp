@@ -7,7 +7,6 @@
              x:DataType="models:AlarmeDetailsDTO"
              Title="Detalhes do Alarme">
              
-    <!-- Adicionar conteúdo da página -->
     <Grid ColumnDefinitions="*" RowDefinitions="*,Auto">
         <ScrollView>
             <VerticalStackLayout Margin="10">
@@ -25,7 +24,13 @@
 
                         <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
                             <Label Text="{Binding Alarme.Nome}" FontSize="20"/>
-                            <Image Source="homeicon.png" WidthRequest="20" HeightRequest="20"></Image>
+                            <Image Source="homeicon.png" WidthRequest="20" HeightRequest="20" IsVisible="False">
+                                <Image.Triggers>
+                                    <DataTrigger TargetType="Image" Binding="{Binding Alarme.TipoAcesso}" Value="adm">
+                                        <Setter Property="IsVisible" Value="True" />
+                                    </DataTrigger>
+                                </Image.Triggers>
+                            </Image>
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </Border>
@@ -46,7 +51,9 @@
                                 x:Name="ToggleAlarmButton"
                                 HeightRequest="60"
                                 CornerRadius="30"
+                                Text="Carregando..."
                                 TextColor="White"
+                                BackgroundColor="Gray"
                                 FontSize="22"
                                 FontAttributes="Bold"
                                 Clicked="OnToggleAlarmClicked">
@@ -70,10 +77,11 @@
                     Padding="15"
                     Stroke="LightGray"
                     StrokeShape="RoundRectangle 8"
-                    StrokeThickness="1">
+                    StrokeThickness="1"
+                    IsVisible="False">
                     <Border.Triggers>
-                        <DataTrigger TargetType="Border" Binding="{Binding Alarme.TipoAcesso}" Value="user">
-                            <Setter Property="IsVisible" Value="False" />
+                        <DataTrigger TargetType="Border" Binding="{Binding Alarme.TipoAcesso}" Value="adm">
+                            <Setter Property="IsVisible" Value="True" />
                         </DataTrigger>
                     </Border.Triggers>
                     <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, *">
