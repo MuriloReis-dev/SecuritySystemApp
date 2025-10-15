@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
+using LiveChartsCore.SkiaSharpView.Maui;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 namespace SecuritySystemApp;
 
 public static class MauiProgram
@@ -9,6 +11,8 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+			.UseLiveCharts()
+			.UseSkiaSharp()
 			.UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
 			{
