@@ -14,7 +14,7 @@ public class ApiService
     public ApiService()
     {
         _httpClient = new HttpClient();
-        _httpClient.BaseAddress = new Uri("http://alarmeapi.runasp.net/api/"); // URL base da API (Windows localhost)
+        _httpClient.BaseAddress = new Uri("http://apisecuritysystem.onrender.com/api/"); // URL base da API (Windows localhost)
 
         // Adiciona o token no cabeçalho Authorization, se existir
         var token = Preferences.Get("AuthToken", null);
