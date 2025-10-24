@@ -31,7 +31,7 @@ public class CadastroPessoaViewModel
         {
             foreach (var alarme in dados)
             {
-                if (alarme.TipoAcesso == "adm") // Filtra apenas os alarmes do proprietário
+                if (alarme.TipoPermissao) // Filtra apenas os alarmes do proprietário
                     alarmes.Add(alarme);
             }
         }

@@ -39,4 +39,11 @@ public class AlarmeViewModel
 
         return resposta != null && resposta.IsSuccessStatusCode;
     }
+
+    public async Task<bool> LiberarAcessoAsync(int id_alarme)
+    {
+        var resposta = await _apiService.PostConsultaAsync<object>($"entradadto/{id_alarme}/{int.Parse(Preferences.Get("UserId", "0"))}/acesso", null);
+
+        return resposta != null && resposta.IsSuccessStatusCode;
+    }
 }

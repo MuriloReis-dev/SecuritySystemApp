@@ -87,13 +87,13 @@
                                             </VerticalStackLayout>
 
                                             <!-- Texto indicando alrmes do propretário -->
-                                            <Label VerticalOptions="Center" Text="ADM" FontSize="15" TextColor="White" Grid.Column="2">
-                                                <Label.Triggers>
-                                                    <DataTrigger TargetType="Label" Binding="{Binding TipoAcesso}" Value="user">
-                                                        <Setter Property="IsVisible" Value="False" />
-                                                    </DataTrigger>
-                                                </Label.Triggers>
-                                            </Label>
+                                            <Label
+                                                VerticalOptions="Center"
+                                                Text="ADM"
+                                                FontSize="15"
+                                                TextColor="White"
+                                                IsVisible="{Binding TipoPermissao}"
+                                                Grid.Column="2" />
                                         </Grid>
                                     </Border>
                                 </DataTemplate>

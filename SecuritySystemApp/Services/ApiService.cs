@@ -14,7 +14,7 @@ public class ApiService
     public ApiService()
     {
         _httpClient = new HttpClient();
-        _httpClient.BaseAddress = new Uri("http://apisecuritysystem.onrender.com/api/"); // URL base da API (Windows localhost)
+        _httpClient.BaseAddress = new Uri("https://apisecuritysystem.onrender.com/api/"); // URL base da API (Windows localhost)
 
         // Adiciona o token no cabeçalho Authorization, se existir
         var token = Preferences.Get("AuthToken", null);
@@ -62,7 +62,7 @@ public class ApiService
     /// <param name="httppath">Caminho url para a requisição na API</param>
     /// <param name="dados">Dados enviados na requisição</param>
     /// <returns>Resposta HTTP</returns>
-    public async Task<HttpResponseMessage?> PostConsultaAsync<T>(string httppath, T dados)
+    public async Task<HttpResponseMessage?> PostConsultaAsync<T>(string httppath, T? dados)
     {
         try
         {

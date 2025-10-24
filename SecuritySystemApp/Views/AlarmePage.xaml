@@ -24,13 +24,7 @@
 
                         <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
                             <Label Text="{Binding Alarme.Nome}" FontSize="20"/>
-                            <Image Source="homeicon.png" WidthRequest="20" HeightRequest="20" IsVisible="False">
-                                <Image.Triggers>
-                                    <DataTrigger TargetType="Image" Binding="{Binding Alarme.TipoAcesso}" Value="adm">
-                                        <Setter Property="IsVisible" Value="True" />
-                                    </DataTrigger>
-                                </Image.Triggers>
-                            </Image>
+                            <Image Source="homeicon.png" WidthRequest="20" HeightRequest="20" IsVisible="{Binding Alarme.TipoPermissao}" />
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </Border>
@@ -56,7 +50,7 @@
                                 BackgroundColor="Gray"
                                 FontSize="22"
                                 FontAttributes="Bold"
-                                Clicked="OnToggleAlarmClicked">
+                                Clicked="OnLiberarClicked">
                                 <Button.Triggers>
                                     <DataTrigger TargetType="Button" Binding="{Binding Alarme.Ligado}" Value="True">
                                         <Setter Property="BackgroundColor" Value="LightGreen" />
@@ -78,12 +72,7 @@
                     Stroke="LightGray"
                     StrokeShape="RoundRectangle 8"
                     StrokeThickness="1"
-                    IsVisible="False">
-                    <Border.Triggers>
-                        <DataTrigger TargetType="Border" Binding="{Binding Alarme.TipoAcesso}" Value="adm">
-                            <Setter Property="IsVisible" Value="True" />
-                        </DataTrigger>
-                    </Border.Triggers>
+                    IsVisible="{Binding Alarme.TipoPermissao}">
                     <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, *">
                         <Label Text="Usuários Permitidos" FontSize="20" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" />
                         <Button
