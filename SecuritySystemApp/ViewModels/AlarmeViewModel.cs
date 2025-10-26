@@ -40,6 +40,11 @@ public class AlarmeViewModel
         return resposta != null && resposta.IsSuccessStatusCode;
     }
 
+    /// <summary>
+    /// Libera acesso ao alarme
+    /// </summary>
+    /// <param name="id_alarme">Id do Alarme selecionado</param>
+    /// <returns></returns>
     public async Task<bool> LiberarAcessoAsync(int id_alarme)
     {
         var resposta = await _apiService.PostConsultaAsync<object>($"entradadto/{id_alarme}/{int.Parse(Preferences.Get("UserId", "0"))}/acesso", null);
