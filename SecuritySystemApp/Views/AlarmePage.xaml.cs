@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using SecuritySystemApp.Models;
 using SecuritySystemApp.ViewModels;
 
@@ -59,10 +60,28 @@ public partial class AlarmePage : ContentPage
     public async void OnLiberarClicked(object sender, EventArgs e)
     {
         if (Dados != null && Dados.Alarme != null)
-            await _viewModel.LiberarAcessoAsync(Dados.Alarme.Id);
+        {
+            bool sucesso = await _viewModel.LiberarAcessoAsync(Dados.Alarme.Id);
+            if (sucesso)
+            {
+                await IniciarTimer();
+            }
+        }
         else
-            Console.WriteLine("Id do Alarme não pode ser nulo.");
+            await DisplayAlert("Erro", "Dados do alarme não carregados.", "OK");
+    }
 
-        OnAppearing(); // Recarrega os dados
+    public async Task IniciarTimer()
+    {
+        Shell.Current.IsVisible = false;
+        Overlay.IsVisible = true;
+        int segundos = 10;
+
+        for (int i = segundos; i >= 0; i--)
+        {
+            TempoLabel.Text = $"Alarme será ativado em {i} segundos";
+            await Task.Delay(1000);
+        }
+        Overlay.IsVisible = false;
     }
 }
