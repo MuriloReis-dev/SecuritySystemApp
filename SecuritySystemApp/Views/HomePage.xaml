@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:components="clr-namespace:SecuritySystemApp.Components"
              x:Class="SecuritySystemApp.Views.HomePage"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
              xmlns:vm="clr-namespace:SecuritySystemApp.ViewModels"
              xmlns:models="clr-namespace:SecuritySystemApp.Models"
              x:DataType="vm:HomeViewModel"
@@ -19,13 +20,15 @@
                     HorizontalOptions="Center"
                     Text="Gráfico geral" />
 
-                <!--  Gráfico falso (aqui você usaria uma lib ou desenharia com graphics API)  -->
                 <Border
                     Padding="10"
                     Stroke="#E0A100"
                     StrokeShape="RoundRectangle 20"
                     StrokeThickness="2">
-                    <BoxView HeightRequest="150" Color="Gray" />
+                    <VerticalStackLayout Padding="20" Spacing="10">
+                        <!-- Container usado para criar/remover dinamicamente o CartesianChart no code-behind -->
+                        <Grid x:Name="ChartContainer" HeightRequest="300" BackgroundColor="Transparent" />
+                    </VerticalStackLayout>
                 </Border>
                 
                 <!--  Lista de alarmes  -->
