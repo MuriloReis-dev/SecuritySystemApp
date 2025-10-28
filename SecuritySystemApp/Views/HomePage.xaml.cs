@@ -87,9 +87,26 @@ public partial class HomePage : ContentPage
         // Adiciona o chart ao container
         ChartContainer.Children.Add(_chartInstance);
 
+        // Informações sobre a semana atual
+        DateTime hoje = DateTime.Now; // Hoje
+        DateTime inicioSemana = hoje.AddDays(-(int)hoje.DayOfWeek); // Domingo
+        DateTime fimSemana = inicioSemana.AddDays(6); // Sábado
+
+        var diasSemana = Enumerable.Range(0, 7)
+            .Select(i => inicioSemana.AddDays(i))
+            .ToList();
+
+        var valores = diasSemana.Select(dia =>
+        {
+            var dado = dadosGrafico.FirstOrDefault(x => x.Data.Date == dia.Date);
+            if (dado != null && dia.Date <= hoje)
+                return (float)dado.QtdEntradas;
+            else
+                return 0.0f;
+        }).ToList();
+
         // Define rótulos (X) e valores (Y)
-        var labels = dadosGrafico.Select(d => d.Data.ToString("ddd")[..1].ToUpper()).ToList();
-        var valores = dadosGrafico.Select(d => (float)d.QtdEntradas).ToList();
+        var labels = diasSemana.Select(d => d.ToString("ddd")[..1].ToUpper()).ToList();
 
         // Define as séries (barras)
         _chartInstance.Series = new ISeries[]
@@ -99,7 +116,9 @@ public partial class HomePage : ContentPage
                 Values = valores,
                 Fill = new SolidColorPaint(SKColors.DeepSkyBlue.WithAlpha(180)),
                 Stroke = null,
-                MaxBarWidth = 30
+                MaxBarWidth = 15,
+                Rx = 10,
+                Ry = 10
             }
         };
 
@@ -111,7 +130,8 @@ public partial class HomePage : ContentPage
                 Labels = labels,
                 LabelsRotation = 0,
                 TextSize = 16,
-                SeparatorsPaint = new SolidColorPaint(SKColors.LightGray) { StrokeThickness = 1 }
+                SeparatorsPaint = new SolidColorPaint(SKColors.LightGray) { StrokeThickness = 1 },
+                ShowSeparatorLines = false
             }
         };
 
@@ -121,11 +141,8 @@ public partial class HomePage : ContentPage
             new Axis
             {
                 MinLimit = 0,
-                MaxLimit = 15,
+                MaxLimit = Math.Ceiling(valores.Max() / 5) * 5,
                 TextSize = 14,
-                Name = "Qtd de Entradas",
-                NameTextSize = 18,
-                NamePadding = new LiveChartsCore.Drawing.Padding(0, 0, 0, 20),
                 SeparatorsPaint = new SolidColorPaint(SKColors.LightGray) { StrokeThickness = 1 },
                 ShowSeparatorLines = true
             }

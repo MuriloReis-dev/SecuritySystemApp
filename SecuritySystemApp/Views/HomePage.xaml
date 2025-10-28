@@ -18,7 +18,7 @@
                     FontFamily="Cursive"
                     FontSize="28"
                     HorizontalOptions="Center"
-                    Text="Gráfico geral" />
+                    Text="Entradas Registradas" />
 
                 <Border
                     Padding="10"
@@ -27,7 +27,7 @@
                     StrokeThickness="2">
                     <VerticalStackLayout Padding="20" Spacing="10">
                         <!-- Container usado para criar/remover dinamicamente o CartesianChart no code-behind -->
-                        <Grid x:Name="ChartContainer" HeightRequest="300" BackgroundColor="Transparent" />
+                        <Grid x:Name="ChartContainer" MaximumHeightRequest="250" BackgroundColor="Transparent" />
                     </VerticalStackLayout>
                 </Border>
                 
