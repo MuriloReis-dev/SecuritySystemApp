@@ -62,10 +62,14 @@
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="5.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="FirebaseAdmin" Version="3.4.0" />
 		<PackageReference Include="LiveChartsCore.SkiaSharpView.Maui" Version="2.0.0-rc6.1" />
 		<PackageReference Include="Microcharts.Maui" Version="1.0.1" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.90" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
+		<PackageReference Include="Plugin.Firebase" Version="2.2.0" />
+		<PackageReference Include="Plugin.Firebase.CloudMessaging" Version="3.1.2" />
+		<PackageReference Include="Plugin.Firebase.Core" Version="3.1.1" />
 	</ItemGroup>
 
 

@@ -13,6 +13,7 @@ public partial class MainPage : ContentPage
     private readonly INavigationService _navigationService;
     private readonly ApiService _apiService;
     private readonly AuthService _authService;
+    private readonly FirebaseService _firebaseService;
 
     public MainPage()
     {
@@ -21,12 +22,19 @@ public partial class MainPage : ContentPage
         _navigationService = new NavigationService();
         _apiService = new ApiService();
         _authService = new AuthService();
+        _firebaseService = new FirebaseService();
 
         CadrastroBtn.Clicked += OnCadrastroBtnClicked;
         LoginBtn.Clicked += OnLoginBtnClicked;
         HomeBtn.Clicked += OnHomeBtnClicked;
         CadastroPessoaBtn.Clicked += OnCadastroPessoaBtnClicked;
         Appearing += OnAppearing;
+    }
+
+    public async Task InitFirebaseMessagingAsync()
+    {
+        var token = await _firebaseService.GetTokenAsync();
+        Console.WriteLine($"Firebase Token: {token}");
     }
 
     // Evento disparado quando a página aparece
@@ -42,6 +50,9 @@ public partial class MainPage : ContentPage
 
         bool tokenValido = await _authService.ValidateLoginAsync();
         Console.WriteLine($"Validação do token de usuário: {tokenValido}");
+
+        // Gera token FMC para notificações
+        await InitFirebaseMessagingAsync();
     }
 
     private async void OnCadrastroBtnClicked(object? sender, EventArgs e)

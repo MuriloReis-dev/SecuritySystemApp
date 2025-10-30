@@ -2,6 +2,7 @@
 using CommunityToolkit.Maui;
 using LiveChartsCore.SkiaSharpView.Maui;
 using SkiaSharp.Views.Maui.Controls.Hosting;
+
 namespace SecuritySystemApp;
 
 public static class MauiProgram
