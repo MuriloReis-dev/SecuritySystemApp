@@ -34,6 +34,7 @@ public partial class MainPage : ContentPage
     public async Task InitFirebaseMessagingAsync()
     {
         var token = await _firebaseService.GetTokenAsync();
+        tokenFMCLabel.Text = $"Token FMC: {token}";
         Console.WriteLine($"Firebase Token: {token}");
     }
 

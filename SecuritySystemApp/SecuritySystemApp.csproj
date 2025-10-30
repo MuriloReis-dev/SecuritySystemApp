@@ -67,7 +67,7 @@
 		<PackageReference Include="Microcharts.Maui" Version="1.0.1" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.90" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
-		<PackageReference Include="Plugin.Firebase" Version="2.2.0" />
+		<PackageReference Include="Plugin.Firebase" Version="3.1.4" />
 		<PackageReference Include="Plugin.Firebase.CloudMessaging" Version="3.1.2" />
 		<PackageReference Include="Plugin.Firebase.Core" Version="3.1.1" />
 	</ItemGroup>
