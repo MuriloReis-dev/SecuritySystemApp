@@ -2,7 +2,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using SecuritySystemApp.Services;
 using SecuritySystemApp.Models;
-using Plugin.Firebase.CloudMessaging;
+using Plugin.FirebasePushNotifications;
 
 namespace SecuritySystemApp.Services;
 
@@ -12,10 +12,10 @@ public class FirebaseService
     {
         try
         {
-            var token = await CrossFirebaseCloudMessaging.Current.GetTokenAsync();
+            // Usa o token provido pelo plugin cliente (consistente com MainViewModel)
+            var token = IFirebasePushNotification.Current?.Token;
             Console.WriteLine($"Token FMC: {token}");
-
-            return token;
+            return await Task.FromResult(token);
         }
         catch (Exception ex)
         {

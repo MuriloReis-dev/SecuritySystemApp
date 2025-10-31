@@ -2,6 +2,7 @@
 using SecuritySystemApp.Interfaces;
 using SecuritySystemApp.Models;
 using SecuritySystemApp.ViewModels;
+using Plugin.FirebasePushNotifications;
 
 namespace SecuritySystemApp.Views;
 
@@ -29,12 +30,12 @@ public partial class MainPage : ContentPage
         HomeBtn.Clicked += OnHomeBtnClicked;
         CadastroPessoaBtn.Clicked += OnCadastroPessoaBtnClicked;
         Appearing += OnAppearing;
+
     }
 
     public async Task InitFirebaseMessagingAsync()
     {
         var token = await _firebaseService.GetTokenAsync();
-        tokenFMCLabel.Text = $"Token FMC: {token}";
         Console.WriteLine($"Firebase Token: {token}");
     }
 
@@ -42,6 +43,10 @@ public partial class MainPage : ContentPage
     private async void OnAppearing(object? sender, EventArgs e)
     {
         base.OnAppearing();
+        BindingContext = _viewModel;
+
+        // Envia um post para ver dados na api
+        await _apiService.PostConsultaAsync("testpost/test", new { TokenFMC = _viewModel.Token });
 
         // Colocar aqui todo o código executado ao abrir o app
         Console.WriteLine($"UserID: {Preferences.Get("UserId", string.Empty)}");
@@ -51,9 +56,6 @@ public partial class MainPage : ContentPage
 
         bool tokenValido = await _authService.ValidateLoginAsync();
         Console.WriteLine($"Validação do token de usuário: {tokenValido}");
-
-        // Gera token FMC para notificações
-        //await InitFirebaseMessagingAsync();
     }
 
     private async void OnCadrastroBtnClicked(object? sender, EventArgs e)

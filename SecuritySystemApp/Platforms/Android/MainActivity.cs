@@ -1,6 +1,8 @@
 ﻿using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.OS;
+using System;
 using Firebase;
 
 namespace SecuritySystemApp;
@@ -12,27 +14,35 @@ public class MainActivity : MauiAppCompatActivity
     {
         base.OnCreate(savedInstanceState);
 
-        if (Build.VERSION.SdkInt >= BuildVersionCodes.Tiramisu) // Android 13 (API 33)
-        {
-            // Solicita permissão para notificações em Android 13 ou superior
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.M) // Android 6.0 (API 23)
-            {
-                if(CheckSelfPermission(Android.Manifest.Permission.PostNotifications) != Permission.Granted)
-                {
-                    RequestPermissions(new[] { Android.Manifest.Permission.PostNotifications }, 0);
-                }
-            }
-        }
-
-        // Inicializa o Firebase
         try
         {
+            // Inicializa Firebase usando a Activity (Context válido)
             FirebaseApp.InitializeApp(this);
-            Console.WriteLine("Firebase inicializado com sucesso.");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Erro ao inicializar o Firebase: {ex.Message}");
+            Console.WriteLine($"Erro ao inicializar FirebaseApp: {ex}");
+        }
+
+        // Se o plugin de push que você usa requer inicialização manual, chame aqui.
+        // Exemplo (se disponível): FirebasePushNotificationManager.Initialize(this, true);
+    }
+
+    protected override void OnNewIntent(Intent? intent)
+    {
+        base.OnNewIntent(intent);
+
+        try
+        {
+            if (intent is not null)
+            {
+                // Encaminhar intent para o plugin de push, se o plugin expõe um método para isso.
+                // Exemplo (se disponível): FirebasePushNotificationManager.ProcessIntent(this, intent);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao processar OnNewIntent: {ex}");
         }
     }
 }

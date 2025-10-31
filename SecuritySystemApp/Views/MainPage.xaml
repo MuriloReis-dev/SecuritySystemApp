@@ -38,7 +38,8 @@
                 MaximumWidthRequest="170"/>
 
             <!-- Label com token FMC para teste -->
-            <Label x:Name="tokenFMCLabel" Text="Código não executado" />
+            <Label Text="Token FCM:" FontAttributes="Bold" />
+            <Label Text="{Binding Token}" x:Name="tokenFMCLabel" LineBreakMode="CharacterWrap" />
         </VerticalStackLayout>
         <!-- Barra de Navegação (Adicionar em todas as páginas que precisam)-->
         <components:BottomTabsView Grid.Row="1" />
