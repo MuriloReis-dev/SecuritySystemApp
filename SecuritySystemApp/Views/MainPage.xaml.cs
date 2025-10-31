@@ -53,7 +53,7 @@ public partial class MainPage : ContentPage
         Console.WriteLine($"Validação do token de usuário: {tokenValido}");
 
         // Gera token FMC para notificações
-        await InitFirebaseMessagingAsync();
+        //await InitFirebaseMessagingAsync();
     }
 
     private async void OnCadrastroBtnClicked(object? sender, EventArgs e)

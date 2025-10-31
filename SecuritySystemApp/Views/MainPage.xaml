@@ -38,7 +38,7 @@
                 MaximumWidthRequest="170"/>
 
             <!-- Label com token FMC para teste -->
-            <Label x:Name="tokenFMCLabel" Text="Token FMC" />
+            <Label x:Name="tokenFMCLabel" Text="Código não executado" />
         </VerticalStackLayout>
         <!-- Barra de Navegação (Adicionar em todas as páginas que precisam)-->
         <components:BottomTabsView Grid.Row="1" />
