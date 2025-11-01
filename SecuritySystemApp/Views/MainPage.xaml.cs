@@ -29,6 +29,7 @@ public partial class MainPage : ContentPage
         LoginBtn.Clicked += OnLoginBtnClicked;
         HomeBtn.Clicked += OnHomeBtnClicked;
         CadastroPessoaBtn.Clicked += OnCadastroPessoaBtnClicked;
+        TokenFMCBtn.Clicked += OnTokenFMCBtnClicked;
         Appearing += OnAppearing;
 
     }
@@ -43,10 +44,9 @@ public partial class MainPage : ContentPage
     private async void OnAppearing(object? sender, EventArgs e)
     {
         base.OnAppearing();
-        BindingContext = _viewModel;
 
         // Envia um post para ver dados na api
-        await _apiService.PostConsultaAsync("testpost/test", new { TokenFMC = _viewModel.Token });
+        //await _apiService.PostConsultaAsync("testpost/test", new { TokenFMC = _viewModel.Token });
 
         // Colocar aqui todo o código executado ao abrir o app
         Console.WriteLine($"UserID: {Preferences.Get("UserId", string.Empty)}");
@@ -76,5 +76,12 @@ public partial class MainPage : ContentPage
     private async void OnCadastroPessoaBtnClicked(object? sender, EventArgs e)
     {
         await _navigationService.NavegarAsync(nameof(CadastroPessoaPage));
+    }
+
+    // teste
+    private async void OnTokenFMCBtnClicked(object? sender, EventArgs e)
+    {
+        var token = await _firebaseService.GetTokenAsync();
+        tokenFMCLabel.Text = token ?? "Token não disponível";
     }
 }

@@ -12,13 +12,10 @@ public class MainViewModel
 {
     private readonly ApiService _apiService;
 
-    public string Token { get; set; }
-
     public MainViewModel()
     {
         // Definição dos Serviços
         _apiService = new ApiService();
-        Token = "?";
 
         // 🔹 Pede permissão para receber notificações
         RequestNotificationPermission();
@@ -44,13 +41,10 @@ public class MainViewModel
         try
         {
             await IFirebasePushNotification.Current.RegisterForPushNotificationsAsync();
-            Token = IFirebasePushNotification.Current.Token;
-            Console.WriteLine($"Token: {Token}");
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Erro ao registrar FCM: {ex.Message}");
-            Token = $"Erro: {ex.Message}";
         }
     }
 }
