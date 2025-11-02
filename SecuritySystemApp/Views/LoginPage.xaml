@@ -6,31 +6,75 @@
              Title="Login">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="15" >
-            <!-- Campo Email -->
-            <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" MaximumWidthRequest="300" />
-            <Label x:Name="EmailErrorLabel" Text="Email inválido" TextColor="Red" IsVisible="False" FontSize="12" HorizontalOptions="Center"/>
+        <Grid VerticalOptions="Center" HorizontalOptions="Center">
+            <Border BackgroundColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray600}}"
+                Padding="10"
+                StrokeShape="RoundRectangle 20"
+                StrokeThickness="2"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Margin="16"
+                MaximumWidthRequest="500">
+                <VerticalStackLayout Padding="20" Spacing="15">
+                    <Label Text="Login"
+                        FontSize="35"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"
+                        TextColor="White" />
+                    <!-- Campo Email -->
+                    <Label Text="Email" FontSize="14" HorizontalOptions="Start" TextColor="White" />
+                    <Entry
+                        x:Name="EmailEntry"
+                        Placeholder="Email"
+                        Keyboard="Email"
+                        HorizontalOptions="Fill"
+                        PlaceholderColor="{AppThemeBinding Light='White', Dark={StaticResource Gray200}}" />
+                    <Label x:Name="EmailErrorLabel" Text="Email inválido" TextColor="Red" IsVisible="False" FontSize="12" HorizontalOptions="Center"/>
 
-            <!-- Campo Senha -->
-            <Entry x:Name="SenhaEntry" Placeholder="Senha" IsPassword="True" MaximumWidthRequest="300" />
-            <Label x:Name="SenhaErrorLabel" Text="Senha incoreta" TextColor="Red" IsVisible="False" FontSize="12" HorizontalOptions="Center"/>
-            
-            <!-- Captcha simples -->
-            <Label Text="Quanto é 3 + 4?" FontSize="14" HorizontalOptions="Center"/>
-            <Entry x:Name="CaptchaEntry" Placeholder="Digite a resposta" Keyboard="Numeric" MaximumWidthRequest="300" />
-            <Label x:Name="CaptchaErrorLabel" Text="Captcha incorreto" TextColor="Red" IsVisible="False" FontSize="12" HorizontalOptions="Center"/>
+                    <!-- Campo Senha -->
+                    <Label Text="Senha" FontSize="14" HorizontalOptions="Start" TextColor="White" />
+                    <Entry
+                        x:Name="SenhaEntry"
+                        Placeholder="Senha"
+                        IsPassword="True"
+                        HorizontalOptions="Fill"
+                        PlaceholderColor="{AppThemeBinding Light='White', Dark={StaticResource Gray200}}" />
+                    <Label x:Name="SenhaErrorLabel" Text="Senha incoreta" TextColor="Red" IsVisible="False" FontSize="12" HorizontalOptions="Center"/>
+                    
+                    <!-- Captcha simples -->
+                    <Label Text="Não sou um robô" FontSize="14" HorizontalOptions="Start" TextColor="White" />
+                    <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                        <Label Text="3 + 4 =" FontSize="14" VerticalOptions="Center" TextColor="White" />
+                        <Entry
+                            x:Name="CaptchaEntry"
+                            Placeholder="Digite a resposta"
+                            Keyboard="Numeric"
+                            WidthRequest="200"
+                            PlaceholderColor="{AppThemeBinding Light='White', Dark={StaticResource Gray200}}" />
+                    </HorizontalStackLayout>
+                    <Label x:Name="CaptchaErrorLabel" Text="Captcha incorreto" TextColor="Red" IsVisible="False" FontSize="12" HorizontalOptions="Center"/>
 
+                    <!-- Cadastro Link -->
+                    <HorizontalStackLayout HorizontalOptions="Center">
+                        <Label Text="Não tem uma conta?" FontSize="14" TextColor="White" VerticalOptions="Center" />
+                        <Button Text="Cadastre-se"
+                                FontSize="14"
+                                BackgroundColor="Transparent"
+                                TextColor="LightBlue"
+                                Clicked="OnCadastroClicked" />
+                    </HorizontalStackLayout>
 
-            <!-- Submit -->
-            <Button Text="Enviar"
-                    BackgroundColor="Gray"
-                    MaximumWidthRequest="170"
-                    Clicked="OnEnviarClicked" />
-
-            <Button Text="Voltar"
-                    BackgroundColor="LightGray"
-                    MaximumWidthRequest="170"
-                    Clicked="OnVoltarClicked" />
-        </VerticalStackLayout>
+                    <!-- Submit -->
+                    <Grid ColumnDefinitions="*" ColumnSpacing="0" HorizontalOptions="Center">
+                        <Button Text="Enviar"
+                                BackgroundColor="LightBlue"
+                                Clicked="OnEnviarClicked"
+                                TextColor="Black"
+                                Grid.Column="0"
+                                HorizontalOptions="Fill" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
     </ScrollView>
 </ContentPage>

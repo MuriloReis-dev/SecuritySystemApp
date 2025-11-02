@@ -28,15 +28,17 @@ public partial class LoginPage : ContentPage
     {
         string email = EmailEntry.Text?.Trim() ?? "";
         string captcha = CaptchaEntry.Text?.Trim() ?? "";
-        string senha = SenhaEntry.Text.Trim();
+        string senha = SenhaEntry.Text.Trim() ?? "";
 
         bool emailValido = Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
         bool captchaValido = captcha == "7";
+        bool senhaValida = senha != "";
 
         EmailErrorLabel.IsVisible = !emailValido;
         CaptchaErrorLabel.IsVisible = !captchaValido;
+        SenhaErrorLabel.IsVisible = !senhaValida;
 
-        if (emailValido && captchaValido)
+        if (emailValido && captchaValido && senhaValida)
         {
             var sucesso = await _viewModel.Entrar(email, senha);
             if (!sucesso)
@@ -51,12 +53,12 @@ public partial class LoginPage : ContentPage
     }
 
     /// <summary>
-    /// Evento ao clicar no botão de voltar
+    /// Evento ao clicar no link de cadastro
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private async void OnVoltarClicked(object? sender, EventArgs e)
+    private async void OnCadastroClicked(object? sender, EventArgs e)
     {
-        await _navigationService.VoltarAsync(); // volta uma página no histórico
+        await _navigationService.NavegarAsync(nameof(CadastroPage)); // Vai para a página de cadastro
     }
 }

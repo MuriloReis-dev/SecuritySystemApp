@@ -33,12 +33,12 @@ public partial class HomePage : ContentPage
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private void OnPageSizeChanged(object? sender, EventArgs e)
+    private async void OnPageSizeChanged(object? sender, EventArgs e)
     {
         // Reconstrói o gráfico ao mudar de tamanho para evitar sobreposição
         try
         {
-            var dados = _viewModel.GerarDadosGrafico();
+            var dados = await _viewModel.GerarDadosGrafico();
             if (dados != null && dados.Any())
             {
                 MontarGrafico(dados);
@@ -57,7 +57,7 @@ public partial class HomePage : ContentPage
     {
         base.OnAppearing();
 
-        var dadosGrafico = _viewModel.GerarDadosGrafico();
+        var dadosGrafico = await _viewModel.GerarDadosGrafico();
         MontarGrafico(dadosGrafico);
 
         DadosAlarmes = await _viewModel.CarregarAlarmesAsync();
@@ -70,10 +70,11 @@ public partial class HomePage : ContentPage
             ListaVaziaLabel.IsVisible = false;
     }
 
-    private void MontarGrafico(List<EntradasDTO> dadosGrafico)
+    private void MontarGrafico(List<EntradasDTO>? dadosGrafico)
     {
-        if (dadosGrafico == null || dadosGrafico.Count() == 0)
+        if (dadosGrafico == null)
             return;
+        GraficoVazioLabel.IsVisible = false; // Esconde a mensagem de gráfico vazio
 
         // Remove chart anterior se existir (evita sobreposição)
         ClearOldChart();

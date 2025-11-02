@@ -26,6 +26,13 @@
                     StrokeShape="RoundRectangle 20"
                     StrokeThickness="2">
                     <VerticalStackLayout Padding="20" Spacing="10">
+                        <!-- Mensagem para Gráfico Vazio -->
+                        <Label
+                            x:Name="GraficoVazioLabel"
+                            Text="Dados não encontrados."
+                            FontSize="16"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center" />
                         <!-- Container usado para criar/remover dinamicamente o CartesianChart no code-behind -->
                         <Grid x:Name="ChartContainer" MaximumHeightRequest="250" BackgroundColor="Transparent" />
                     </VerticalStackLayout>
