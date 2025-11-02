@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using SecuritySystemApp.Models;
 using SecuritySystemApp.ViewModels;
 
@@ -11,6 +12,8 @@ public partial class AlarmePage : ContentPage
     private readonly AlarmeViewModel _viewModel;
 
     public AlarmeDetailsDTO? Dados;
+
+    
 
     public AlarmePage()
     {
@@ -45,10 +48,33 @@ public partial class AlarmePage : ContentPage
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    public void OnAlarmAreaTapped(object sender, EventArgs e)
+    public void OnEditAlarmeTapped(object sender, EventArgs e)
     {
         // Área para editar o nome do alarme (apenas proprietário)
         Console.WriteLine("Área do alarme tocada para editar o nome.");
+    }
+
+    /// <summary>
+    /// Evento ao alternar o estado do alarme
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    public async void OnToggleAlarmClicked(object sender, EventArgs e)
+    {
+        if (Dados != null && Dados.Alarme != null)
+        {
+            bool sucesso = await _viewModel.AlarmeOnOffAsync(Dados.Alarme.Id, !Dados.Alarme.Ligado);
+            if (!sucesso)
+            {
+                await DisplayAlert("Erro", "Não foi possível alterar o estado do alarme.", "OK");
+            }
+        }
+        else
+        {
+            await DisplayAlert("Erro", "Dados do alarme não carregados.", "OK");
+        }
+
+        OnAppearing(); // Recarrega a página
     }
 
     /// <summary>
@@ -56,13 +82,34 @@ public partial class AlarmePage : ContentPage
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    public async void OnToggleAlarmClicked(object sender, EventArgs e)
+    public async void OnLiberarClicked(object sender, EventArgs e)
     {
         if (Dados != null && Dados.Alarme != null)
-            await _viewModel.AlarmeOnOffAsync(Dados.Alarme.Id, !Dados.Alarme.Ligado);
+        {
+            bool sucesso = await _viewModel.LiberarAcessoAsync(Dados.Alarme.Id);
+            if (sucesso)
+            {
+                await IniciarTimer();
+            }
+            else
+                await DisplayAlert("Erro", "Não foi possível liberar o acesso ao alarme.", "OK");
+        }
         else
-            Console.WriteLine("Id do Alarme não pode ser nulo.");
+            await DisplayAlert("Erro", "Dados do alarme não carregados.", "OK");
+    }
 
-        OnAppearing(); // Recarrega os dados
+    public async Task IniciarTimer()
+    {
+        Shell.SetNavBarIsVisible(this, false);
+        Overlay.IsVisible = true;
+        int segundos = 10;
+
+        for (int i = segundos; i > 0; i--)
+        {
+            TempoLabel.Text = $"Alarme será ativado em {i} segundos";
+            await Task.Delay(1000);
+        }
+        Shell.SetNavBarIsVisible(this, true);
+        Overlay.IsVisible = false;
     }
 }

@@ -6,119 +6,159 @@
              xmlns:models="clr-namespace:SecuritySystemApp.Models"
              x:DataType="models:AlarmeDetailsDTO"
              Title="Detalhes do Alarme">
-             
-    <!-- Adicionar conteúdo da página -->
-    <Grid ColumnDefinitions="*" RowDefinitions="*,Auto">
-        <ScrollView>
-            <VerticalStackLayout Margin="10">
-                <!-- Alarme -->
-                <Border
-                    Padding="15"
-                    Stroke="LightGray"
-                    StrokeShape="RoundRectangle 8"
-                    StrokeThickness="1">
-                    <VerticalStackLayout>
-                        <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnAlarmAreaTapped"/>
-                        </VerticalStackLayout.GestureRecognizers>
-                        <Label Text="Nome" FontSize="12"/>
 
-                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
-                            <Label Text="{Binding Alarme.Nome}" FontSize="20"/>
-                            <Image Source="homeicon.png" WidthRequest="20" HeightRequest="20"></Image>
-                        </HorizontalStackLayout>
-                    </VerticalStackLayout>
-                </Border>
-
-                <!-- Botão para ligar/desligar -->
-                <Border
-                    Padding="15"
-                    Stroke="LightGray"
-                    StrokeShape="RoundRectangle 8"
-                    StrokeThickness="1">
+    <Grid>
+        <Grid ColumnDefinitions="*" RowDefinitions="*, Auto">
+            <ScrollView Grid.Row="0">
+                <VerticalStackLayout Margin="10">
+                    <!-- Alarme -->
                     <Border
-                        Padding="0"
-                        StrokeThickness="0"
-                        BackgroundColor="Transparent"
-                        Margin="0,20,0,20">
-                        <Grid>
-                            <Button
-                                x:Name="ToggleAlarmButton"
-                                HeightRequest="60"
-                                CornerRadius="30"
-                                TextColor="White"
-                                FontSize="22"
-                                FontAttributes="Bold"
-                                Clicked="OnToggleAlarmClicked">
-                                <Button.Triggers>
-                                    <DataTrigger TargetType="Button" Binding="{Binding Alarme.Ligado}" Value="True">
-                                        <Setter Property="BackgroundColor" Value="LightGreen" />
-                                        <Setter Property="Text" Value="Desligar Alarme" />
-                                    </DataTrigger>
-                                    <DataTrigger TargetType="Button" Binding="{Binding Alarme.Ligado}" Value="False">
-                                        <Setter Property="BackgroundColor" Value="Red" />
-                                        <Setter Property="Text" Value="Ligar Alarme" />
-                                    </DataTrigger>
-                                </Button.Triggers>
-                            </Button>
+                        Padding="15"
+                        Stroke="LightGray"
+                        StrokeShape="RoundRectangle 8"
+                        StrokeThickness="1">
+                        <Grid ColumnDefinitions="*, Auto">
+                            <!-- Nome do Alarme -->
+                            <VerticalStackLayout Grid.Column="0">
+                                <VerticalStackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnEditAlarmeTapped"/>
+                                </VerticalStackLayout.GestureRecognizers>
+
+                                <Label Text="Nome" FontSize="12" VerticalOptions="Center" />
+                                <HorizontalStackLayout Spacing="10">
+                                    <Label Text="{Binding Alarme.Nome}" FontSize="20"/>
+                                    <Image Source="{AppThemeBinding Light='pencil_black_full.png', Dark='pencil_white_full.png'}" WidthRequest="20" HeightRequest="20" IsVisible="{Binding Alarme.TipoPermissao}" />
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+
+                            <!-- Ligar/Desligar alarme -->
+                            <Grid RowDefinitions="Auto, Auto" Grid.Column="1">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnToggleAlarmClicked"/>
+                                </Grid.GestureRecognizers>
+
+                                <Label FontSize="16" HorizontalOptions="Center" Grid.Row="0">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding Alarme.Ligado}" Value="True">
+                                            <Setter Property="Text" Value="Ligado" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Label" Binding="{Binding Alarme.Ligado}" Value="False">
+                                            <Setter Property="Text" Value="Desligado" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                                <Image
+                                    HorizontalOptions="Center"
+                                    MaximumHeightRequest="30"
+                                    Grid.Row="1">
+                                    <Image.Triggers>
+                                        <DataTrigger TargetType="Image" Binding="{Binding Alarme.Ligado}" Value="True">
+                                            <Setter Property="Source" Value="half_circle_green.png" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Image" Binding="{Binding Alarme.Ligado}" Value="False">
+                                            <Setter Property="Source" Value="half_circle_red.png" />
+                                        </DataTrigger>
+                                    </Image.Triggers>
+                                </Image>
+                            </Grid>
                         </Grid>
                     </Border>
-                </Border>
 
-                <!-- Usuários Relacionados -->
-                <Border
-                    Padding="15"
-                    Stroke="LightGray"
-                    StrokeShape="RoundRectangle 8"
-                    StrokeThickness="1">
-                    <Border.Triggers>
-                        <DataTrigger TargetType="Border" Binding="{Binding Alarme.TipoAcesso}" Value="user">
-                            <Setter Property="IsVisible" Value="False" />
-                        </DataTrigger>
-                    </Border.Triggers>
-                    <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, *">
-                        <Label Text="Usuários Permitidos" FontSize="20" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" />
-                        <Button
-                            Text="Adicionar Usuário"
-                            HorizontalOptions="Fill"
-                            Background="Green"
-                            Grid.Row="0"
-                            Grid.Column="1" />
+                    <!-- Botão para liberar acesso -->
+                    <Border
+                        Padding="15"
+                        Stroke="LightGray"
+                        StrokeShape="RoundRectangle 8"
+                        StrokeThickness="1">
+                        <Border.Triggers>
+                            <DataTrigger TargetType="Border" Binding="{Binding Alarme.Ligado}" Value="False">
+                                <Setter Property="Opacity" Value="0.5" />
+                            </DataTrigger>
+                        </Border.Triggers>
+                        <Border
+                            Padding="0"
+                            StrokeThickness="0"
+                            BackgroundColor="Transparent"
+                            Margin="0,20,0,20">
+                            <Grid>
+                                <Button
+                                    x:Name="ToggleAlarmButton"
+                                    HeightRequest="60"
+                                    CornerRadius="30"
+                                    Text="Abrir"
+                                    TextColor="White"
+                                    BackgroundColor="LightGreen"
+                                    FontSize="22"
+                                    FontAttributes="Bold"
+                                    IsEnabled="{Binding Alarme.Ligado}"
+                                    Clicked="OnLiberarClicked">
+                                </Button>
+                            </Grid>
+                        </Border>
+                    </Border>
 
-                        <!-- Mensagem para Lista Vazia -->
-                        <Label
-                            x:Name="ListaVaziaLabel"
-                            Text="Nenhum usuário encontrado."
-                            FontSize="16"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center"
-                            Grid.Row="1"
-                            Grid.ColumnSpan="2" />
-                        
-                        <!-- Lista de Usuários -->
-                        <CollectionView
-                            HeightRequest="220"
-                            x:Name="UsuariosList"
-                            SelectionMode="None"
-                            Grid.Row="1"
-                            Grid.ColumnSpan="2">
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate x:DataType="models:Usuario">
-                                    <HorizontalStackLayout
-                                        Padding="8"
-                                        Spacing="12"
-                                        VerticalOptions="Center">
-                                        <Label Text="{Binding Id}" VerticalOptions="Center" WidthRequest="30"/>
-                                        <Label Text="{Binding Nome}" VerticalOptions="Center" />
-                                        <Label Text="{Binding Email}" VerticalOptions="Center" />
-                                    </HorizontalStackLayout>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                    </Grid>
-                </Border>
-            </VerticalStackLayout>
-        </ScrollView>
-        <components:BottomTabsView CurrentPage="HomePage" Grid.Row="1" />
+                    <!-- Usuários Relacionados -->
+                    <Border
+                        Padding="15"
+                        Stroke="LightGray"
+                        StrokeShape="RoundRectangle 8"
+                        StrokeThickness="1"
+                        IsVisible="{Binding Alarme.TipoPermissao}">
+                        <Border.Triggers>
+                            <DataTrigger TargetType="Border" Binding="{Binding Alarme.Ligado}" Value="False">
+                                <Setter Property="Opacity" Value="0.5" />
+                            </DataTrigger>
+                        </Border.Triggers>
+                        <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, *">
+                            <Label Text="Usuários Permitidos" FontSize="20" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" />
+                            <Button
+                                Text="Adicionar Usuário"
+                                HorizontalOptions="Fill"
+                                Background="Green"
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                IsEnabled="{Binding Alarme.Ligado}" />
+
+                            <!-- Mensagem para Lista Vazia -->
+                            <Label
+                                x:Name="ListaVaziaLabel"
+                                Text="Nenhum usuário encontrado."
+                                FontSize="16"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                Grid.Row="1"
+                                Grid.ColumnSpan="2" />
+                            
+                            <!-- Lista de Usuários -->
+                            <CollectionView
+                                HeightRequest="220"
+                                x:Name="UsuariosList"
+                                SelectionMode="None"
+                                Grid.Row="1"
+                                Grid.ColumnSpan="2">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="models:Usuario">
+                                        <HorizontalStackLayout
+                                            Padding="8"
+                                            Spacing="12"
+                                            VerticalOptions="Center">
+                                            <Label Text="{Binding Id}" VerticalOptions="Center" WidthRequest="30"/>
+                                            <Label Text="{Binding Nome}" VerticalOptions="Center" />
+                                            <Label Text="{Binding Email}" VerticalOptions="Center" />
+                                        </HorizontalStackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
+            </ScrollView>
+            <components:BottomTabsView CurrentPage="HomePage" Grid.Row="1" />
+        </Grid>
+        
+        <!-- Timer do Alarme -->
+        <Grid x:Name="Overlay" BackgroundColor="#80000000" IsVisible="False">
+            <Label x:Name="TempoLabel" TextColor="White" FontSize="28" HorizontalOptions="Center" VerticalOptions="Center" />
+        </Grid>
     </Grid>
 </ContentPage>

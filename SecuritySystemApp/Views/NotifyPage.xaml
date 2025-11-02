@@ -3,12 +3,64 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SecuritySystemApp.Views.NotifyPage"
              xmlns:components="clr-namespace:SecuritySystemApp.Components"
+             xmlns:vm="clr-namespace:SecuritySystemApp.ViewModels"
+             xmlns:models="clr-namespace:SecuritySystemApp.Models"
              Title="Notificações">
              
     <!-- Adicionar conteúdo da página -->
     <Grid ColumnDefinitions="*" RowDefinitions="*,Auto">
         <ScrollView>
+            <VerticalStackLayout>
+                <!-- Mensagem para Lista Vazia -->
+                <Label
+                    x:Name="ListaVaziaLabel"
+                    Text="Nenhuma notificação encontrada."
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center" />
 
+                <!-- Lista de Notificações -->
+                <CollectionView
+                    HeightRequest="300"
+                    x:Name="NotifyList"
+                    SelectionMode="Single"
+                    VerticalScrollBarVisibility="Always">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:NotifyDTO">
+                            <Border
+                                Margin="5"
+                                Padding="10"
+                                StrokeShape="RoundRectangle 10"
+                                BackgroundColor="{StaticResource Gray600}">
+                                        
+                                <Grid ColumnSpacing="10" ColumnDefinitions="*,Auto">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="16"
+                                        Text="{Binding Mensagem}"
+                                        TextColor="White"
+                                        VerticalOptions="Center"
+                                        Grid.Column="0" />
+                                    <VerticalStackLayout Grid.Column="1">
+                                        <Label
+                                            FontSize="12"
+                                            Text="{Binding DataHora, StringFormat='{0:dd/MM/yyyy}'}"
+                                            TextColor="White"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="End" />
+                                        <Label
+                                            FontSize="12"
+                                            Text="{Binding DataHora, StringFormat='{0:HH:mm}'}"
+                                            TextColor="White"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="End" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
         </ScrollView>
         <components:BottomTabsView CurrentPage="NotifyPage" Grid.Row="1" />
     </Grid>
