@@ -56,13 +56,14 @@ public class AuthService
     /// <param name="email">Email do usuário cadastrado</param>
     /// <param name="senha">Senha do usuário cadastrado</param>
     /// <returns>Booleano indicando sucesso ou falha</returns>
-    public async Task<bool> RegisterAsync(string nome, string email, string senha)
+    public async Task<bool> RegisterAsync(string nome, string email, string senha, string tokenFmc)
     {
         var cadastro = new CadastroDTO
         {
             Nome = nome,
             Email = email,
-            Senha = senha
+            Senha = senha,
+            TokenFMC = tokenFmc
         };
 
         var status = await _apiService.PostConsultaAsync("cadastrodto/cadastro", cadastro); // URL do endpoint de cadastro

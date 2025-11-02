@@ -8,6 +8,7 @@ namespace SecuritySystemApp.Services;
 
 public class FirebaseService
 {
+    private readonly ApiService _apiService = new ApiService();
     public async Task<string?> GetTokenAsync()
     {
         try
@@ -22,6 +23,11 @@ public class FirebaseService
             Console.WriteLine($"Erro ao obter o token do Firebase: {ex}");
             return null;
         }
+    }
+
+    public async Task UpdateTokenAsync(string token)
+    {
+        await _apiService.PutConsultaAsync($"notifydto/{Preferences.Get("UserId", 0)}/updatefmc", new { FmcToken = token });
     }
     
 }

@@ -8,11 +8,13 @@ namespace SecuritySystemApp.ViewModels;
 public class CadastroViewModel
 {
     private readonly AuthService _authService;
+    private readonly FirebaseService _firebaseService;
 
     public CadastroViewModel()
     {
         // Definição dos Serviços
         _authService = new AuthService();
+        _firebaseService = new FirebaseService();
     }
 
     /// <summary>
@@ -24,7 +26,8 @@ public class CadastroViewModel
     /// <returns>Booleano indicando sucesso ou falha</returns>
     public async Task<bool> Cadastrar(string nome, string email, string senha)
     {
-        var sucesso = await _authService.RegisterAsync(nome, email, senha);
+        var tokenFmc = await _firebaseService.GetTokenAsync() ?? string.Empty;
+        var sucesso = await _authService.RegisterAsync(nome, email, senha, tokenFmc);
 
         if (sucesso)
         {
