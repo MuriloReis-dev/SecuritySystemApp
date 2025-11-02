@@ -82,6 +82,6 @@ public partial class MainPage : ContentPage
     private async void OnTokenFMCBtnClicked(object? sender, EventArgs e)
     {
         var token = await _firebaseService.GetTokenAsync();
-        tokenFMCLabel.Text = token ?? "Token não disponível";
+        tokenFMCEntry.Text = token ?? "Token não disponível";
     }
 }
