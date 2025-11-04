@@ -25,11 +25,19 @@ public class AuthService
         var login = new LoginDTO
         {
             Email = email,
-            Senha = senha,
-            TokenFMC = tokenFmc
+            Senha = senha
         };
 
-        var (loginResponse, status) = await _apiService.PostConsultaAsync<LoginDTO, LoginResponseDTO>("logindto/login", login); // URL do endpoint de login
+        LoginResponseDTO? loginResponse;
+        HttpResponseMessage? status;
+
+        if (DeviceInfo.Current.Platform == DevicePlatform.WinUI) // Acessa endpoint que não exige FCM no Windows
+            (loginResponse, status) = await _apiService.PostConsultaAsync<LoginDTO, LoginResponseDTO>("logindto/loginnofcm", login); // URL do endpoint de login
+        else
+        {
+            login.TokenFMC = tokenFmc;
+            (loginResponse, status) = await _apiService.PostConsultaAsync<LoginDTO, LoginResponseDTO>("logindto/login", login); // URL do endpoint de login
+        }
 
         // Token para o usuário continuar logado (gerado na API)
         if (loginResponse?.Token != null && loginResponse.Usuario != null)
