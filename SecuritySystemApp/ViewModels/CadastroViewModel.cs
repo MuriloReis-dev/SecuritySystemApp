@@ -26,12 +26,12 @@ public class CadastroViewModel
     /// <returns>Booleano indicando sucesso ou falha</returns>
     public async Task<bool> Cadastrar(string nome, string email, string senha)
     {
-        var tokenFmc = await _firebaseService.GetTokenAsync() ?? string.Empty;
-        var sucesso = await _authService.RegisterAsync(nome, email, senha, tokenFmc);
+        var sucesso = await _authService.RegisterAsync(nome, email, senha);
 
         if (sucesso)
         {
-            return await _authService.LoginAsync(email, senha);
+            var tokenFmc = await _firebaseService.GetTokenAsync() ?? string.Empty;
+            return await _authService.LoginAsync(email, senha, tokenFmc);
         }
 
         return false;

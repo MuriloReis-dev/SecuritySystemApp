@@ -15,6 +15,7 @@ public class ApiService
     {
         _httpClient = new HttpClient();
         _httpClient.BaseAddress = new Uri("https://apisecuritysystem.onrender.com/api/"); // URL base da API (Windows localhost)
+        _httpClient.Timeout = TimeSpan.FromSeconds(30);
 
         // Adiciona o token no cabeçalho Authorization, se existir
         var token = Preferences.Get("AuthToken", null);
@@ -53,6 +54,16 @@ public class ApiService
             Console.WriteLine($"Erro ao fazer a requisição: {ex.Message}");
             return (null, null);
         }
+        catch (TaskCanceledException ex) when (!ex.CancellationToken.IsCancellationRequested)
+        {
+            Console.WriteLine($"GET timeout: {httppath} - {ex}");
+            return (null, null);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"GET unexpected error: {httppath} - {ex}");
+            return (null, null);
+        }
     }
 
     /// <summary>
@@ -78,6 +89,16 @@ public class ApiService
         catch (HttpRequestException ex)
         {
             Console.WriteLine($"Erro ao fazer a requisição: {ex.Message}");
+            return null;
+        }
+        catch (TaskCanceledException ex) when (!ex.CancellationToken.IsCancellationRequested)
+        {
+            Console.WriteLine($"GET timeout: {httppath} - {ex}");
+            return null;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"GET unexpected error: {httppath} - {ex}");
             return null;
         }
     }
@@ -113,6 +134,16 @@ public class ApiService
             Console.WriteLine($"Erro ao fazer a requisição: {ex.Message}");
             return (null, null);
         }
+        catch (TaskCanceledException ex) when (!ex.CancellationToken.IsCancellationRequested)
+        {
+            Console.WriteLine($"GET timeout: {httppath} - {ex}");
+            return (null, null);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"GET unexpected error: {httppath} - {ex}");
+            return (null, null);
+        }
     }
 
     /// <summary>
@@ -140,6 +171,16 @@ public class ApiService
             Console.WriteLine($"Erro ao fazer a requisição: {ex.Message}");
             return null;
         }
+        catch (TaskCanceledException ex) when (!ex.CancellationToken.IsCancellationRequested)
+        {
+            Console.WriteLine($"GET timeout: {httppath} - {ex}");
+            return null;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"GET unexpected error: {httppath} - {ex}");
+            return null;
+        }
     }
 
     /// <summary>
@@ -163,6 +204,16 @@ public class ApiService
         catch (HttpRequestException ex)
         {
             Console.WriteLine($"Erro ao fazer a requisição: {ex.Message}");
+            return null;
+        }
+        catch (TaskCanceledException ex) when (!ex.CancellationToken.IsCancellationRequested)
+        {
+            Console.WriteLine($"GET timeout: {httppath} - {ex}");
+            return null;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"GET unexpected error: {httppath} - {ex}");
             return null;
         }
     }

@@ -48,10 +48,29 @@ public partial class AlarmePage : ContentPage
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    public void OnEditAlarmeTapped(object sender, EventArgs e)
+    public async void OnEditAlarmeTapped(object sender, EventArgs e)
     {
         // Área para editar o nome do alarme (apenas proprietário)
-        Console.WriteLine("Área do alarme tocada para editar o nome.");
+        string novoNome = await DisplayPromptAsync("Editar Alarme", "Digite o novo nome do alarme:", initialValue: Dados?.Alarme?.Nome);
+        if (novoNome == null)
+            return; // Usuário cancelou a ação
+        if (!string.IsNullOrEmpty(novoNome) && Dados != null && Dados.Alarme != null)
+        {
+            bool sucesso = await _viewModel.EditarAlarmeAsync(Dados.Alarme.Id, novoNome);
+            if (sucesso)
+            {
+                await DisplayAlert("Sucesso", "Nome do alarme atualizado com sucesso.", "OK");
+                OnAppearing(); // Recarrega a página para refletir a mudança
+            }
+            else
+            {
+                await DisplayAlert("Erro", "Não foi possível atualizar o nome do alarme.", "OK");
+            }
+        }
+        else
+        {
+            await DisplayAlert("Erro", "Dados do alarme não carregados ou nome inválido.", "OK");
+        }
     }
 
     /// <summary>

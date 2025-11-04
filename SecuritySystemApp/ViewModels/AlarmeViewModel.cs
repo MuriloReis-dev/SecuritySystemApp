@@ -51,4 +51,11 @@ public class AlarmeViewModel
 
         return resposta != null && resposta.IsSuccessStatusCode;
     }
+
+    public async Task<bool> EditarAlarmeAsync(int id_alarme, string novoNome)
+    {
+        var resposta = await _apiService.PutConsultaAsync($"alarmedto/{id_alarme}/{Preferences.Get("UserId", "0")}/editnome", new { Nome = novoNome });
+
+        return resposta != null && resposta.IsSuccessStatusCode;
+    }
 }

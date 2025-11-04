@@ -11,6 +11,7 @@ public partial class ConfigPage : ContentPage
     private readonly INavigationService _navigationService;
     private readonly ApiService _apiService;
     private readonly AuthService _authService;
+    private readonly ConfigViewModel _configViewModel;
     public ConfigPage()
     {
         InitializeComponent();
@@ -19,6 +20,7 @@ public partial class ConfigPage : ContentPage
         _navigationService = new NavigationService();
         _apiService = new ApiService();
         _authService = new AuthService();
+        _configViewModel = new ConfigViewModel();
     }
 
     /// <summary>
@@ -32,6 +34,27 @@ public partial class ConfigPage : ContentPage
         string novaSenha = NovaSenhaEntry.Text;
 
         bool confirm = await DisplayAlert("Confirmação", "Tem certeza de que deseja alterar sua senha?", "Sim", "Não");
+        if(confirm)
+        {
+            if (!string.IsNullOrWhiteSpace(senhaAtual) && !string.IsNullOrWhiteSpace(novaSenha))
+            {
+                bool sucesso = await _configViewModel.AlterarSenhaAsync(senhaAtual, novaSenha);
+                if (sucesso)
+                {
+                    await DisplayAlert("Sucesso", "Senha alterada com sucesso.", "OK");
+                    SenhaAtualEntry.Text = string.Empty;
+                    NovaSenhaEntry.Text = string.Empty;
+                }
+                else
+                {
+                    await DisplayAlert("Erro", "Falha ao alterar a senha. Verifique se a senha atual está correta.", "OK");
+                }
+            }
+            else
+            {
+                await DisplayAlert("Erro", "Por favor, preencha todos os campos.", "OK");
+            }
+        }
     }
 
     private async void OnLogoutButtonClicked(object? sender, EventArgs e)

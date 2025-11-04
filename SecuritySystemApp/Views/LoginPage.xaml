@@ -21,6 +21,7 @@
                         FontAttributes="Bold"
                         HorizontalOptions="Center"
                         TextColor="White" />
+
                     <!-- Campo Email -->
                     <Label Text="Email" FontSize="14" HorizontalOptions="Start" TextColor="White" />
                     <Entry
@@ -43,17 +44,16 @@
                     
                     <!-- Captcha simples -->
                     <Label Text="Não sou um robô" FontSize="14" HorizontalOptions="Start" TextColor="White" />
-                    <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                    <HorizontalStackLayout Spacing="10" HorizontalOptions="Start">
                         <Label Text="3 + 4 =" FontSize="14" VerticalOptions="Center" TextColor="White" />
                         <Entry
                             x:Name="CaptchaEntry"
                             Placeholder="Digite a resposta"
                             Keyboard="Numeric"
-                            WidthRequest="200"
                             PlaceholderColor="{AppThemeBinding Light='White', Dark={StaticResource Gray200}}" />
                     </HorizontalStackLayout>
                     <Label x:Name="CaptchaErrorLabel" Text="Captcha incorreto" TextColor="Red" IsVisible="False" FontSize="12" HorizontalOptions="Center"/>
-
+                    
                     <!-- Cadastro Link -->
                     <HorizontalStackLayout HorizontalOptions="Center">
                         <Label Text="Não tem uma conta?" FontSize="14" TextColor="White" VerticalOptions="Center" />
@@ -70,6 +70,7 @@
                                 BackgroundColor="LightBlue"
                                 Clicked="OnEnviarClicked"
                                 TextColor="Black"
+                                WidthRequest="150"
                                 Grid.Column="0"
                                 HorizontalOptions="Fill" />
                     </Grid>
