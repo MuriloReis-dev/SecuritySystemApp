@@ -28,6 +28,10 @@ public partial class HomePage : ContentPage
         this.SizeChanged += OnPageSizeChanged;
     }
 
+    // Modifique o evento OnPageSizeChanged para ser menos frequente
+    private DateTime _lastResize = DateTime.MinValue;
+    private const int RESIZE_DELAY_MS = 250; // Delay entre redraws
+
     /// <summary>
     /// Evento disparado ao mudar o tamanho da página
     /// </summary>
@@ -35,13 +39,21 @@ public partial class HomePage : ContentPage
     /// <param name="e"></param>
     private async void OnPageSizeChanged(object? sender, EventArgs e)
     {
-        // Reconstrói o gráfico ao mudar de tamanho para evitar sobreposição
         try
         {
+            // Evita múltiplos redraws em sequência
+            if ((DateTime.Now - _lastResize).TotalMilliseconds < RESIZE_DELAY_MS)
+                return;
+
+            _lastResize = DateTime.Now;
+
+            // Aguarda um momento para evitar múltiplos redraws
+            await Task.Delay(RESIZE_DELAY_MS);
+
             var dados = await _viewModel.GerarDadosGrafico();
             if (dados != null && dados.Any())
             {
-                MontarGrafico(dados);
+                MainThread.BeginInvokeOnMainThread(() => MontarGrafico(dados));
             }
         }
         catch (Exception ex)
@@ -57,36 +69,51 @@ public partial class HomePage : ContentPage
     {
         base.OnAppearing();
 
-        var dadosGrafico = await _viewModel.GerarDadosGrafico();
-        MontarGrafico(dadosGrafico);
+        await MainThread.InvokeOnMainThreadAsync(async () =>
+        {
+            ClearOldChart(); // Limpa qualquer gráfico residual
+            
+            var dadosGrafico = await _viewModel.GerarDadosGrafico();
+            if (dadosGrafico?.Any() == true)
+            {
+                MontarGrafico(dadosGrafico);
+            }
 
-        DadosAlarmes = await _viewModel.CarregarAlarmesAsync();
-        AlarmesList.ItemsSource = DadosAlarmes;
+            DadosAlarmes = await _viewModel.CarregarAlarmesAsync();
+            AlarmesList.ItemsSource = DadosAlarmes;
 
-        // Ajusta visibilidade dos elementos com base nos dados carregados
-        if (DadosAlarmes == null || DadosAlarmes.Count == 0)
-            AlarmesList.IsVisible = false;
-        else
-            ListaVaziaLabel.IsVisible = false;
+            if (DadosAlarmes == null || DadosAlarmes.Count == 0)
+                AlarmesList.IsVisible = false;
+            else
+                ListaVaziaLabel.IsVisible = false;
+        });
     }
 
     private void MontarGrafico(List<EntradasDTO>? dadosGrafico)
     {
         if (dadosGrafico == null)
-            return;
-        GraficoVazioLabel.IsVisible = false; // Esconde a mensagem de gráfico vazio
+        return;
 
-        // Remove chart anterior se existir (evita sobreposição)
+        // Esconde o container enquanto remontamos o gráfico (evita sobreposição visual)
+        MainThread.BeginInvokeOnMainThread(() => 
+        {
+            ChartContainer.IsVisible = false;
+            GraficoVazioLabel.IsVisible = false; // esconder label enquanto desenha
+        });
+
+        // Remove chart anterior ANTES de esconder o label
         ClearOldChart();
+        
+        GraficoVazioLabel.IsVisible = false;
 
-        // Cria nova instância do CartesianChart
+        // Cria nova instância do CartesianChart com todas as propriedades definidas ANTES de adicionar ao container
         _chartInstance = new LiveChartsCore.SkiaSharpView.Maui.CartesianChart
         {
-            BackgroundColor = Microsoft.Maui.Graphics.Colors.Transparent
+            BackgroundColor = Microsoft.Maui.Graphics.Colors.Transparent,
+            Series = new ISeries[] { /* será preenchido abaixo */ },
+            XAxes = Array.Empty<Axis>(),
+            YAxes = Array.Empty<Axis>(),
         };
-
-        // Adiciona o chart ao container
-        ChartContainer.Children.Add(_chartInstance);
 
         // Informações sobre a semana atual
         DateTime hoje = DateTime.Now; // Hoje
@@ -158,38 +185,54 @@ public partial class HomePage : ContentPage
 
         // Desativar Tooltips
         _chartInstance.TooltipPosition = TooltipPosition.Hidden;
+
+        // Adiciona o chart ao container POR ÚLTIMO e torna visível novamente
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            try
+            {
+                ChartContainer.Children.Clear();
+                ChartContainer.Children.Add(_chartInstance);
+                ChartContainer.IsVisible = true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro ao adicionar chart: {ex}");
+                // Em caso de falha, mostra label de gráfico vazio
+                ChartContainer.IsVisible = false;
+                GraficoVazioLabel.IsVisible = true;
+            }
+        });
     }
 
     private void ClearOldChart()
     {
-        try
+        if (_chartInstance == null) return;
+
+        MainThread.BeginInvokeOnMainThread(() =>
         {
-            if (_chartInstance != null)
+            try
             {
-                // Tenta esconder tooltip caso esteja aberto
-                try
-                {
-                    // A API exige que se passe a instância do Chart ao chamar Hide
-                    var core = _chartInstance.CoreChart;
-                    if (core != null)
-                    {
-                        core.Tooltip?.Hide(core);
-                    }
-                }
-                catch { /* Ignore se API não expor Hide/assinar diferente */ }
-
-                // Remove do container e dispose se possível
+                // Primeiro remove do container
                 if (ChartContainer.Children.Contains(_chartInstance))
-                    ChartContainer.Children.Remove(_chartInstance);
+                {
+                    ChartContainer.Children.Clear(); // Limpa todos os filhos
+                }
 
-                // Some implementations may expose Dispose, tentar limpar referência
+                // Tenta limpar recursos
+                if (_chartInstance is IDisposable disposable)
+                {
+                    disposable.Dispose();
+                }
+
+                // Limpa a referência
                 _chartInstance = null;
             }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Erro ao limpar chart antigo: {ex}");
-        }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro ao limpar chart antigo: {ex}");
+            }
+        });
     }
 
     /// <summary>
