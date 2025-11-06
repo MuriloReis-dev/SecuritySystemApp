@@ -5,17 +5,17 @@
              Shell.NavBarIsVisible="False"
              Title="Cadastro">
 
-    <ScrollView>
-        <Grid VerticalOptions="Center" HorizontalOptions="Center">
+    <ScrollView HorizontalOptions="Fill">
+        <Grid ColumnDefinitions="*" VerticalOptions="Center">
             <Border BackgroundColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray600}}"
                 Padding="10"
                 StrokeShape="RoundRectangle 20"
                 StrokeThickness="2"
-                HorizontalOptions="Center"
+                HorizontalOptions="Fill"
                 VerticalOptions="Center"
                 Margin="16"
-                MaximumWidthRequest="500">
-                <VerticalStackLayout Padding="20" Spacing="15">
+                Grid.Column="0">
+                <VerticalStackLayout HorizontalOptions="Fill" Padding="20" Spacing="15">
                     <Label Text="Cadastro"
                         FontSize="35"
                         FontAttributes="Bold"
@@ -25,7 +25,7 @@
                     <Label Text="Nome" FontSize="14" HorizontalOptions="Start" TextColor="White" />
                     <Entry
                         x:Name="NomeEntry"
-                        Placeholder="Nome"
+                        Placeholder="Digite seu Nome"
                         HorizontalOptions="Fill"
                         PlaceholderColor="{AppThemeBinding Light='White', Dark={StaticResource Gray200}}" />
 
@@ -33,7 +33,7 @@
                     <Label Text="Email" FontSize="14" HorizontalOptions="Start" TextColor="White" />
                     <Entry
                         x:Name="EmailEntry"
-                        Placeholder="Email"
+                        Placeholder="Digite seu Email"
                         Keyboard="Email"
                         HorizontalOptions="Fill"
                         PlaceholderColor="{AppThemeBinding Light='White', Dark={StaticResource Gray200}}" />
@@ -43,7 +43,7 @@
                     <Label Text="Senha" FontSize="14" HorizontalOptions="Start" TextColor="White" />
                     <Entry
                         x:Name="SenhaEntry"
-                        Placeholder="Senha"
+                        Placeholder="Digite sua Senha"
                         IsPassword="True"
                         HorizontalOptions="Fill"
                         PlaceholderColor="{AppThemeBinding Light='White', Dark={StaticResource Gray200}}" />
@@ -53,37 +53,36 @@
                     <Label Text="Confirme a Senha" FontSize="14" HorizontalOptions="Start" TextColor="White" />
                     <Entry
                         x:Name="ConfirmarSenhaEntry"
-                        Placeholder="Confirme a Senha"
+                        Placeholder="Digite sua Senha Novamente"
                         IsPassword="True"
                         HorizontalOptions="Fill"
                         PlaceholderColor="{AppThemeBinding Light='White', Dark={StaticResource Gray200}}" />
                     
                     <!-- Captcha simples -->
-                    <Label Text="Não sou um robô" FontSize="14" HorizontalOptions="Start" TextColor="White" />
-                    <HorizontalStackLayout Spacing="10" HorizontalOptions="Start">
+                    <Label Text="Não sou um robô" FontSize="14" HorizontalOptions="Center" TextColor="White" />
+                    <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
                         <Label Text="3 + 4 =" FontSize="14" VerticalOptions="Center" TextColor="White" />
                         <Entry
                             x:Name="CaptchaEntry"
                             Placeholder="Digite a resposta"
                             Keyboard="Numeric"
+                            HorizontalOptions="Fill"
                             PlaceholderColor="{AppThemeBinding Light='White', Dark={StaticResource Gray200}}" />
                     </HorizontalStackLayout>
                     <Label x:Name="CaptchaErrorLabel" Text="Captcha incorreto" TextColor="Red" IsVisible="False" FontSize="12" HorizontalOptions="Center"/>
 
                     <!-- Submit -->
-                    <Grid ColumnDefinitions="*,*" ColumnSpacing="20" HorizontalOptions="Center">
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="20" HorizontalOptions="End">
                         <Button Text="Voltar"
                                 BackgroundColor="LightGray"
                                 Clicked="OnVoltarClicked"
                                 TextColor="Black"
-                                WidthRequest="150"
                                 Grid.Column="0"
                                 HorizontalOptions="Fill" />
                         <Button Text="Enviar"
                                 BackgroundColor="LightBlue"
                                 Clicked="OnEnviarClicked"
                                 TextColor="Black"
-                                WidthRequest="150"
                                 Grid.Column="1"
                                 HorizontalOptions="Fill" />
                     </Grid>

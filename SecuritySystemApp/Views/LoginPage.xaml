@@ -5,17 +5,17 @@
              Shell.NavBarIsVisible="False"
              Title="Login">
 
-    <ScrollView>
-        <Grid VerticalOptions="Center" HorizontalOptions="Center">
+    <ScrollView HorizontalOptions="Fill">
+        <Grid ColumnDefinitions="*" VerticalOptions="Center">
             <Border BackgroundColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray600}}"
                 Padding="10"
                 StrokeShape="RoundRectangle 20"
                 StrokeThickness="2"
-                HorizontalOptions="Center"
+                HorizontalOptions="Fill"
                 VerticalOptions="Center"
                 Margin="16"
-                MaximumWidthRequest="500">
-                <VerticalStackLayout Padding="20" Spacing="15">
+                Grid.Column="0">
+                <VerticalStackLayout HorizontalOptions="Fill" Padding="20" Spacing="15">
                     <Label Text="Login"
                         FontSize="35"
                         FontAttributes="Bold"
@@ -26,7 +26,7 @@
                     <Label Text="Email" FontSize="14" HorizontalOptions="Start" TextColor="White" />
                     <Entry
                         x:Name="EmailEntry"
-                        Placeholder="Email"
+                        Placeholder="Digite seu Email"
                         Keyboard="Email"
                         HorizontalOptions="Fill"
                         PlaceholderColor="{AppThemeBinding Light='White', Dark={StaticResource Gray200}}" />
@@ -36,20 +36,21 @@
                     <Label Text="Senha" FontSize="14" HorizontalOptions="Start" TextColor="White" />
                     <Entry
                         x:Name="SenhaEntry"
-                        Placeholder="Senha"
+                        Placeholder="Digite sua Senha"
                         IsPassword="True"
                         HorizontalOptions="Fill"
                         PlaceholderColor="{AppThemeBinding Light='White', Dark={StaticResource Gray200}}" />
                     <Label x:Name="SenhaErrorLabel" Text="Senha incoreta" TextColor="Red" IsVisible="False" FontSize="12" HorizontalOptions="Center"/>
                     
                     <!-- Captcha simples -->
-                    <Label Text="Não sou um robô" FontSize="14" HorizontalOptions="Start" TextColor="White" />
-                    <HorizontalStackLayout Spacing="10" HorizontalOptions="Start">
+                    <Label Text="Não sou um robô" FontSize="14" HorizontalOptions="Center" TextColor="White" />
+                    <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
                         <Label Text="3 + 4 =" FontSize="14" VerticalOptions="Center" TextColor="White" />
                         <Entry
                             x:Name="CaptchaEntry"
                             Placeholder="Digite a resposta"
                             Keyboard="Numeric"
+                            HorizontalOptions="Fill"
                             PlaceholderColor="{AppThemeBinding Light='White', Dark={StaticResource Gray200}}" />
                     </HorizontalStackLayout>
                     <Label x:Name="CaptchaErrorLabel" Text="Captcha incorreto" TextColor="Red" IsVisible="False" FontSize="12" HorizontalOptions="Center"/>
@@ -65,12 +66,11 @@
                     </HorizontalStackLayout>
 
                     <!-- Submit -->
-                    <Grid ColumnDefinitions="*" ColumnSpacing="0" HorizontalOptions="Center">
+                    <Grid ColumnDefinitions="*" ColumnSpacing="0" HorizontalOptions="End">
                         <Button Text="Enviar"
                                 BackgroundColor="LightBlue"
                                 Clicked="OnEnviarClicked"
                                 TextColor="Black"
-                                WidthRequest="150"
                                 Grid.Column="0"
                                 HorizontalOptions="Fill" />
                     </Grid>

@@ -110,11 +110,12 @@
                             </DataTrigger>
                         </Border.Triggers>
                         <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, *">
-                            <Label Text="Usuários Permitidos" FontSize="20" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" />
+                            <Label Text="Usuários" FontSize="20" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" />
                             <Button
                                 Text="Adicionar Usuário"
                                 HorizontalOptions="Fill"
                                 Background="Green"
+                                Clicked="OnAddUsuarioClicked"
                                 Grid.Row="0"
                                 Grid.Column="1"
                                 IsEnabled="{Binding Alarme.Ligado}" />
@@ -130,25 +131,42 @@
                                 Grid.ColumnSpan="2" />
                             
                             <!-- Lista de Usuários -->
-                            <CollectionView
-                                HeightRequest="220"
-                                x:Name="UsuariosList"
-                                SelectionMode="None"
+                            <Grid
+                                RowDefinitions="Auto, *"
+                                ColumnDefinitions="*"
                                 Grid.Row="1"
-                                Grid.ColumnSpan="2">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="models:Usuario">
-                                        <HorizontalStackLayout
-                                            Padding="8"
-                                            Spacing="12"
-                                            VerticalOptions="Center">
-                                            <Label Text="{Binding Id}" VerticalOptions="Center" WidthRequest="30"/>
-                                            <Label Text="{Binding Nome}" VerticalOptions="Center" />
-                                            <Label Text="{Binding Email}" VerticalOptions="Center" />
-                                        </HorizontalStackLayout>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
+                                Grid.ColumnSpan="2"
+                                x:Name="UsuariosGrid">
+                                <Grid
+                                    ColumnDefinitions="Auto,*,*"
+                                    Padding="8"
+                                    ColumnSpacing="12"
+                                    VerticalOptions="Center"
+                                    Grid.Row="0">
+                                    <Label Text="ID" FontAttributes="Bold" Grid.Column="0" />
+                                    <Label Text="Nome" FontAttributes="Bold" Grid.Column="1" />
+                                    <Label Text="Email" FontAttributes="Bold" Grid.Column="2" />
+                                </Grid>
+                                <CollectionView
+                                    HeightRequest="220"
+                                    SelectionMode="None"
+                                    Grid.Row="1"
+                                    x:Name="UsuariosList">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="models:Usuario">
+                                            <Grid
+                                                ColumnDefinitions="Auto,*,*"
+                                                Padding="8"
+                                                ColumnSpacing="12"
+                                                VerticalOptions="Center">
+                                                <Label Text="{Binding Id}" VerticalOptions="Center" Grid.Column="0" />
+                                                <Label Text="{Binding Nome}" VerticalOptions="Center" Grid.Column="1" />
+                                                <Label Text="{Binding Email}" VerticalOptions="Center" Grid.Column="2" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Grid>
                         </Grid>
                     </Border>
                 </VerticalStackLayout>

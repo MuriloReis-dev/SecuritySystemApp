@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using SecuritySystemApp.Models;
 using SecuritySystemApp.ViewModels;
+using SecuritySystemApp.Services;
 
 namespace SecuritySystemApp.Views;
 
@@ -10,6 +11,7 @@ public partial class AlarmePage : ContentPage
     public int AlarmeId { get; set; }
 
     private readonly AlarmeViewModel _viewModel;
+    private readonly NavigationService _navigationService;
 
     public AlarmeDetailsDTO? Dados;
 
@@ -20,6 +22,7 @@ public partial class AlarmePage : ContentPage
         InitializeComponent();
 
         _viewModel = new AlarmeViewModel();
+        _navigationService = new NavigationService();
     }
 
     /// <summary>
@@ -38,7 +41,7 @@ public partial class AlarmePage : ContentPage
 
         // Ajusta visibilidade dos elementos com base nos dados carregados
         if (Dados == null || Dados.Usuarios?.Count == 0)
-            UsuariosList.IsVisible = false;
+            UsuariosGrid.IsVisible = false;
         else
             ListaVaziaLabel.IsVisible = false;
     }
@@ -97,7 +100,7 @@ public partial class AlarmePage : ContentPage
     }
 
     /// <summary>
-    /// Evento ao clicar no botão de ligar/desligar o alarme
+    /// Evento ao clicar no botão de liberar acesso
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
@@ -115,6 +118,11 @@ public partial class AlarmePage : ContentPage
         }
         else
             await DisplayAlert("Erro", "Dados do alarme não carregados.", "OK");
+    }
+
+    public async void OnAddUsuarioClicked(object? sender, EventArgs e)
+    {
+        await _navigationService.NavegarAsync(nameof(CadastroPessoaPage));
     }
 
     public async Task IniciarTimer()
