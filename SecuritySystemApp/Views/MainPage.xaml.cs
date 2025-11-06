@@ -3,6 +3,8 @@ using SecuritySystemApp.Interfaces;
 using SecuritySystemApp.Models;
 using SecuritySystemApp.ViewModels;
 using Plugin.FirebasePushNotifications;
+using Microsoft.Maui.Networking;
+using Microsoft.Maui.ApplicationModel;
 
 namespace SecuritySystemApp.Views;
 
@@ -24,14 +26,6 @@ public partial class MainPage : ContentPage
         _apiService = new ApiService();
         _authService = new AuthService();
         _firebaseService = new FirebaseService();
-
-        CadrastroBtn.Clicked += OnCadrastroBtnClicked;
-        LoginBtn.Clicked += OnLoginBtnClicked;
-        HomeBtn.Clicked += OnHomeBtnClicked;
-        CadastroPessoaBtn.Clicked += OnCadastroPessoaBtnClicked;
-        TokenFMCBtn.Clicked += OnTokenFMCBtnClicked;
-        Appearing += OnAppearing;
-
     }
 
     public async Task InitFirebaseMessagingAsync()
@@ -41,21 +35,67 @@ public partial class MainPage : ContentPage
     }
 
     // Evento disparado quando a página aparece
-    private async void OnAppearing(object? sender, EventArgs e)
+    protected override async void OnAppearing()
     {
-        base.OnAppearing();
+        try
+        {
+            base.OnAppearing();
 
-        // Envia um post para ver dados na api
-        //await _apiService.PostConsultaAsync("testpost/test", new { TokenFMC = _viewModel.Token });
+            // Espera um momento para garantir que a UI esteja pronta
+            await Task.Delay(100);
 
-        // Colocar aqui todo o código executado ao abrir o app
-        Console.WriteLine($"UserID: {Preferences.Get("UserId", string.Empty)}");
-        Console.WriteLine($"UserName: {Preferences.Get("UserName", string.Empty)}");
-        Console.WriteLine($"UserEmail: {Preferences.Get("UserEmail", string.Empty)}");
-        Console.WriteLine($"AuthToken: {Preferences.Get("AuthToken", string.Empty)}");
+            await MainThread.InvokeOnMainThreadAsync(() =>
+            {
+                LoadingLabel.IsVisible = true;
+                ReloadPageArea.IsVisible = false;
+            });
 
-        bool tokenValido = await _authService.ValidateLoginAsync();
-        Console.WriteLine($"Validação do token de usuário: {tokenValido}");
+            var currentAccess = Connectivity.Current.NetworkAccess;
+            Console.WriteLine($"Current network access: {currentAccess}");
+
+            if (currentAccess == NetworkAccess.Internet)
+            {
+                Console.WriteLine("Conectado à Internet");
+                bool tokenValido = await _authService.ValidateLoginAsync();
+                Console.WriteLine($"Token válido: {tokenValido}");
+
+                if (tokenValido)
+                {
+                    await _navigationService.NavegarResetAsync("HomePageReset");
+                }
+                else
+                {
+                    await _navigationService.NavegarResetAsync("LoginPageReset");
+                    await DisplayAlert("Validação de Login Falhou", "Por favor, faça login novamente.", "OK");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Sem conexão com a Internet");
+                await Task.Delay(100); // Pequeno delay para garantir que a UI está pronta
+                await DisplayAlert("Sem Conexão", "Erro ao Conectar", "OK");
+                
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    LoadingLabel.IsVisible = false;
+                    ReloadPageArea.IsVisible = true;
+                });
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro em MainPage OnAppearing: {ex}");
+            await MainThread.InvokeOnMainThreadAsync(() =>
+            {
+                LoadingLabel.IsVisible = false;
+                ReloadPageArea.IsVisible = true;
+            });
+        }
+    }
+
+    public void OnReloadBtnClicked(object? sender, EventArgs e)
+    {
+        OnAppearing();
     }
 
     private async void OnCadrastroBtnClicked(object? sender, EventArgs e)
@@ -76,12 +116,5 @@ public partial class MainPage : ContentPage
     private async void OnCadastroPessoaBtnClicked(object? sender, EventArgs e)
     {
         await _navigationService.NavegarAsync(nameof(CadastroPessoaPage));
-    }
-
-    // teste
-    private async void OnTokenFMCBtnClicked(object? sender, EventArgs e)
-    {
-        var token = await _firebaseService.GetTokenAsync();
-        tokenFMCEntry.Text = token ?? "Token não disponível";
     }
 }

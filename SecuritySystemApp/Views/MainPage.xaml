@@ -4,51 +4,77 @@
              xmlns:components="clr-namespace:SecuritySystemApp.Components"
              xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
              x:Class="SecuritySystemApp.Views.MainPage"
+             Shell.NavBarIsVisible="False"
              Title="MainPage">
-    <!-- No futuro, mudar a MainPage para uma tela de carregamento e alterar o código para redirecionar para a tela de Login (ou para Home caso esteja logado) -->
-    
-    <Grid RowDefinitions="*, Auto"> <!-- Conteúdo da página, Barra de Navegação -->
+    <Grid RowDefinitions="*, Auto">
+        <VerticalStackLayout Padding="20" Spacing="25" Grid.Row="0" VerticalOptions="Center">
+            <Image
+                Source="homeicon.png"
+                HorizontalOptions="Center"
+                WidthRequest="200"
+                HeightRequest="200" />
+            <Label
+                x:Name="LoadingLabel"
+                Text="Carregando..."
+                FontAttributes="Bold"
+                FontSize="20"
+                HorizontalOptions="Center" />
+        </VerticalStackLayout>
+        <VerticalStackLayout x:Name="ReloadPageArea" Grid.Row="1" Padding="10" IsVisible="False" Spacing="5">
+            <Label
+                Text="Verifique sua conexão com a internet."
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+            <Button Text="Tentar Novamente" Clicked="OnReloadBtnClicked" HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </Grid>
+
+    <!--
+    <Grid RowDefinitions="*, Auto">
         <VerticalStackLayout
                 Padding="20,0"
                 Spacing="25">
             
             <Button
                 x:Name="LoginBtn"
-                Text="Login" 
+                Text="Login"
+                Clicked="OnLoginBtnClicked"
                 HorizontalOptions="Fill" 
                 Background="Gray"
                 MaximumWidthRequest="170"/>
             <Button
                 x:Name="CadrastroBtn"
                 Text="Cadrastro" 
+                Clicked="OnCadrastroBtnClicked"
                 HorizontalOptions="Fill" 
                 Background="Gray"
                 MaximumWidthRequest="170"/>
             <Button
                 x:Name="HomeBtn"
                 Text="Home" 
+                Clicked="OnHomeBtnClicked"
                 HorizontalOptions="Fill" 
                 Background="Gray"
                 MaximumWidthRequest="170"/>
             <Button
                 x:Name="CadastroPessoaBtn"
-                Text="CadastroPessoa" 
+                Text="CadastroPessoa"
+                Clicked="OnCadastroPessoaBtnClicked"
                 HorizontalOptions="Fill" 
                 Background="Gray"
                 MaximumWidthRequest="170"/>
-            <!-- Teste -->
             <Button
                 x:Name="TokenFMCBtn"
-                Text="Get Token FMC" 
+                Text="Get Token FCM"
+                Clicked="OnTokenFMCBtnClicked"
                 HorizontalOptions="Fill" 
                 Background="Gray"
                 MaximumWidthRequest="170"/>
 
-            <!-- Label com token FMC para teste -->
             <Label Text="Token FCM:" FontAttributes="Bold" />
             <Entry x:Name="tokenFMCEntry" Placeholder="TokenFMC" />
         </VerticalStackLayout>
-        <!-- Barra de Navegação (Adicionar em todas as páginas que precisam)-->
         <components:BottomTabsView Grid.Row="1" />
     </Grid>
+    -->
 </ContentPage>
