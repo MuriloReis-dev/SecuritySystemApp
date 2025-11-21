@@ -53,6 +53,12 @@ public partial class AlarmePage : ContentPage
     /// <param name="e"></param>
     public async void OnEditAlarmeTapped(object sender, EventArgs e)
     {
+        if (Dados == null || Dados.Alarme == null || Dados.Alarme.TipoPermissao != true)
+        {
+            Console.WriteLine("Usuário não é proprietário, não permite editar o alarme.");
+            return; // Usuário não é proprietário, não permite editar
+        }
+
         // Área para editar o nome do alarme (apenas proprietário)
         string novoNome = await DisplayPromptAsync("Editar Alarme", "Digite o novo nome do alarme:", initialValue: Dados?.Alarme?.Nome);
         if (novoNome == null)
@@ -85,6 +91,12 @@ public partial class AlarmePage : ContentPage
     {
         if (Dados != null && Dados.Alarme != null)
         {
+            if (Dados.Alarme.TipoPermissao != true)
+            {
+                Console.WriteLine("Usuário sem permissão para alterar o estado do alarme.");
+                return; // Usuário sem permissão
+            }
+
             bool sucesso = await _viewModel.AlarmeOnOffAsync(Dados.Alarme.Id, !Dados.Alarme.Ligado);
             if (!sucesso)
             {
