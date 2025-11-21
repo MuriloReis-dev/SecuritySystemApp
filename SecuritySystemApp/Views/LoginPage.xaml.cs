@@ -28,11 +28,12 @@ public partial class LoginPage : ContentPage
     {
         string email = EmailEntry.Text?.Trim() ?? "";
         string captcha = CaptchaEntry.Text?.Trim() ?? "";
-        string senha = SenhaEntry.Text.Trim() ?? "";
+        string senha = SenhaEntry.Text?.Trim() ?? "";
 
-        bool emailValido = Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
-        bool captchaValido = captcha == "7";
-        bool senhaValida = senha != "";
+        // Valida o formato dos inputs
+        bool emailValido = email != "" && Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+        bool captchaValido = captcha != "" && captcha == "7";
+        bool senhaValida = senha != "" && senha.Length >= 8;
 
         EmailErrorLabel.IsVisible = !emailValido;
         CaptchaErrorLabel.IsVisible = !captchaValido;
@@ -41,15 +42,19 @@ public partial class LoginPage : ContentPage
         if (emailValido && captchaValido && senhaValida)
         {
             var sucesso = await _viewModel.Entrar(email, senha);
-            if (!sucesso)
+            if (sucesso)
             {
-                await DisplayAlert("Erro", "Email ou Senha incorretos", "OK");
+                await _navigationService.NavegarResetAsync("HomePageReset"); // Navega para a HomePage e reseta a pilha de navegação
+                EmailEntry.Text = "";
+                CaptchaEntry.Text = "";
+                SenhaEntry.Text = "";
             }
             else
             {
-                await _navigationService.NavegarResetAsync("HomePageReset"); // Navega para a HomePage e reseta a pilha de navegação
+                await DisplayAlert("Erro", "Email ou Senha incorretos", "OK");
             }
         }
+        SenhaEntry.Text = "";
     }
 
     /// <summary>

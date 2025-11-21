@@ -28,6 +28,7 @@
                         Placeholder="Digite seu Nome"
                         HorizontalOptions="Fill"
                         PlaceholderColor="{AppThemeBinding Light='White', Dark={StaticResource Gray200}}" />
+                    <Label x:Name="NomeErrorLabel" Text="Apenas letras e números" TextColor="Red" IsVisible="False" FontSize="12" HorizontalOptions="Center"/>
 
                     <!-- Campo Email -->
                     <Label Text="Email" FontSize="14" HorizontalOptions="Start" TextColor="White" />
@@ -47,7 +48,7 @@
                         IsPassword="True"
                         HorizontalOptions="Fill"
                         PlaceholderColor="{AppThemeBinding Light='White', Dark={StaticResource Gray200}}" />
-                    <Label x:Name="SenhaErrorLabel" Text="Senha incoreta" TextColor="Red" IsVisible="False" FontSize="12" HorizontalOptions="Center"/>
+                    <Label x:Name="SenhaErrorLabel" Text="A senha precisa ter pelo menos 8 dígitos" TextColor="Red" IsVisible="False" FontSize="12" HorizontalOptions="Center"/>
 
                     <!-- Campo Confirmação de Senha -->
                     <Label Text="Confirme a Senha" FontSize="14" HorizontalOptions="Start" TextColor="White" />
@@ -57,6 +58,7 @@
                         IsPassword="True"
                         HorizontalOptions="Fill"
                         PlaceholderColor="{AppThemeBinding Light='White', Dark={StaticResource Gray200}}" />
+                    <Label x:Name="ConfirmarSenhaErrorLabel" Text="As senhas não batem" TextColor="Red" IsVisible="False" FontSize="12" HorizontalOptions="Center"/>
                     
                     <!-- Captcha simples -->
                     <Label Text="Não sou um robô" FontSize="14" HorizontalOptions="Center" TextColor="White" />

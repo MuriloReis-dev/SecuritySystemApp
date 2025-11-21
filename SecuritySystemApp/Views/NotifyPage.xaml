@@ -7,61 +7,85 @@
              xmlns:models="clr-namespace:SecuritySystemApp.Models"
              Title="Notificações">
              
-    <!-- Adicionar conteúdo da página -->
-    <Grid ColumnDefinitions="*" RowDefinitions="*,Auto">
-        <ScrollView>
-            <VerticalStackLayout>
-                <!-- Mensagem para Lista Vazia -->
-                <Label
-                    x:Name="ListaVaziaLabel"
-                    Text="Nenhuma notificação encontrada."
-                    FontSize="16"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center" />
+    <ContentPage.Resources>
+        <!-- Reutiliza o template das notificações -->
+        <DataTemplate x:Key="NotifyItemTemplate" x:DataType="models:NotifyDTO">
+            <Border Margin="5"
+                    Padding="10"
+                    StrokeShape="RoundRectangle 10"
+                    BackgroundColor="{StaticResource Gray600}">
+                <Grid ColumnSpacing="10" ColumnDefinitions="*,Auto">
+                    <Label FontAttributes="Bold"
+                           FontSize="16"
+                           Text="{Binding Mensagem}"
+                           TextColor="White"
+                           VerticalOptions="Center"
+                           Grid.Column="0" />
+                    <VerticalStackLayout Grid.Column="1" HorizontalOptions="End">
+                        <Label FontSize="12"
+                               Text="{Binding DataHora, StringFormat='{0:dd/MM/yyyy}'}"
+                               TextColor="White"
+                               HorizontalOptions="End" />
+                        <Label FontSize="12"
+                               Text="{Binding DataHora, StringFormat='{0:HH:mm}'}"
+                               TextColor="White"
+                               HorizontalOptions="End" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </ContentPage.Resources>
 
-                <!-- Lista de Notificações -->
-                <CollectionView
-                    HeightRequest="300"
-                    x:Name="NotifyList"
-                    SelectionMode="Single"
-                    VerticalScrollBarVisibility="Always">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:NotifyDTO">
-                            <Border
-                                Margin="5"
-                                Padding="10"
-                                StrokeShape="RoundRectangle 10"
-                                BackgroundColor="{StaticResource Gray600}">
-                                        
-                                <Grid ColumnSpacing="10" ColumnDefinitions="*,Auto">
-                                    <Label
-                                        FontAttributes="Bold"
-                                        FontSize="16"
-                                        Text="{Binding Mensagem}"
-                                        TextColor="White"
-                                        VerticalOptions="Center"
-                                        Grid.Column="0" />
-                                    <VerticalStackLayout Grid.Column="1">
-                                        <Label
-                                            FontSize="12"
-                                            Text="{Binding DataHora, StringFormat='{0:dd/MM/yyyy}'}"
-                                            TextColor="White"
-                                            VerticalOptions="Center"
-                                            HorizontalOptions="End" />
-                                        <Label
-                                            FontSize="12"
-                                            Text="{Binding DataHora, StringFormat='{0:HH:mm}'}"
-                                            TextColor="White"
-                                            VerticalOptions="Center"
-                                            HorizontalOptions="End" />
-                                    </VerticalStackLayout>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+    <Grid ColumnDefinitions="*" RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="12" Spacing="18">
+
+                <!-- Hoje -->
+                <VerticalStackLayout>
+                    <Label Text="Hoje"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark=White}" />
+                    <CollectionView x:Name="TodayList"
+                                    ItemTemplate="{StaticResource NotifyItemTemplate}"
+                                    ItemsLayout="VerticalList"
+                                    SelectionMode="None"
+                                    EmptyView="Nenhuma notificação hoje."
+                                    Margin="0,6,0,0" />
+                </VerticalStackLayout>
+
+                <!-- Últimos 7 dias -->
+                <VerticalStackLayout>
+                    <Label Text="Últimos 7 dias"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark=White}" />
+                    <CollectionView x:Name="Last7DaysList"
+                                    ItemTemplate="{StaticResource NotifyItemTemplate}"
+                                    ItemSizingStrategy="MeasureAllItems"
+                                    ItemsLayout="VerticalList"
+                                    SelectionMode="None"
+                                    EmptyView="Nenhuma notificação nos últimos 7 dias."
+                                    Margin="0,6,0,0" />
+                </VerticalStackLayout>
+
+                <!-- Mais Antigas -->
+                <VerticalStackLayout>
+                    <Label Text="Mais Antigas"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark=White}" />
+                    <CollectionView x:Name="OlderList"
+                                    ItemTemplate="{StaticResource NotifyItemTemplate}"
+                                    ItemsLayout="VerticalList"
+                                    SelectionMode="None"
+                                    EmptyView="Sem notificações antigas."
+                                    Margin="0,6,0,0" />
+                </VerticalStackLayout>
+
             </VerticalStackLayout>
         </ScrollView>
+
         <components:BottomTabsView CurrentPage="NotifyPage" Grid.Row="1" />
     </Grid>
 </ContentPage>

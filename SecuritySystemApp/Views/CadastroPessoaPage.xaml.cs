@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using SecuritySystemApp.ViewModels;
 using SecuritySystemApp.Models;
 
@@ -57,20 +58,16 @@ public partial class CadastroPessoaPage : ContentPage
     {
         string nome = NomeEntry.Text?.Trim() ?? "";
         string email = EmailEntry.Text?.Trim() ?? "";
-        string senha = SenhaEntry.Text.Trim();
+        string senha = SenhaEntry.Text?.Trim() ?? "";
 
-        // validações
-        if (string.IsNullOrWhiteSpace(nome))
-        {
-            await Shell.Current.DisplayAlert("Erro", "Informe o nome", "OK");
-            return;
-        }
+        // Valida o formato dos inputs
+        bool nomeValido = nome != "" && !Regex.IsMatch(nome, @"[^\p{L}\p{N}]");
+        bool emailValido = email != "" && Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+        bool senhaValida = senha != "" && senha.Length >= 8;
 
-        if (string.IsNullOrWhiteSpace(email))
-        {
-            await Shell.Current.DisplayAlert("Erro", "Informe o email", "OK");
-            return;
-        }
+        NomeErrorLabel.IsVisible = !nomeValido;
+        EmailErrorLabel.IsVisible = !emailValido;
+        SenhaErrorLabel.IsVisible = !senhaValida;
 
         if (!_selecionados.Any())
         {
@@ -78,13 +75,24 @@ public partial class CadastroPessoaPage : ContentPage
             return;
         }
 
-        bool sucesso = await _viewModel.CadastrarAsync(nome, email, senha, _selecionados);
-
-        if (!sucesso)
+        if (nomeValido && emailValido && senhaValida)
         {
-            await Shell.Current.DisplayAlert("Erro", "Falha ao cadastrar usuário.", "OK");
-            return;
+            bool sucesso = await _viewModel.CadastrarAsync(nome, email, senha, _selecionados);
+
+            if (sucesso)
+            {
+                await Shell.Current.DisplayAlert("Sucesso", $"Usuário {nome} cadastrado com sucesso!", "OK");
+                NomeEntry.Text = "";
+                EmailEntry.Text = "";
+                SenhaEntry.Text = "";
+                _selecionados.Clear();
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Erro", "Falha ao cadastrar usuário.", "OK");
+                SenhaEntry.Text = "";
+            }
+            
         }
-        await Shell.Current.DisplayAlert("Sucesso", $"Usuário {nome} cadastrado com sucesso!", "OK");
     }
 }

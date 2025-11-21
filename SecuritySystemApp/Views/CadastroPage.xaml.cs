@@ -29,30 +29,41 @@ public partial class CadastroPage : ContentPage
         string nome = NomeEntry.Text?.Trim() ?? "";
         string email = EmailEntry.Text?.Trim() ?? "";
         string captcha = CaptchaEntry.Text?.Trim() ?? "";
-        string senha = SenhaEntry.Text.Trim();
+        string senha = SenhaEntry.Text?.Trim() ?? "";
         string confirmarSenha = ConfirmarSenhaEntry.Text?.Trim() ?? "";
 
-        bool emailValido = Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
-        bool captchaValido = captcha == "7";
-        bool senhavalida = senha == confirmarSenha;
+        bool nomeValido = nome != "" && !Regex.IsMatch(nome, @"[^\p{L}\p{N}]");
+        bool emailValido = email != "" && Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+        bool captchaValido = captcha != "" && captcha == "7";
+        bool senhaValida = senha != "" && senha.Length >= 8;
+        bool confirmarSenhaValida = senha == confirmarSenha;
 
+        NomeErrorLabel.IsVisible = !nomeValido;
         EmailErrorLabel.IsVisible = !emailValido;
         CaptchaErrorLabel.IsVisible = !captchaValido;
-        SenhaErrorLabel.IsVisible = !senhavalida;
+        SenhaErrorLabel.IsVisible = !senhaValida;
+        ConfirmarSenhaErrorLabel.IsVisible = !confirmarSenhaValida;
 
-        if (emailValido && captchaValido && senhavalida)
+        if (nomeValido && emailValido && captchaValido && senhaValida && confirmarSenhaValida)
         {
             //realiza cadastro
             var sucesso = await _viewModel.Cadastrar(nome, email, senha);
-            if (!sucesso)
+            if (sucesso)
             {
-                await DisplayAlert("Erro", "O usuário não foi cadastrado", "OK");
+                await _navigationService.NavegarResetAsync("HomePageReset"); // Navega para a HomePage e reseta a pilha de navegação
+                NomeEntry.Text = "";
+                EmailEntry.Text = "";
+                CaptchaEntry.Text = "";
+                SenhaEntry.Text = "";
+                ConfirmarSenhaEntry.Text = "";
             }
             else
             {
-                await _navigationService.NavegarResetAsync("HomePageReset"); // Navega para a HomePage e reseta a pilha de navegação
+                await DisplayAlert("Erro", "O usuário não foi cadastrado", "OK");
             }
         }
+        SenhaEntry.Text = "";
+        ConfirmarSenhaEntry.Text = "";
     }
 
     /// <summary>

@@ -2,6 +2,8 @@ using SecuritySystemApp.Services;
 using SecuritySystemApp.Models;
 using SecuritySystemApp.ViewModels;
 using SecuritySystemApp.Interfaces;
+using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace SecuritySystemApp.Views;
 
@@ -28,12 +30,52 @@ public partial class NotifyPage : ContentPage
         base.OnAppearing();
 
         Dados = await _viewModel.CarregarNotificacoesAsync();
-        NotifyList.ItemsSource = Dados;
+        SetNotifications(Dados);
+    }
 
-        // Ajusta visibilidade dos elementos com base nos dados carregados
-        if (Dados == null || Dados.Count == 0)
-            NotifyList.IsVisible = false;
-        else
-            ListaVaziaLabel.IsVisible = false;
+    // Agrupa notificações em Hoje / Últimos 7 dias / Outras e atualiza os CollectionViews (se existirem)
+    private void SetNotifications(IEnumerable<NotifyDTO>? notifications)
+    {
+        var list = notifications?.ToList() ?? new List<NotifyDTO>();
+        DateTime hoje = DateTime.Now.Date;
+
+        var hojeItems = list
+            .Where(n => n.DataHora.Date == hoje)
+            .OrderByDescending(n => n.DataHora)
+            .ToList();
+
+        var seteDiasItems = list
+            .Where(n => n.DataHora.Date < hoje && (hoje - n.DataHora.Date).TotalDays <= 7)
+            .OrderByDescending(n => n.DataHora)
+            .ToList();
+
+        var outrasItems = list
+            .Where(n => (hoje - n.DataHora.Date).TotalDays > 7)
+            .OrderByDescending(n => n.DataHora)
+            .ToList();
+
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            // Se a XAML já tiver TodayList / Last7DaysList / OlderList, popula elas
+            if (this.FindByName<CollectionView>("TodayList") != null)
+            {
+                this.FindByName<CollectionView>("TodayList").ItemsSource = new ObservableCollection<NotifyDTO>(hojeItems);
+                this.FindByName<CollectionView>("Last7DaysList").ItemsSource = new ObservableCollection<NotifyDTO>(seteDiasItems);
+                this.FindByName<CollectionView>("OlderList").ItemsSource = new ObservableCollection<NotifyDTO>(outrasItems);
+
+                // controla visibilidade de uma label de lista vazia se existir
+                var emptyLabel = this.FindByName<Label>("ListaVaziaLabel");
+                if (emptyLabel != null)
+                    emptyLabel.IsVisible = !(hojeItems.Any() || seteDiasItems.Any() || outrasItems.Any());
+            }
+            else if (this.FindByName<CollectionView>("NotifyList") != null)
+            {
+                // compatibilidade: se existe apenas NotifyList, mostra tudo junto
+                this.FindByName<CollectionView>("NotifyList").ItemsSource = list;
+                var emptyLabel = this.FindByName<Label>("ListaVaziaLabel");
+                if (emptyLabel != null)
+                    emptyLabel.IsVisible = !list.Any();
+            }
+        });
     }
 }
