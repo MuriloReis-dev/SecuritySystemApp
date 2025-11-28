@@ -12,23 +12,24 @@
         <DataTemplate x:Key="NotifyItemTemplate" x:DataType="models:NotifyDTO">
             <Border Margin="5"
                     Padding="10"
+                    Stroke="{AppThemeBinding Light=Black, Dark='#E0A100'}"
                     StrokeShape="RoundRectangle 10"
-                    BackgroundColor="{StaticResource Gray600}">
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}">
                 <Grid ColumnSpacing="10" ColumnDefinitions="*,Auto">
                     <Label FontAttributes="Bold"
                            FontSize="16"
                            Text="{Binding Mensagem}"
-                           TextColor="White"
+                           TextColor="{AppThemeBinding Light=Black, Dark=White}"
                            VerticalOptions="Center"
                            Grid.Column="0" />
                     <VerticalStackLayout Grid.Column="1" HorizontalOptions="End">
                         <Label FontSize="12"
                                Text="{Binding DataHora, StringFormat='{0:dd/MM/yyyy}'}"
-                               TextColor="White"
+                               TextColor="{AppThemeBinding Light=Black, Dark=White}"
                                HorizontalOptions="End" />
                         <Label FontSize="12"
                                Text="{Binding DataHora, StringFormat='{0:HH:mm}'}"
-                               TextColor="White"
+                               TextColor="{AppThemeBinding Light=Black, Dark=White}"
                                HorizontalOptions="End" />
                     </VerticalStackLayout>
                 </Grid>
@@ -50,8 +51,13 @@
                                     ItemTemplate="{StaticResource NotifyItemTemplate}"
                                     ItemsLayout="VerticalList"
                                     SelectionMode="None"
-                                    EmptyView="Nenhuma notificação hoje."
-                                    Margin="0,6,0,0" />
+                                    Margin="0,6,0,0" >
+                        <CollectionView.EmptyView>
+                            <Label 
+                                Text="Nenhuma notificação hoje." 
+                                TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+                        </CollectionView.EmptyView>
+                    </CollectionView>
                 </VerticalStackLayout>
 
                 <!-- Últimos 7 dias -->
@@ -65,8 +71,13 @@
                                     ItemSizingStrategy="MeasureAllItems"
                                     ItemsLayout="VerticalList"
                                     SelectionMode="None"
-                                    EmptyView="Nenhuma notificação nos últimos 7 dias."
-                                    Margin="0,6,0,0" />
+                                    Margin="0,6,0,0" >
+                        <CollectionView.EmptyView>
+                            <Label 
+                                Text="Nenhuma notificação nos últimos 7 dias." 
+                                TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+                        </CollectionView.EmptyView>
+                    </CollectionView>
                 </VerticalStackLayout>
 
                 <!-- Mais Antigas -->
@@ -79,8 +90,13 @@
                                     ItemTemplate="{StaticResource NotifyItemTemplate}"
                                     ItemsLayout="VerticalList"
                                     SelectionMode="None"
-                                    EmptyView="Sem notificações antigas."
-                                    Margin="0,6,0,0" />
+                                    Margin="0,6,0,0" >
+                        <CollectionView.EmptyView>
+                            <Label 
+                                Text="Sem notificações antigas." 
+                                TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+                        </CollectionView.EmptyView>
+                    </CollectionView>
                 </VerticalStackLayout>
 
             </VerticalStackLayout>

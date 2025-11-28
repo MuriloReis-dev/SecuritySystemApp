@@ -14,7 +14,8 @@
                     <!-- Alarme -->
                     <Border
                         Padding="15"
-                        Stroke="LightGray"
+                        Stroke="{AppThemeBinding Light=Black, Dark='#E0A100'}"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark=Black}"
                         StrokeShape="RoundRectangle 8"
                         StrokeThickness="1">
                         <Grid ColumnDefinitions="*, Auto">
@@ -72,7 +73,8 @@
                     <!-- Botão para liberar acesso -->
                     <Border
                         Padding="15"
-                        Stroke="LightGray"
+                        Stroke="{AppThemeBinding Light=Black, Dark='#E0A100'}"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark=Black}"
                         StrokeShape="RoundRectangle 8"
                         StrokeThickness="1">
                         <Border.Triggers>
@@ -88,12 +90,13 @@
                             <Grid>
                                 <Button
                                     x:Name="ToggleAlarmButton"
-                                    HeightRequest="60"
-                                    CornerRadius="30"
+                                    CornerRadius="40"
                                     Text="Abrir"
-                                    TextColor="White"
+                                    FontSize="20"
+                                    TextColor="Black"
+                                    ImageSource="cadeado_black.png"
+                                    MaximumHeightRequest="90"
                                     BackgroundColor="LightGreen"
-                                    FontSize="22"
                                     FontAttributes="Bold"
                                     IsEnabled="{Binding Alarme.Ligado}"
                                     Clicked="OnLiberarClicked">
@@ -105,7 +108,8 @@
                     <!-- Usuários Relacionados -->
                     <Border
                         Padding="15"
-                        Stroke="LightGray"
+                        Stroke="{AppThemeBinding Light=Black, Dark='#E0A100'}"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark=Black}"
                         StrokeShape="RoundRectangle 8"
                         StrokeThickness="1"
                         IsVisible="{Binding Alarme.TipoPermissao}">

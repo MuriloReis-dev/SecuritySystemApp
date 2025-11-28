@@ -11,7 +11,8 @@
                 <!-- Aparência -->
                 <Border
                     Padding="15"
-                    Stroke="LightGray"
+                    Stroke="{AppThemeBinding Light=Black, Dark='#E0A100'}"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark=Black}"
                     StrokeShape="RoundRectangle 8"
                     StrokeThickness="1">
                     <VerticalStackLayout>
@@ -39,7 +40,8 @@
                 <!-- Perfil -->
                 <Border
                     Padding="15"
-                    Stroke="LightGray"
+                    Stroke="{AppThemeBinding Light=Black, Dark='#E0A100'}"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark=Black}"
                     StrokeShape="RoundRectangle 8"
                     StrokeThickness="1">
                     <VerticalStackLayout Spacing="15">
