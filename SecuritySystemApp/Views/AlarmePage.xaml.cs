@@ -145,7 +145,7 @@ public partial class AlarmePage : ContentPage
 
         for (int i = segundos; i > 0; i--)
         {
-            TempoLabel.Text = $"Alarme será ativado em {i} segundos";
+            TempoLabel.Text = $"Alarme ativo em {i} segundos";
             await Task.Delay(1000);
         }
         Shell.SetNavBarIsVisible(this, true);
