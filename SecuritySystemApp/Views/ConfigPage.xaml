@@ -47,10 +47,21 @@
                     <VerticalStackLayout Spacing="15">
                         <Label Text="Perfil" FontSize="20" FontAttributes="Bold" Margin="4" /> <!-- Título da seção -->
                         <Label Text="Alterar Senha" FontSize="18" FontAttributes="Bold" />
+
                         <Label Text="Senha atual" VerticalOptions="Center" FontSize="16" />
-                        <Entry x:Name="SenhaAtualEntry" Placeholder="Digite sua senha atual" IsPassword="True" />
+                        <Entry
+                            x:Name="SenhaAtualEntry"
+                            Placeholder="Digite sua senha atual"
+                            IsPassword="True"
+                            PlaceholderColor="{AppThemeBinding Light={StaticResource Gray400}, Dark=LightGray}" />
+                        
                         <Label Text="Nova Senha" VerticalOptions="Center" FontSize="16" />
-                        <Entry x:Name="NovaSenhaEntry" Placeholder="Digite sua nova senha" IsPassword="True" />
+                        <Entry
+                            x:Name="NovaSenhaEntry"
+                            Placeholder="Digite sua nova senha"
+                            IsPassword="True"
+                            PlaceholderColor="{AppThemeBinding Light={StaticResource Gray400}, Dark=LightGray}" />
+                        
                         <Button
                             Text="Salvar Alterações"
                             Clicked="OnSaveProfileButtonClicked"

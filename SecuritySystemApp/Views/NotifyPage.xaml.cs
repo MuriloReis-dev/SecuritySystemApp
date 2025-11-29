@@ -37,6 +37,7 @@ public partial class NotifyPage : ContentPage
     private void SetNotifications(IEnumerable<NotifyDTO>? notifications)
     {
         var list = notifications?.ToList() ?? new List<NotifyDTO>();
+
         DateTime hoje = DateTime.Now.Date;
 
         var hojeItems = list

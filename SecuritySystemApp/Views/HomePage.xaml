@@ -68,7 +68,7 @@
                                         Margin="5"
                                         Padding="10"
                                         StrokeShape="RoundRectangle 10"
-                                        BackgroundColor="{StaticResource Gray600}">
+                                        BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
                                         <Border.Triggers>
                                             <DataTrigger TargetType="Border" Binding="{Binding Ligado}" Value="False">
                                                 <Setter Property="Opacity" Value="0.5" />
@@ -92,8 +92,8 @@
                                                 </Image.Triggers>
                                             </Image>
                                             <VerticalStackLayout Grid.Column="1">
-                                                <Label Text="{Binding Id}" TextColor="White" />
-                                                <Label Text="{Binding Nome}" TextColor="White" />
+                                                <Label Text="{Binding Id}" TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+                                                <Label Text="{Binding Nome}" TextColor="{AppThemeBinding Light=Black, Dark=White}" />
                                             </VerticalStackLayout>
 
                                             <!-- Texto indicando alrmes do propretário -->
@@ -101,7 +101,7 @@
                                                 VerticalOptions="Center"
                                                 Text="ADM"
                                                 FontSize="15"
-                                                TextColor="White"
+                                                TextColor="{AppThemeBinding Light=Black, Dark=White}"
                                                 IsVisible="{Binding TipoPermissao}"
                                                 Grid.Column="2" />
                                         </Grid>

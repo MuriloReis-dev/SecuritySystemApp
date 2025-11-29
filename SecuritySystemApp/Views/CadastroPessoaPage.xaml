@@ -6,7 +6,7 @@
     xmlns:vm="clr-namespace:SecuritySystemApp.ViewModels"
     xmlns:models="clr-namespace:SecuritySystemApp.Models"
     x:DataType="vm:CadastroPessoaViewModel"
-    Title="Cadastro de Pessoa">
+    Title="Adicionar Usuário">
 
     <ContentPage.BindingContext>
         <vm:CadastroPessoaViewModel />
@@ -16,15 +16,15 @@
         <VerticalStackLayout Padding="20" Spacing="18">
 
             <Label FontAttributes="Bold" Text="Nome" TextColor="{AppThemeBinding Light=Black, Dark=White}" />
-            <Entry x:Name="NomeEntry" Placeholder="Digite o nome" PlaceholderColor="{AppThemeBinding Light=White, Dark=LightGray}" />
+            <Entry x:Name="NomeEntry" Placeholder="Digite o nome" PlaceholderColor="{AppThemeBinding Light={StaticResource Gray600}, Dark=LightGray}" />
             <Label x:Name="NomeErrorLabel" Text="Apenas letras e números" TextColor="Red" IsVisible="False" FontSize="12" HorizontalOptions="Center"/>
 
             <Label FontAttributes="Bold" Text="Email" TextColor="{AppThemeBinding Light=Black, Dark=White}" />
-            <Entry x:Name="EmailEntry" Placeholder="Digite o email" PlaceholderColor="{AppThemeBinding Light=White, Dark=LightGray}" />
+            <Entry x:Name="EmailEntry" Placeholder="Digite o email" PlaceholderColor="{AppThemeBinding Light={StaticResource Gray600}, Dark=LightGray}" />
             <Label x:Name="EmailErrorLabel" Text="Email inválido" TextColor="Red" IsVisible="False" FontSize="12" HorizontalOptions="Center"/>
 
             <Label FontAttributes="Bold" Text="Senha" TextColor="{AppThemeBinding Light=Black, Dark=White}" />
-            <Entry x:Name="SenhaEntry" Placeholder="Digite a senha" IsPassword="True" PlaceholderColor="{AppThemeBinding Light=White, Dark=LightGray}" />
+            <Entry x:Name="SenhaEntry" Placeholder="Digite a senha" IsPassword="True" PlaceholderColor="{AppThemeBinding Light={StaticResource Gray600}, Dark=LightGray}" />
             <Label x:Name="SenhaErrorLabel" Text="A senha precisa ter pelo menos 8 dígitos" TextColor="Red" IsVisible="False" FontSize="12" HorizontalOptions="Center"/>
 
             <Label FontAttributes="Bold" Text="Alarmes" TextColor="{AppThemeBinding Light=Black, Dark=White}" />
@@ -44,11 +44,11 @@
                                 Margin="5"
                                 Padding="10"
                                 StrokeShape="RoundRectangle 10"
-                                BackgroundColor="{StaticResource Gray600}">
+                                BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}">
                                 <HorizontalStackLayout
                                     VerticalOptions="Center">
-                                    <CheckBox CheckedChanged="OnCheckBoxCheckedChanged" VerticalOptions="Center" Color="{StaticResource White}" />
-                                    <Label Text="{Binding Nome}" TextColor="{StaticResource White}" VerticalOptions="Center" />
+                                    <CheckBox CheckedChanged="OnCheckBoxCheckedChanged" VerticalOptions="Center" Color="{AppThemeBinding Light=Black, Dark=White}" />
+                                    <Label Text="{Binding Nome}" TextColor="{AppThemeBinding Light=Black, Dark=White}" VerticalOptions="Center" />
                                 </HorizontalStackLayout>
                             </Border>
                         </DataTemplate>

@@ -15,14 +15,15 @@
                     Stroke="{AppThemeBinding Light=Black, Dark='#E0A100'}"
                     StrokeShape="RoundRectangle 10"
                     BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}">
-                <Grid ColumnSpacing="10" ColumnDefinitions="*,Auto">
+                <Grid ColumnSpacing="10" ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
                     <Label FontAttributes="Bold"
                            FontSize="16"
                            Text="{Binding Mensagem}"
                            TextColor="{AppThemeBinding Light=Black, Dark=White}"
                            VerticalOptions="Center"
-                           Grid.Column="0" />
-                    <VerticalStackLayout Grid.Column="1" HorizontalOptions="End">
+                           Grid.Column="0"
+                           Grid.Row="0" />
+                    <VerticalStackLayout Grid.Column="1" Grid.Row="0" HorizontalOptions="End">
                         <Label FontSize="12"
                                Text="{Binding DataHora, StringFormat='{0:dd/MM/yyyy}'}"
                                TextColor="{AppThemeBinding Light=Black, Dark=White}"
@@ -32,6 +33,22 @@
                                TextColor="{AppThemeBinding Light=Black, Dark=White}"
                                HorizontalOptions="End" />
                     </VerticalStackLayout>
+                    <Label FontSize="14"
+                           Text="{Binding UsuarioEntrou, StringFormat='Usuário: {0}'}"
+                           TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                           Grid.Column="0"
+                           Grid.Row="1"
+                           Grid.ColumnSpan="2"
+                           Margin="0,6,0,0" >
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label"
+                                         Binding="{Binding UsuarioEntrou}"
+                                         Value="">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                            
+                    </Label>
                 </Grid>
             </Border>
         </DataTemplate>
